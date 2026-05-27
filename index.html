@@ -3,200 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر تطبيقات IPA</title>
+    <title>تطبيقات IPA</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         body { font-family: 'Tajawal', sans-serif; background: #04060a; }
-        @keyframes fluid-move {
-            0%, 100% { transform: translate(0px, 0px) scale(1); }
-            50% { transform: translate(40px, -40px) scale(1.1); }
-        }
-        .liquid-blob { animation: fluid-move 14s infinite ease-in-out; }
         .liquid-glass {
             background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(25px) saturate(190%);
-            -webkit-backdrop-filter: blur(25px) saturate(190%);
-            border: 1px solid rgba(255, 255, 255, 0.11);
-            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), 0 10px 30px rgba(0, 0, 0, 0.4);
-        }
-        .liquid-nav {
-            background: rgba(8, 12, 22, 0.7);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
     </style>
 </head>
 <body class="text-white min-h-screen flex justify-center items-center p-4">
 
-    <div class="w-full max-w-md bg-[#060911] rounded-[45px] shadow-[0_0_50px_rgba(0,0,0,0.8)] border border-gray-900 overflow-hidden relative pb-28">
+    <div class="w-full max-w-md bg-[#060911] rounded-[45px] border border-gray-900 overflow-hidden relative pb-28">
         
-        <div class="absolute top-12 right-4 w-56 h-56 bg-blue-600/30 rounded-full blur-[60px] liquid-blob pointer-events-none z-0"></div>
-        <div class="absolute bottom-24 left-4 w-60 h-60 bg-purple-600/20 rounded-full blur-[70px] liquid-blob pointer-events-none z-0" style="animation-delay: -5s;"></div>
-
-        <div class="relative z-10">
-            <div class="p-6 pb-2 flex justify-between items-center">
-                <button class="w-10 h-10 rounded-full liquid-glass flex items-center justify-center text-gray-300 hover:text-white transition"><i class="fas fa-cog"></i></button>
-                <h1 class="text-base font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-300">متجر تطبيقات IPA</h1>
-                <button class="w-10 h-10 rounded-full liquid-glass flex items-center justify-center text-gray-300 hover:text-white transition"><i class="fas fa-bars"></i></button>
-            </div>
-
-            <div class="px-6 mb-5">
-                <div class="relative flex items-center">
-                    <span class="absolute right-4 text-gray-400"><i class="fas fa-search text-xs"></i></span>
-                    <input type="text" id="search-input" oninput="handleSearch()" placeholder="ابحث عن تطبيق أو لعبة..." class="w-full liquid-glass rounded-2xl py-3 pr-11 pl-4 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-blue-500/40 transition">
-                </div>
-            </div>
-
-            <div id="content-home" class="tab-content block">
-                <div class="px-6 mb-6">
-                    <div class="liquid-glass rounded-3xl p-5 relative overflow-hidden flex justify-between items-center">
-                        <div class="z-10 max-w-[65%]">
-                            <h2 class="text-base font-bold mb-1">تطبيقات بدون قيود!</h2>
-                            <p class="text-[11px] text-gray-400 mb-4 leading-relaxed">حمل برامجك وألعابك المفضلة والمعدلة بنقرة واحدة وبأمان تام.</p>
-                            <a href="#" class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-500 text-white text-xs font-medium py-2.5 px-4 rounded-xl shadow-lg shadow-blue-600/20 transition active:scale-95">
-                                <i class="fab fa-telegram"></i> قناة التليجرام
-                            </a>
-                        </div>
-                        <div class="absolute -left-2 bottom-2 w-28 h-28 flex items-center justify-center opacity-80">
-                            <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl shadow-lg flex items-center justify-center transform rotate-12 border border-white/20">
-                                <i class="fab fa-telegram-plane text-4xl text-white"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="px-6 mb-4 flex justify-between items-center">
-                    <h3 id="list-title" class="font-bold text-xs text-gray-300">أحدث التحديثات</h3>
-                    <span id="apps-count" class="liquid-glass text-blue-400 text-[11px] font-medium px-3 py-1 rounded-full">0 تطبيق</span>
-                </div>
-
-                <div id="apps-container" class="px-6 space-y-3 overflow-y-auto max-h-[340px] pb-4">
-                    </div>
-            </div>
-
-            <div id="content-apps" class="tab-content hidden px-6">
-                <div class="mb-4"><h3 class="font-bold text-xs text-gray-300">تصفح حسب الفئة</h3></div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div onclick="filterByCategory('games')" class="liquid-glass rounded-2xl p-4 flex flex-col items-center justify-center gap-2 hover:bg-white/[0.03] transition cursor-pointer active:scale-95">
-                        <div class="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center text-purple-400"><i class="fas fa-gamepad text-xl"></i></div>
-                        <span class="text-xs font-bold">ألعاب مهكرة</span>
-                    </div>
-                    <div onclick="filterByCategory('social')" class="liquid-glass rounded-2xl p-4 flex flex-col items-center justify-center gap-2 hover:bg-white/[0.03] transition cursor-pointer active:scale-95">
-                        <div class="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400"><i class="fas fa-share-alt text-xl"></i></div>
-                        <span class="text-xs font-bold">تواصل اجتماعي</span>
-                    </div>
-                    <div onclick="filterByCategory('tools')" class="liquid-glass rounded-2xl p-4 flex flex-col items-center justify-center gap-2 hover:bg-white/[0.03] transition cursor-pointer active:scale-95">
-                        <div class="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center text-green-400"><i class="fas fa-tools text-xl"></i></div>
-                        <span class="text-xs font-bold">أدوات ونظام</span>
-                    </div>
-                    <div onclick="filterByCategory('design')" class="liquid-glass rounded-2xl p-4 flex flex-col items-center justify-center gap-2 hover:bg-white/[0.03] transition cursor-pointer active:scale-95">
-                        <div class="w-12 h-12 rounded-xl bg-pink-500/20 flex items-center justify-center text-pink-400"><i class="fas fa-photo-video text-xl"></i></div>
-                        <span class="text-xs font-bold">تصميم ومونتاج</span>
-                    </div>
-                </div>
-            </div>
-
-            <div id="content-sources" class="tab-content hidden px-6 space-y-3">
-                <div class="mb-2"><h3 class="font-bold text-xs text-gray-300">حالة الخوادم</h3></div>
-                <div class="liquid-glass rounded-2xl p-4 flex justify-between items-center">
-                    <div class="flex items-center gap-3">
-                        <div class="text-green-400"><i class="fas fa-server"></i></div>
-                        <div>
-                            <h4 class="text-xs font-bold">السيرفر الرئيسي</h4>
-                            <p class="text-[10px] text-green-400 mt-0.5">يعمل بكفاءة</p>
-                        </div>
-                    </div>
-                    <span class="text-[10px] text-gray-400">99.9%</span>
-                </div>
-            </div>
-
+        <div class="p-6 pb-2 text-center">
+            <h1 class="text-base font-bold text-white">تطبيقات IPA</h1>
         </div>
 
-        <div id="download-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex justify-center items-center p-6 animate-fade-in">
-            <div class="liquid-glass w-full max-w-sm rounded-[30px] p-6 text-center relative border border-white/20">
-                <button onclick="closeModal()" class="absolute top-4 left-4 text-gray-400 hover:text-white"><i class="fas fa-times"></i></button>
-                <div id="modal-icon-container" class="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center text-3xl shadow-lg mb-4"></div>
-                <h3 id="modal-title" class="text-base font-bold mb-1"></h3>
-                <p id="modal-version" class="text-xs text-gray-400 mb-4"></p>
-                <p id="modal-desc" class="text-xs text-gray-300 px-2 mb-6 leading-relaxed"></p>
-                <a id="modal-download-link" href="#" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold py-3 rounded-xl transition shadow-lg shadow-blue-600/35">تثبيت IPA الآن</a>
+        <div id="apps-container" class="px-6 space-y-3 mt-6">
+            </div>
+
+        <div id="download-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex justify-center items-center p-6">
+            <div class="liquid-glass w-full max-w-sm rounded-[30px] p-6 text-center border border-white/10">
+                <button onclick="closeModal()" class="mb-4 text-gray-400"><i class="fas fa-times"></i></button>
+                <div id="modal-icon-container" class="text-5xl mb-4"></div>
+                <h3 id="modal-title" class="text-lg font-bold mb-2"></h3>
+                <p id="modal-desc" class="text-xs text-gray-400 mb-6"></p>
+                <a id="modal-download-link" href="#" class="block w-full bg-blue-600 text-white py-3 rounded-xl font-bold">تثبيت</a>
             </div>
         </div>
-
-        <div class="absolute bottom-4 left-4 right-4 h-20 liquid-nav rounded-3xl flex justify-around items-center px-4 shadow-xl z-20">
-            <button id="btn-home" onclick="switchTab('home')" class="nav-btn flex flex-col items-center gap-1 text-blue-400 transition-all">
-                <div class="icon-box w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20 shadow-[0_0_15px_rgba(59,130,246,0.15)]"><i class="fas fa-home text-base"></i></div>
-                <span class="text-[10px] font-bold">الرئيسية</span>
-            </button>
-            <button id="btn-apps" onclick="switchTab('apps')" class="nav-btn flex flex-col items-center gap-1 text-gray-400 hover:text-gray-200 transition-all">
-                <div class="icon-box w-10 h-10 flex items-center justify-center"><i class="fas fa-box-open text-base"></i></div>
-                <span class="text-[10px]">التطبيقات</span>
-            </button>
-            <button id="btn-sources" onclick="switchTab('sources')" class="nav-btn flex flex-col items-center gap-1 text-gray-400 hover:text-gray-200 transition-all">
-                <div class="icon-box w-10 h-10 flex items-center justify-center"><i class="fas fa-layer-group text-base"></i></div>
-                <span class="text-[10px]">المصادر</span>
-            </button>
-        </div>
-
     </div>
 
     <script>
         const database = [
-            { id: 1, name: "Reddit Deluxe", version: "v2026.19", category: "social", icon: "fab fa-reddit-alien", iconBg: "#ff4500", desc: "تطبيق ريديت معدل بالكامل: ميزة تحميل الفيديوهات مباشرة بدون علامة مائية، وإزالة كافة الإعلانات المزعجة.", url: "#" },
-            { id: 2, name: "Messenger Plus", version: "v562.0", category: "social", icon: "fab fa-facebook-messenger", iconBg: "linear-gradient(to tr, #0084ff, #a136ff)", desc: "نسخة بلس تحتوي على ميزة قراءة الرسائل المحذوفة، تجميد الظهور، وتحميل الحالات والستوريات بجودة عالية.", url: "#" },
-            { id: 3, name: "WPS Office Pro", version: "v26.4", category: "tools", icon: "fas fa-file-invoice", iconBg: "#ff3b30", desc: "الحزمة المكتبية الاحترافية كاملة المزايا مجاناً لفتح وإنشاء ملفات PDF و Word و Excel بدون قيود.", url: "#" },
-            { id: 4, name: "PUBG Mobile", version: "v3.2", category: "games", icon: "fas fa-gamepad", iconBg: "#212b3d", desc: "نسخة ببجي موبايل مجهزة بأدوات كشف الأماكن الحركية، ثبات السلاح بنسبة آمنة، ودعم الـ 90 إطار.", url: "#" },
-            { id: 5, name: "CapCut Pro", version: "v12.1", category: "design", icon: "fas fa-video", iconBg: "#000000", desc: "برنامج المونتاج الشهير بنسخته المدفوعة: جميع الفلاتر، الانتقالات الاحترافية، والخطوط العربية مفعّلة جاهزة.", url: "#" }
+            { id: 1, name: "Reddit", version: "v2026.19", icon: "fab fa-reddit", desc: "تطبيق ريديت معدل.", url: "#" },
+            { id: 2, name: "Messenger", version: "v562.0", icon: "fab fa-facebook-messenger", desc: "نسخة بلس.", url: "#" },
+            { id: 3, name: "WPS Office", version: "v26.4", icon: "fas fa-file-pdf", desc: "الحزمة المكتبية الاحترافية.", url: "#" },
+            { id: 4, name: "PUBG Mobile", version: "v3.2", icon: "fas fa-gamepad", desc: "نسخة ببجي المعدلة.", url: "#" },
+            { id: 5, name: "CapCut", version: "v12.1", icon: "fas fa-video", desc: "برنامج المونتاج الاحترافي.", url: "#" }
         ];
 
-        window.onload = function() { renderApps(database); };
-
-        function renderApps(appsArray) {
+        window.onload = function() {
             const container = document.getElementById('apps-container');
-            const countSpan = document.getElementById('apps-count');
-            container.innerHTML = '';
-            countSpan.innerText = `${appsArray.length} تطبيق`;
-
-            appsArray.forEach(app => {
+            database.forEach(app => {
                 const card = document.createElement('div');
-                card.className = "liquid-glass rounded-2xl p-3 flex justify-between items-center hover:bg-white/[0.02] transition";
+                card.className = "liquid-glass rounded-2xl p-3 flex justify-between items-center";
                 card.innerHTML = `
-                    <div class="flex items-center gap-3">
-                        <div class="w-11 h-11 rounded-xl flex items-center justify-center shadow-lg" style="background: ${app.iconBg}">
-                            <i class="${app.icon} text-xl text-white"></i>
-                        </div>
+                    <div class="flex items-center gap-4">
+                        <div class="text-3xl text-white/90 w-10 text-center"><i class="${app.icon}"></i></div>
                         <div>
-                            <h4 class="text-xs font-bold">${app.name}</h4>
-                            <p class="text-[10px] text-gray-400 mt-0.5">${app.version}</p>
+                            <h4 class="text-sm font-bold">${app.name}</h4>
+                            <p class="text-[10px] text-gray-400">${app.version}</p>
                         </div>
                     </div>
-                    <button onclick="openModal(${app.id})" class="liquid-glass hover:bg-blue-600 hover:text-white text-blue-400 text-[11px] font-medium py-2 px-4 rounded-xl transition active:scale-95">تنزيل</button>
+                    <button onclick="openModal(${app.id})" class="text-blue-400 text-xs font-bold px-4 py-2">تنزيل</button>
                 `;
                 container.appendChild(card);
             });
-        }
+        };
 
         function openModal(id) {
             const app = database.find(a => a.id === id);
             document.getElementById('modal-title').innerText = app.name;
-            document.getElementById('modal-version').innerText = app.version;
             document.getElementById('modal-desc').innerText = app.desc;
-            const iconContainer = document.getElementById('modal-icon-container');
-            iconContainer.style.background = app.iconBg;
-            iconContainer.innerHTML = `<i class="${app.icon} text-white"></i>`;
+            document.getElementById('modal-icon-container').innerHTML = `<i class="${app.icon} text-white"></i>`;
             document.getElementById('download-modal').classList.remove('hidden');
         }
 
         function closeModal() { document.getElementById('download-modal').classList.add('hidden'); }
-
-        function switchTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.getElementById(`content-${tabName}`).classList.remove('hidden');
-        }
     </script>
 </body>
 </html>
