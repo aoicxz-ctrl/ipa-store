@@ -18,15 +18,67 @@
 
         body {
             background-color: #05050d;
-            background-image: 
-                radial-gradient(circle at top right, rgba(24, 63, 219, 0.15), transparent 400px),
-                radial-gradient(circle at bottom left, rgba(140, 24, 219, 0.1), transparent 400px);
             color: #ffffff;
             min-height: 100vh;
             padding: 20px 15px 100px 15px; /* مسافة سفلية لشريط التنقل */
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* --- تأثير الزجاج السائل والخلفية الديناميكية --- */
+        .liquid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(70px);
+            mix-blend-mode: screen;
+            opacity: 0.25;
+            animation: moveLiquid 14s infinite alternate ease-in-out;
+        }
+
+        .blob1 {
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, #183fdb 0%, transparent 70%);
+            top: -60px;
+            right: -60px;
+        }
+
+        .blob2 {
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, #8c18db 0%, transparent 70%);
+            bottom: 12%;
+            left: -70px;
+            animation-duration: 18s;
+            animation-delay: -4s;
+        }
+
+        .blob3 {
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, #00f2fe 0%, transparent 70%);
+            top: 35%;
+            right: -30px;
+            animation-duration: 12s;
+            animation-delay: -2s;
+        }
+
+        @keyframes moveLiquid {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            50% { transform: translate(60px, 40px) scale(1.2) rotate(180deg); }
+            100% { transform: translate(-40px, -30px) scale(0.9) rotate(360deg); }
         }
 
         .container {
@@ -35,6 +87,7 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+            z-index: 1;
         }
 
         /* 1. الشريط العلوي Header */
@@ -81,12 +134,13 @@
         .search-bar input {
             width: 100%;
             padding: 14px 45px 14px 20px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 25px;
             color: #fff;
             font-size: 15px;
             outline: none;
+            backdrop-filter: blur(10px);
             transition: 0.3s;
         }
 
@@ -103,11 +157,11 @@
             font-size: 16px;
         }
 
-        /* 3. البانر الرئيسي الترويجي */
+        /* 3. البانر الرئيسي الترويجي زجاجي ممتد */
         .main-banner {
             width: 100%;
-            background: linear-gradient(135deg, rgba(24, 63, 219, 0.25), rgba(140, 24, 219, 0.08));
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 24px;
             padding: 20px;
             display: flex;
@@ -115,7 +169,9 @@
             align-items: center;
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         .banner-info {
@@ -140,7 +196,7 @@
         .telegram-btn {
             align-self: flex-start;
             margin-top: 5px;
-            background: #183fdb;
+            background: linear-gradient(135deg, #183fdb, #1232b5);
             color: white;
             border: none;
             padding: 8px 16px;
@@ -158,20 +214,28 @@
 
         .telegram-btn:active {
             transform: scale(0.95);
-            background: #1232b5;
         }
 
+        /* تنسيق اللوجو الجديد وتأثيراته */
         .banner-image {
-            font-size: 75px;
-            color: #183fdb;
-            text-shadow: 0 0 25px rgba(24, 63, 219, 0.8);
             z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .banner-image img {
+            width: 85px;
+            height: 85px;
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow: 0 0 25px rgba(24, 63, 219, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.2);
             animation: float 4s ease-in-out infinite;
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-6px) rotate(2deg); }
         }
 
         /* 4. عنوان قسم التطبيقات والمعداد */
@@ -198,7 +262,7 @@
             font-weight: 600;
         }
 
-        /* 5. قائمة التطبيقات App List */
+        /* 5. قائمة التطبيقات زجاجية الزخرفة */
         .apps-list {
             display: flex;
             flex-direction: column;
@@ -207,14 +271,16 @@
         }
 
         .app-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.07);
             border-radius: 18px;
             padding: 14px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             transition: 0.3s;
         }
 
@@ -247,7 +313,7 @@
             color: rgba(255, 255, 255, 0.45);
         }
 
-        /* زر التنزيل والتفاعل الزجاجي */
+        /* زر التنزيل */
         .download-btn {
             background: rgba(24, 63, 219, 0.15);
             border: 1px solid rgba(24, 63, 219, 0.4);
@@ -269,7 +335,6 @@
             transform: scale(0.92);
         }
 
-        /* حالة التحميل النشطة للزر */
         .download-btn.loading {
             background: rgba(255, 255, 255, 0.1);
             border-color: rgba(255, 255, 255, 0.2);
@@ -283,7 +348,7 @@
             color: #2ecc71;
         }
 
-        /* 6. شريط التنقل السفلي الثابت Navigation */
+        /* 6. شريط التنقل السفلي الثابت */
         .bottom-nav {
             position: fixed;
             bottom: 15px;
@@ -291,15 +356,15 @@
             transform: translateX(-50%);
             width: calc(100% - 30px);
             max-width: 450px;
-            background: rgba(10, 15, 35, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(10, 15, 35, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             border-radius: 25px;
             padding: 10px 5px;
             display: flex;
             justify-content: space-around;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6);
             z-index: 999;
         }
 
@@ -328,7 +393,6 @@
             transform: scale(1.05);
         }
 
-        /* رسالة عدم وجود نتائج للبحث */
         .no-results {
             text-align: center;
             color: rgba(255, 255, 255, 0.4);
@@ -339,6 +403,12 @@
     </style>
 </head>
 <body>
+
+    <div class="liquid-bg">
+        <div class="blob blob1"></div>
+        <div class="blob blob2"></div>
+        <div class="blob blob3"></div>
+    </div>
 
     <div class="container">
         
@@ -361,13 +431,13 @@
             <div class="banner-info">
                 <h2>أحدث التطبيقات<br>والتحديثات</h2>
                 <p>تابع آخر التطبيقات المعدلة<br>والجديدة داخل ستور التطبيقات</p>
-                <a href="https://t.me/YourChannel" target="_blank" class="telegram-btn">
+                <a href="https://t.me/Applicationsipa" target="_blank" class="telegram-btn">
                     <i class="fa-solid fa-paper-plane"></i>
                     قناة التليجرام
                 </a>
             </div>
             <div class="banner-image">
-                <i class="fa-solid fa-layer-group"></i>
+                <img src="logo.png" alt="شعار المتجر">
             </div>
         </div>
 
@@ -456,7 +526,7 @@
     </div>
 
     <script>
-        // 1. نظام البحث الذكي والفوري
+        // نظام البحث الفوري
         const searchInput = document.getElementById('searchInput');
         const appCards = document.querySelectorAll('.app-card');
         const noResults = document.getElementById('noResults');
@@ -476,10 +546,8 @@
                 }
             });
 
-            // تحديث العداد العلوي بناءً على نتائج البحث
             appsCountLabel.innerText = `${visibleCount} تطبيق`;
 
-            // إظهار رسالة خطأ إذا لم يجد شيء
             if (visibleCount === 0) {
                 noResults.style.display = 'block';
             } else {
@@ -487,24 +555,18 @@
             }
         });
 
-        // 2. تفعيل حركة التنزيل (Spinner) بشكل واقعي
+        // حركة التنزيل (Spinner)
         function startDownload(button) {
-            // التحقق من أن الزر لا يقوم بالتحميل حالياً
             if (button.classList.contains('loading') || button.classList.contains('success')) return;
 
             button.classList.add('loading');
             button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري...';
 
-            // محاكاة طلب التنزيل (مثلاً بعد 3 ثواني تكتمل الحركة)
             setTimeout(() => {
                 button.classList.remove('loading');
                 button.classList.add('success');
                 button.innerHTML = '<i class="fa-solid fa-check"></i> تم';
 
-                // (اختياري) يمكنك هنا وضع رابط الـ manifest لتثبيت الـ IPA تلقائياً للآيفون:
-                // window.location.href = "itms-services://?action=download-manifest&url=رابط_الملف_هنا";
-
-                // إعادة الزر لحالته الطبيعية بعد ثانيتين إضافيتين
                 setTimeout(() => {
                     button.classList.remove('success');
                     button.innerHTML = '<i class="fa-solid fa-arrow-down"></i> تنزيل';
@@ -513,7 +575,7 @@
             }, 3000);
         }
 
-        // 3. التحكم بشريط التنقل السفلي (تغيير الزر النشط Active)
+        // تحويل أزرار شريط التنقل السفلي
         function changeTab(element) {
             const navItems = document.querySelectorAll('.nav-item');
             navItems.forEach(item => item.classList.remove('active'));
