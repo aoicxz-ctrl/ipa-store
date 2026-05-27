@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ستور التطبيقات - الزجاج السائل</title>
+    <title>ستور التطبيقات - التنقل السائل</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -28,7 +28,7 @@
         .liquid-blob-1 { animation: fluid-move-1 12s infinite ease-in-out; }
         .liquid-blob-2 { animation: fluid-move-2 15s infinite ease-in-out; }
 
-        /* تأثير الزجاج السائل السميك مع لمعة داخلية */
+        /* تأثير الزجاج السائل السميك */
         .liquid-glass {
             background: rgba(255, 255, 255, 0.04);
             backdrop-filter: blur(25px) saturate(190%);
@@ -46,6 +46,11 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
+
+        /* تأثير الأنيميشن لتغيير المحتوى بسلاسة */
+        .tab-content {
+            transition: all 0.3s ease-in-out;
+        }
     </style>
 </head>
 <body class="text-white min-h-screen flex justify-center items-center p-4">
@@ -54,10 +59,8 @@
         
         <div class="absolute top-12 right-4 w-56 h-56 bg-gradient-to-br from-blue-600/40 to-cyan-500/10 rounded-full blur-[50px] liquid-blob-1 pointer-events-none z-0"></div>
         <div class="absolute bottom-24 left-4 w-60 h-60 bg-gradient-to-tr from-purple-600/30 to-pink-500/5 rounded-full blur-[60px] liquid-blob-2 pointer-events-none z-0"></div>
-        <div class="absolute top-1/2 left-10 w-36 h-36 bg-blue-500/20 rounded-full blur-[45px] liquid-blob-1 pointer-events-none z-0" style="animation-delay: -3s;"></div>
 
         <div class="relative z-10">
-            
             <div class="p-6 pb-2 flex justify-between items-center">
                 <button class="w-10 h-10 rounded-full liquid-glass flex items-center justify-center text-gray-300 hover:text-white transition active:scale-95">
                     <i class="fas fa-cog text-base"></i>
@@ -77,95 +80,118 @@
                 </div>
             </div>
 
-            <div class="px-6 mb-6">
-                <div class="liquid-glass rounded-3xl p-5 relative overflow-hidden flex justify-between items-center">
-                    <div class="z-10 max-w-[60%]">
-                        <h2 class="text-base font-bold mb-1 text-white">أحدث التطبيقات والتحديثات</h2>
-                        <p class="text-[11px] text-gray-400 mb-4 leading-relaxed">تابع آخر التطبيقات المعدلة والجديدة داخل ستور التطبيقات</p>
-                        <a href="#" class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white text-xs font-medium py-2.5 px-4 rounded-xl shadow-lg shadow-blue-600/20 transition active:scale-95">
-                            <i class="fas fa-paper-plane"></i>
-                            قناة التليجرام
-                        </a>
-                    </div>
-                    <div class="absolute -left-2 bottom-2 w-32 h-32 flex items-center justify-center opacity-90">
-                        <div class="w-20 h-20 bg-gradient-to-br from-blue-500/80 to-indigo-600/80 rounded-2xl shadow-[0_0_25px_rgba(59,130,246,0.4)] flex items-center justify-center transform rotate-12 border border-white/20">
-                            <i class="fab fa-apple text-4xl text-white"></i>
+            <div id="content-home" class="tab-content opacity-100 scale-100 block">
+                <div class="px-6 mb-6">
+                    <div class="liquid-glass rounded-3xl p-5 relative overflow-hidden flex justify-between items-center">
+                        <div class="z-10 max-w-[60%]">
+                            <h2 class="text-base font-bold mb-1">أحدث التطبيقات والتحديثات</h2>
+                            <p class="text-[11px] text-gray-400 mb-4 leading-relaxed">تابع آخر التطبيقات المعدلة والجديدة داخل ستور التطبيقات</p>
+                            <a href="#" class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white text-xs font-medium py-2.5 px-4 rounded-xl transition active:scale-95">
+                                <i class="fas fa-paper-plane"></i> قناة التليجرام
+                            </a>
                         </div>
+                        <div class="absolute -left-2 bottom-2 w-32 h-32 flex items-center justify-center opacity-90">
+                            <div class="w-20 h-20 bg-gradient-to-br from-blue-500/80 to-indigo-600/80 rounded-2xl shadow-[0_0_25px_rgba(59,130,246,0.4)] flex items-center justify-center transform rotate-12 border border-white/20">
+                                <i class="fab fa-apple text-4xl text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="px-6 mb-4 flex justify-between items-center">
+                    <h3 class="font-bold text-xs text-gray-300">محدث مؤخراً</h3>
+                    <span class="liquid-glass text-blue-400 text-[11px] font-medium px-3 py-1 rounded-full">248 تطبيق</span>
+                </div>
+
+                <div class="px-6 space-y-3 overflow-y-auto max-h-[340px] pb-4">
+                    <div class="liquid-glass rounded-2xl p-3 flex justify-between items-center hover:bg-white/[0.02] transition">
+                        <div class="flex items-center gap-3">
+                            <div class="w-11 h-11 bg-[#ff4500] rounded-xl flex items-center justify-center shadow-lg"><i class="fab fa-reddit-alien text-xl text-white"></i></div>
+                            <div>
+                                <h4 class="text-xs font-bold">Reddit Deluxe</h4>
+                                <p class="text-[10px] text-gray-400 mt-0.5">v2026.19 • اجتماعي</p>
+                            </div>
+                        </div>
+                        <button class="liquid-glass hover:bg-blue-600 hover:text-white text-blue-400 text-[11px] font-medium py-2 px-4 rounded-xl flex items-center gap-1.5 transition active:scale-95">تنزيل <i class="fas fa-arrow-down text-[9px]"></i></button>
+                    </div>
+                    <div class="liquid-glass rounded-2xl p-3 flex justify-between items-center hover:bg-white/[0.02] transition">
+                        <div class="flex items-center gap-3">
+                            <div class="w-11 h-11 bg-gradient-to-tr from-blue-500 via-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg"><i class="fab fa-facebook-messenger text-xl text-white"></i></div>
+                            <div>
+                                <h4 class="text-xs font-bold">Messenger Plus</h4>
+                                <p class="text-[10px] text-gray-400 mt-0.5">v562.0 • مراسلة</p>
+                            </div>
+                        </div>
+                        <button class="liquid-glass hover:bg-blue-600 hover:text-white text-blue-400 text-[11px] font-medium py-2 px-4 rounded-xl flex items-center gap-1.5 transition active:scale-95">تنزيل <i class="fas fa-arrow-down text-[9px]"></i></button>
                     </div>
                 </div>
             </div>
 
-            <div class="px-6 mb-4 flex justify-between items-center">
-                <h3 class="font-bold text-xs text-gray-300">محدث مؤخراً</h3>
-                <span class="liquid-glass text-blue-400 text-[11px] font-medium px-3 py-1 rounded-full">248 تطبيق</span>
+            <div id="content-apps" class="tab-content opacity-0 scale-95 hidden px-6">
+                <div class="mb-4"><h3 class="font-bold text-xs text-gray-300">جميع الفئات الأكاديمية والمعدلة</h3></div>
+                <div class="grid grid-cols-2 gap-4 max-h-[460px] overflow-y-auto pb-4">
+                    <div class="liquid-glass rounded-2xl p-4 flex flex-col items-center text-center justify-center gap-2 hover:bg-white/[0.02] transition cursor-pointer">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center border border-purple-500/30 text-purple-400"><i class="fas fa-gamepad text-xl"></i></div>
+                        <span class="text-xs font-bold">ألعاب مهكرة</span>
+                    </div>
+                    <div class="liquid-glass rounded-2xl p-4 flex flex-col items-center text-center justify-center gap-2 hover:bg-white/[0.02] transition cursor-pointer">
+                        <div class="w-12 h-12 rounded-xl bg-orange-500/20 flex items-center justify-center border border-orange-500/30 text-orange-400"><i class="fas fa-share-alt text-xl"></i></div>
+                        <span class="text-xs font-bold">برامج التواصل</span>
+                    </div>
+                    <div class="liquid-glass rounded-2xl p-4 flex flex-col items-center text-center justify-center gap-2 hover:bg-white/[0.02] transition cursor-pointer">
+                        <div class="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center border border-green-500/30 text-green-400"><i class="fas fa-tools text-xl"></i></div>
+                        <span class="text-xs font-bold">أدوات ونظام</span>
+                    </div>
+                    <div class="liquid-glass rounded-2xl p-4 flex flex-col items-center text-center justify-center gap-2 hover:bg-white/[0.02] transition cursor-pointer">
+                        <div class="w-12 h-12 rounded-xl bg-pink-500/20 flex items-center justify-center border border-pink-500/30 text-pink-400"><i class="fas fa-photo-video text-xl"></i></div>
+                        <span class="text-xs font-bold">تصميم ومونتاج</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="px-6 space-y-3 overflow-y-auto max-h-[360px] pb-4">
-                
-                <div class="liquid-glass rounded-2xl p-3 flex justify-between items-center hover:bg-white/[0.02] transition">
+            <div id="content-sources" class="tab-content opacity-0 scale-95 hidden px-6 space-y-3">
+                <div class="mb-2"><h3 class="font-bold text-xs text-gray-300">مصادر السيرفرات النشطة</h3></div>
+                <div class="liquid-glass rounded-2xl p-4 flex justify-between items-center">
                     <div class="flex items-center gap-3">
-                        <div class="w-11 h-11 bg-[#ff4500] rounded-xl flex items-center justify-center shadow-lg">
-                            <i class="fab fa-reddit-alien text-xl text-white"></i>
-                        </div>
+                        <div class="text-blue-400"><i class="fas fa-server text-lg"></i></div>
                         <div>
-                            <h4 class="text-xs font-bold">Reddit Deluxe</h4>
-                            <p class="text-[10px] text-gray-400 mt-0.5">v2026.19 <span class="mx-1">•</span> تطبيق اجتماعي</p>
+                            <h4 class="text-xs font-bold">سيرفر المتجر الرئيسي</h4>
+                            <p class="text-[10px] text-green-400 mt-0.5">متصل (مستقر)</p>
                         </div>
                     </div>
-                    <button class="liquid-glass hover:bg-blue-600 hover:text-white text-blue-400 text-[11px] font-medium py-2 px-4 rounded-xl flex items-center gap-1.5 transition active:scale-95">
-                        تنزيل <i class="fas fa-arrow-down text-[9px]"></i>
-                    </button>
+                    <span class="text-[10px] text-gray-400">99.9%</span>
                 </div>
-
-                <div class="liquid-glass rounded-2xl p-3 flex justify-between items-center hover:bg-white/[0.02] transition">
+                <div class="liquid-glass rounded-2xl p-4 flex justify-between items-center">
                     <div class="flex items-center gap-3">
-                        <div class="w-11 h-11 bg-gradient-to-tr from-blue-500 via-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
-                            <i class="fab fa-facebook-messenger text-xl text-white"></i>
-                        </div>
+                        <div class="text-purple-400"><i class="fas fa-database text-lg"></i></div>
                         <div>
-                            <h4 class="text-xs font-bold">Messenger Plus</h4>
-                            <p class="text-[10px] text-gray-400 mt-0.5">v562.0 <span class="mx-1">•</span> مراسلة</p>
+                            <h4 class="text-xs font-bold">قاعدة بيانات الـ IPA</h4>
+                            <p class="text-[10px] text-green-400 mt-0.5">محدثة ومزامنة</p>
                         </div>
                     </div>
-                    <button class="liquid-glass hover:bg-blue-600 hover:text-white text-blue-400 text-[11px] font-medium py-2 px-4 rounded-xl flex items-center gap-1.5 transition active:scale-95">
-                        تنزيل <i class="fas fa-arrow-down text-[9px]"></i>
-                    </button>
+                    <span class="text-[10px] text-gray-400">v3.2</span>
                 </div>
-
-                <div class="liquid-glass rounded-2xl p-3 flex justify-between items-center hover:bg-white/[0.02] transition">
-                    <div class="flex items-center gap-3">
-                        <div class="w-11 h-11 bg-[#ff3b30] rounded-xl flex items-center justify-center shadow-lg">
-                            <span class="text-lg font-black text-white font-sans">W</span>
-                        </div>
-                        <div>
-                            <h4 class="text-xs font-bold">WPS Office</h4>
-                            <p class="text-[10px] text-gray-400 mt-0.5">v26.4 <span class="mx-1">•</span> إنتاجية</p>
-                        </div>
-                    </div>
-                    <button class="liquid-glass hover:bg-blue-600 hover:text-white text-blue-400 text-[11px] font-medium py-2 px-4 rounded-xl flex items-center gap-1.5 transition active:scale-95">
-                        تنزيل <i class="fas fa-arrow-down text-[9px]"></i>
-                    </button>
-                </div>
-
             </div>
 
-        </div> <div class="absolute bottom-4 left-4 right-4 h-20 liquid-nav rounded-3xl flex justify-around items-center px-4 shadow-xl z-20">
-            <button class="flex flex-col items-center gap-1 text-blue-400">
-                <div class="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center shadow-[0_0_15px_rgba(59,130,246,0.15)] border border-blue-500/20">
+        </div>
+
+        <div class="absolute bottom-4 left-4 right-4 h-20 liquid-nav rounded-3xl flex justify-around items-center px-4 shadow-xl z-20">
+            <button id="btn-home" onclick="switchTab('home')" class="nav-btn flex flex-col items-center gap-1 text-blue-400 transition-all duration-300">
+                <div class="icon-container w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center shadow-[0_0_15px_rgba(59,130,246,0.15)] border border-blue-500/20 transition-all duration-300">
                     <i class="fas fa-home text-base"></i>
                 </div>
                 <span class="text-[10px] font-bold">الرئيسية</span>
             </button>
 
-            <button class="flex flex-col items-center gap-1 text-gray-400 hover:text-gray-200 transition">
-                <div class="w-10 h-10 flex items-center justify-center">
+            <button id="btn-apps" onclick="switchTab('apps')" class="nav-btn flex flex-col items-center gap-1 text-gray-400 hover:text-gray-200 transition-all duration-300">
+                <div class="icon-container w-10 h-10 flex items-center justify-center transition-all duration-300">
                     <i class="fas fa-box-open text-base"></i>
                 </div>
                 <span class="text-[10px]">التطبيقات</span>
             </button>
 
-            <button class="flex flex-col items-center gap-1 text-gray-400 hover:text-gray-200 transition">
-                <div class="w-10 h-10 flex items-center justify-center">
+            <button id="btn-sources" onclick="switchTab('sources')" class="nav-btn flex flex-col items-center gap-1 text-gray-400 hover:text-gray-200 transition-all duration-300">
+                <div class="icon-container w-10 h-10 flex items-center justify-center transition-all duration-300">
                     <i class="fas fa-layer-group text-base"></i>
                 </div>
                 <span class="text-[10px]">المصادر</span>
@@ -174,5 +200,40 @@
 
     </div>
 
+    <script>
+        function switchTab(tabName) {
+            // 1. إخفاء جميع الأقسام مع أنيميشن ناعم
+            const tabs = ['home', 'apps', 'sources'];
+            tabs.forEach(tab => {
+                const content = document.getElementById(`content-${tab}`);
+                content.classList.add('hidden', 'opacity-0', 'scale-95');
+                content.classList.remove('block', 'opacity-100', 'scale-100');
+            });
+
+            // 2. إظهار القسم المطلوب
+            const activeContent = document.getElementById(`content-${tabName}`);
+            activeContent.classList.remove('hidden');
+            setTimeout(() => {
+                activeContent.classList.add('block', 'opacity-100', 'scale-100');
+            }, 50);
+
+            // 3. إعادة ستايل الأزرار إلى الوضع الافتراضي (غير نشط)
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-blue-400');
+                btn.classList.add('text-gray-400');
+                // إزالة ثيم الزجاج المشع من حاوية الأيقونة
+                const iconContainer = btn.querySelector('.icon-container');
+                iconContainer.className = "icon-container w-10 h-10 flex items-center justify-center transition-all duration-300";
+            });
+
+            // 4. إضافة ثيم "الزجاج السائل المشع" للزر الذي تم ضغطه حالياً
+            const currentBtn = document.getElementById(`btn-${tabName}`);
+            currentBtn.classList.remove('text-gray-400');
+            currentBtn.classList.add('text-blue-400');
+            
+            const currentIconContainer = currentBtn.querySelector('.icon-container');
+            currentIconContainer.className = "icon-container w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center shadow-[0_0_15px_rgba(59,130,246,0.15)] border border-blue-500/20 transition-all duration-300";
+        }
+    </script>
 </body>
 </html>
