@@ -90,7 +90,7 @@
             z-index: 1;
         }
 
-        /* 1. الشريط العلوي Header (تكبير الخط قليلاً) */
+        /* 1. الشريط العلوي Header */
         .header {
             display: flex;
             justify-content: space-between;
@@ -99,7 +99,7 @@
         }
 
         .header h1 {
-            font-size: 22px; /* تم التكبير قليلاً جداً */
+            font-size: 22px; 
             font-weight: 700;
             background: linear-gradient(135deg, #ffffff 60%, #00f2fe);
             -webkit-background-clip: text;
@@ -141,7 +141,7 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 25px;
             color: #fff;
-            font-size: 16px; /* تم التكبير قليل جداً لسهولة القراءة */
+            font-size: 16px; 
             outline: none;
             backdrop-filter: blur(10px);
             transition: 0.3s;
@@ -160,7 +160,7 @@
             font-size: 17px;
         }
 
-        /* 3. البانر الرئيسي الترويجي - تصميم حقيقي واحترافي */
+        /* 3. البانر الرئيسي الترويجي - مع اسم المتجر الجديد */
         .main-banner {
             width: 100%;
             background: linear-gradient(135deg, rgba(24, 63, 219, 0.12), rgba(140, 24, 219, 0.04));
@@ -185,15 +185,15 @@
         }
 
         .banner-info h2 {
-            font-size: 22px; /* تم تكبير خط العناوين */
+            font-size: 22px; 
             font-weight: 700;
             line-height: 1.4;
         }
 
         .banner-info p {
-            font-size: 13px; /* تم تكبير خط الوصف */
+            font-size: 13px; 
             color: rgba(255, 255, 255, 0.75);
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .telegram-btn {
@@ -219,7 +219,7 @@
             transform: scale(0.95);
         }
 
-        /* بديل الأيقونة المكسورة: شعار تليجرام حقيقي ومضيء وعائم */
+        /* تصميم دائرة التليجرام المضيئة والحقيقية */
         .banner-icon-zone {
             z-index: 2;
             display: flex;
@@ -228,18 +228,26 @@
             padding-left: 5px;
         }
 
-        .banner-icon-zone i {
-            font-size: 70px;
-            background: linear-gradient(135deg, #00f2fe, #183fdb);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 15px rgba(0, 242, 254, 0.5));
+        .tg-circle {
+            width: 75px;
+            height: 75px;
+            background: linear-gradient(135deg, #3a9efd, #1d73c9);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 25px rgba(29, 115, 201, 0.5);
             animation: floatIcon 4s ease-in-out infinite;
+        }
+
+        .tg-circle i {
+            font-size: 38px;
+            color: #ffffff;
         }
 
         @keyframes floatIcon {
             0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-6px) scale(1.03); }
+            50% { transform: translateY(-5px) scale(1.02); }
         }
 
         /* 4. عنوان قسم التطبيقات والمعداد */
@@ -252,7 +260,7 @@
         }
 
         .section-title h3 {
-            font-size: 17px; /* تكبير بسيط */
+            font-size: 17px; 
             font-weight: 600;
         }
 
@@ -266,7 +274,7 @@
             font-weight: 600;
         }
 
-        /* 5. قائمة التطبيقات - تصميم المتاجر الحقيقية الفخمة */
+        /* 5. قائمة التطبيقات */
         .apps-list {
             display: flex;
             flex-direction: column;
@@ -307,24 +315,24 @@
         }
 
         .app-info h4 {
-            font-size: 16px; /* تكبير بسيط لقراءة أسهل */
+            font-size: 16px; 
             font-weight: 600;
             margin-bottom: 3px;
         }
 
         .app-info p {
-            font-size: 12px; /* تكبير قليل جداً */
+            font-size: 12px; 
             color: rgba(255, 255, 255, 0.5);
         }
 
-        /* زر التنزيل الحقيقي */
+        /* زر التنزيل */
         .download-btn {
             background: rgba(24, 63, 219, 0.16);
             border: 1px solid rgba(24, 63, 219, 0.45);
             color: #ffffff;
             padding: 7px 20px;
             border-radius: 18px;
-            font-size: 14px; /* خط أوضح */
+            font-size: 14px; 
             font-weight: 700;
             cursor: pointer;
             display: flex;
@@ -352,7 +360,7 @@
             color: #2ecc71;
         }
 
-        /* 6. شريط التنقل السفلي الثابت (تم حذف خانة حسابي وإعادة التوزيع لـ 3 خانات) */
+        /* 6. شريط التنقل السفلي الثابت (3 خانات متوازنة ومتناسقة) */
         .bottom-nav {
             position: fixed;
             bottom: 15px;
@@ -380,15 +388,15 @@
             background: none;
             border: none;
             color: rgba(255, 255, 255, 0.45);
-            font-size: 12px; /* تكبير بسيط للكتابة */
+            font-size: 12px; 
             font-weight: 600;
             cursor: pointer;
-            width: 30%; /* توزيع مثالي متساوي للـ 3 عناصر بدلاً من 4 */
+            width: 30%; 
             transition: 0.3s;
         }
 
         .nav-item i {
-            font-size: 20px; /* تكبير الأيقونات السفلية قليلاً لتبدو حقيقية */
+            font-size: 20px; 
         }
 
         .nav-item.active {
@@ -434,14 +442,16 @@
         <div class="main-banner">
             <div class="banner-info">
                 <h2>أحدث التطبيقات<br>والتحديثات</h2>
-                <p>تابع آخر التطبيقات المعدلة<br>والجديدة داخل ستور التطبيقات</p>
+                <p>تابع آخر التطبيقات المعدلة<br>والجديدة داخل تطبيقات IPA</p>
                 <a href="https://t.me/Applicationsipa" target="_blank" class="telegram-btn">
                     <i class="fa-solid fa-paper-plane"></i>
                     قناة التليجرام
                 </a>
             </div>
             <div class="banner-icon-zone">
-                <i class="fa-brands fa-telegram"></i>
+                <div class="tg-circle">
+                    <i class="fa-brands fa-telegram"></i>
+                </div>
             </div>
         </div>
 
@@ -575,7 +585,7 @@
             }, 3000);
         }
 
-        // تحويل التبويبات بنعومة للمتجر الحقيقي
+        // تحويل التبويبات بنعومة
         function changeTab(element) {
             const navItems = document.querySelectorAll('.nav-item');
             navItems.forEach(item => item.classList.remove('active'));
