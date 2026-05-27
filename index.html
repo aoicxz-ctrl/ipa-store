@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر التطبيقات المتكامل</title>
+    <title>متجر تطبيقات IPA</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -40,7 +40,7 @@
         <div class="relative z-10">
             <div class="p-6 pb-2 flex justify-between items-center">
                 <button class="w-10 h-10 rounded-full liquid-glass flex items-center justify-center text-gray-300 hover:text-white transition"><i class="fas fa-cog"></i></button>
-                <h1 class="text-base font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-300">متجر التطبيقات الذكي</h1>
+                <h1 class="text-base font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-300">متجر تطبيقات IPA</h1>
                 <button class="w-10 h-10 rounded-full liquid-glass flex items-center justify-center text-gray-300 hover:text-white transition"><i class="fas fa-bars"></i></button>
             </div>
 
@@ -58,12 +58,12 @@
                             <h2 class="text-base font-bold mb-1">تطبيقات بدون قيود!</h2>
                             <p class="text-[11px] text-gray-400 mb-4 leading-relaxed">حمل برامجك وألعابك المفضلة والمعدلة بنقرة واحدة وبأمان تام.</p>
                             <a href="#" class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-500 text-white text-xs font-medium py-2.5 px-4 rounded-xl shadow-lg shadow-blue-600/20 transition active:scale-95">
-                                <i class="fas fa-paper-plane"></i> الدعم الفني
+                                <i class="fab fa-telegram"></i> قناة التليجرام
                             </a>
                         </div>
                         <div class="absolute -left-2 bottom-2 w-28 h-28 flex items-center justify-center opacity-80">
-                            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl shadow-lg flex items-center justify-center transform rotate-12 border border-white/20">
-                                <i class="fab fa-apple text-3xl text-white"></i>
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl shadow-lg flex items-center justify-center transform rotate-12 border border-white/20">
+                                <i class="fab fa-telegram-plane text-4xl text-white"></i>
                             </div>
                         </div>
                     </div>
@@ -106,7 +106,7 @@
                     <div class="flex items-center gap-3">
                         <div class="text-green-400"><i class="fas fa-server"></i></div>
                         <div>
-                            <h4 class="text-xs font-bold">السيرفر الرئيسي الرئيسي</h4>
+                            <h4 class="text-xs font-bold">السيرفر الرئيسي</h4>
                             <p class="text-[10px] text-green-400 mt-0.5">يعمل بكفاءة</p>
                         </div>
                     </div>
@@ -123,7 +123,7 @@
                 <h3 id="modal-title" class="text-base font-bold mb-1"></h3>
                 <p id="modal-version" class="text-xs text-gray-400 mb-4"></p>
                 <p id="modal-desc" class="text-xs text-gray-300 px-2 mb-6 leading-relaxed"></p>
-                <a id="modal-download-link" href="#" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold py-3 rounded-xl transition shadow-lg shadow-blue-600/35">تثبيت التطبيق الآن</a>
+                <a id="modal-download-link" href="#" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold py-3 rounded-xl transition shadow-lg shadow-blue-600/35">تثبيت IPA الآن</a>
             </div>
         </div>
 
@@ -145,31 +145,21 @@
     </div>
 
     <script>
-        // 1. قاعدة البيانات الداخلية للمتجر (تكدر تضيف أو تحذف منها بسهولة بدون تكرار كود الـ HTML)
         const database = [
             { id: 1, name: "Reddit Deluxe", version: "v2026.19", category: "social", icon: "fab fa-reddit-alien", iconBg: "#ff4500", desc: "تطبيق ريديت معدل بالكامل: ميزة تحميل الفيديوهات مباشرة بدون علامة مائية، وإزالة كافة الإعلانات المزعجة.", url: "#" },
             { id: 2, name: "Messenger Plus", version: "v562.0", category: "social", icon: "fab fa-facebook-messenger", iconBg: "linear-gradient(to tr, #0084ff, #a136ff)", desc: "نسخة بلس تحتوي على ميزة قراءة الرسائل المحذوفة، تجميد الظهور، وتحميل الحالات والستوريات بجودة عالية.", url: "#" },
             { id: 3, name: "WPS Office Pro", version: "v26.4", category: "tools", icon: "fas fa-file-invoice", iconBg: "#ff3b30", desc: "الحزمة المكتبية الاحترافية كاملة المزايا مجاناً لفتح وإنشاء ملفات PDF و Word و Excel بدون قيود.", url: "#" },
-            { id: 4, name: "PUBG Mobile Mobile", version: "v3.2", category: "games", icon: "fas fa-gamepad", iconBg: "#212b3d", desc: "نسخة ببجي موبايل مجهزة بأدوات كشف الأماكن الحركية، ثبات السلاح بنسبة آمنة، ودعم الـ 90 إطار.", url: "#" },
+            { id: 4, name: "PUBG Mobile", version: "v3.2", category: "games", icon: "fas fa-gamepad", iconBg: "#212b3d", desc: "نسخة ببجي موبايل مجهزة بأدوات كشف الأماكن الحركية، ثبات السلاح بنسبة آمنة، ودعم الـ 90 إطار.", url: "#" },
             { id: 5, name: "CapCut Pro", version: "v12.1", category: "design", icon: "fas fa-video", iconBg: "#000000", desc: "برنامج المونتاج الشهير بنسخته المدفوعة: جميع الفلاتر، الانتقالات الاحترافية، والخطوط العربية مفعّلة جاهزة.", url: "#" }
         ];
 
-        // تشغيل المتجر وعرض التطبيقات عند فتح الصفحة فوراً
-        window.onload = function() {
-            renderApps(database);
-        };
+        window.onload = function() { renderApps(database); };
 
-        // دالة بناء وعرض التطبيقات ديناميكياً داخل التصميم الزجاجي
         function renderApps(appsArray) {
             const container = document.getElementById('apps-container');
             const countSpan = document.getElementById('apps-count');
             container.innerHTML = '';
             countSpan.innerText = `${appsArray.length} تطبيق`;
-
-            if(appsArray.length === 0) {
-                container.innerHTML = `<p class="text-center text-xs text-gray-500 py-8">لم يتم العثور على نتائج مطابقة!</p>`;
-                return;
-            }
 
             appsArray.forEach(app => {
                 const card = document.createElement('div');
@@ -181,87 +171,31 @@
                         </div>
                         <div>
                             <h4 class="text-xs font-bold">${app.name}</h4>
-                            <p class="text-[10px] text-gray-400 mt-0.5">${app.version} <span class="mx-1">•</span> ${getCategoryName(app.category)}</p>
+                            <p class="text-[10px] text-gray-400 mt-0.5">${app.version}</p>
                         </div>
                     </div>
-                    <button onclick="openModal(${app.id})" class="liquid-glass hover:bg-blue-600 hover:text-white text-blue-400 text-[11px] font-medium py-2 px-4 rounded-xl flex items-center gap-1.5 transition active:scale-95">
-                        تنزيل <i class="fas fa-arrow-down text-[9px]"></i>
-                    </button>
+                    <button onclick="openModal(${app.id})" class="liquid-glass hover:bg-blue-600 hover:text-white text-blue-400 text-[11px] font-medium py-2 px-4 rounded-xl transition active:scale-95">تنزيل</button>
                 `;
                 container.appendChild(card);
             });
         }
 
-        // تحويل كود الفئة إلى اسم عربي مفهوم
-        function getCategoryName(cat) {
-            if(cat === 'games') return 'ألعاب';
-            if(cat === 'social') return 'تواصل';
-            if(cat === 'tools') return 'أدوات';
-            if(cat === 'design') return 'تصميم';
-            return 'عام';
-        }
-
-        // تشغيل شريط البحث الفعلي والتصفية التلقائية أثناء الكتابة
-        function handleSearch() {
-            const query = document.getElementById('search-input').value.toLowerCase();
-            const filtered = database.filter(app => app.name.toLowerCase().includes(query));
-            document.getElementById('list-title').innerText = "نتائج البحث";
-            switchTab('home'); // التأكد من العودة للرئيسية لعرض النتائج
-            renderApps(filtered);
-        }
-
-        // التصفية حسب الفئة عند اختيارها من قسم "التطبيقات"
-        function filterByCategory(category) {
-            const filtered = database.filter(app => app.category === category);
-            document.getElementById('list-title').innerText = `قسم: ${getCategoryName(category)}`;
-            switchTab('home');
-            renderApps(filtered);
-        }
-
-        // فتح نافذة التحميل المنبثقة وعرض معلومات التطبيق المختار
         function openModal(id) {
             const app = database.find(a => a.id === id);
-            if(!app) return;
-
             document.getElementById('modal-title').innerText = app.name;
             document.getElementById('modal-version').innerText = app.version;
             document.getElementById('modal-desc').innerText = app.desc;
-            
             const iconContainer = document.getElementById('modal-icon-container');
             iconContainer.style.background = app.iconBg;
             iconContainer.innerHTML = `<i class="${app.icon} text-white"></i>`;
-            
-            document.getElementById('modal-download-link').href = app.url;
-
-            const modal = document.getElementById('download-modal');
-            modal.classList.remove('hidden');
+            document.getElementById('download-modal').classList.remove('hidden');
         }
 
-        function closeModal() {
-            document.getElementById('download-modal').classLogic = document.getElementById('download-modal').classList.add('hidden');
-        }
+        function closeModal() { document.getElementById('download-modal').classList.add('hidden'); }
 
-        // دالة التنقل بين الأقسام والحفاظ على ستايل الزجاج السائل المشع للزر النشط
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.getElementById(`content-${tabName}`).classList.remove('hidden');
-
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('text-blue-400');
-                btn.classList.add('text-gray-400');
-                btn.querySelector('.icon-box').className = "icon-box w-10 h-10 flex items-center justify-center transition-all";
-            });
-
-            const activeBtn = document.getElementById(`btn-${tabName}`);
-            activeBtn.classList.remove('text-gray-400');
-            activeBtn.classList.add('text-blue-400');
-            activeBtn.querySelector('.icon-box').className = "icon-box w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20 shadow-[0_0_15px_rgba(59,130,246,0.15)]";
-            
-            // إعادة ضبط العنوان إذا رجع للرئيسية بدون بحث
-            if(tabName === 'home' && document.getElementById('search-input').value === "") {
-                document.getElementById('list-title').innerText = "أحدث التحديثات";
-                renderApps(database);
-            }
         }
     </script>
 </body>
