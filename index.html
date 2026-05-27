@@ -5,77 +5,247 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تطبيقات IPA</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Tajawal', sans-serif; background: #04060a; }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: radial-gradient(circle at 50% 0%, #1a234a 0%, #070b19 70%);
+            background-attachment: fixed;
+        }
+        /* تأثير الزجاج السائل المتطور */
         .liquid-glass {
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(24px) saturate(120%);
+            -webkit-backdrop-filter: blur(24px) saturate(120%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        /* إخفاء شريط التمرير */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* حركات مخصصة للانتقال السلس */
+        .page-content {
+            transition: all 0.3s ease-in-out;
         }
     </style>
 </head>
-<body class="text-white min-h-screen flex justify-center items-center p-4">
+<body class="text-white min-h-screen pb-28">
 
-    <div class="w-full max-w-md bg-[#060911] rounded-[45px] border border-gray-900 overflow-hidden relative pb-28">
-        
-        <div class="p-6 pb-2 text-center">
-            <h1 class="text-base font-bold text-white">تطبيقات IPA</h1>
+    <header class="flex justify-between items-center px-6 pt-6 pb-4">
+        <div class="w-12 h-12 rounded-[1.2rem] bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-700 flex items-center justify-center border border-white/20 shadow-[0_0_20px_rgba(6,182,212,0.4)]">
+            <i class="fa-solid fa-microchip text-xl text-white drop-shadow-[0_2px_8px_rgba(255,255,255,0.5)]"></i>
         </div>
+        <div class="liquid-glass px-6 py-2 rounded-full text-base font-bold tracking-wide">
+            تطبيقات IPA
+        </div>
+    </header>
 
-        <div id="apps-container" class="px-6 space-y-3 mt-6">
+    <main id="home-page" class="page-content block">
+        <section class="px-6 my-6">
+            <div class="grid grid-cols-4 gap-y-6 gap-x-2 text-center text-xs text-gray-300">
+                <div class="flex flex-col items-center gap-2 cursor-pointer">
+                    <div class="w-14 h-14 liquid-glass rounded-full flex items-center justify-center text-xl text-cyan-400"><i class="fa-solid fa-th-large"></i></div>
+                    <span>الكل</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 cursor-pointer">
+                    <div class="w-14 h-14 liquid-glass rounded-full flex items-center justify-center text-xl text-purple-400"><i class="fa-solid fa-users"></i></div>
+                    <span>تواصل</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 cursor-pointer">
+                    <div class="w-14 h-14 liquid-glass rounded-full flex items-center justify-center text-xl text-indigo-400"><i class="fa-solid fa-tv"></i></div>
+                    <span>ترفيه</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 cursor-pointer">
+                    <div class="w-14 h-14 liquid-glass rounded-full flex items-center justify-center text-xl text-emerald-400"><i class="fa-solid fa-gamepad"></i></div>
+                    <span>الألعاب</span>
+                </div>
             </div>
+        </section>
 
-        <div id="download-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex justify-center items-center p-6">
-            <div class="liquid-glass w-full max-w-sm rounded-[30px] p-6 text-center border border-white/10">
-                <button onclick="closeModal()" class="mb-4 text-gray-400"><i class="fas fa-times"></i></button>
-                <div id="modal-icon-container" class="text-5xl mb-4"></div>
-                <h3 id="modal-title" class="text-lg font-bold mb-2"></h3>
-                <p id="modal-desc" class="text-xs text-gray-400 mb-6"></p>
-                <a id="modal-download-link" href="#" class="block w-full bg-blue-600 text-white py-3 rounded-xl font-bold">تثبيت</a>
+        <section class="my-8">
+            <h2 class="text-lg font-bold px-6 mb-4 text-right flex items-center gap-2">
+                <span class="w-1.5 h-4 bg-cyan-500 rounded-full"></span> تواصل اجتماعي
+            </h2>
+            <div class="flex overflow-x-auto gap-4 px-6 no-scrollbar snap-x snap-mandatory">
+                <div class="min-w-[115px] liquid-glass rounded-[2.5rem] p-3 flex flex-col items-center justify-between gap-3 snap-start">
+                    <div class="w-16 h-16 rounded-[1.5rem] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 flex items-center justify-center text-3xl shadow-md"><i class="fa-brands fa-instagram"></i></div>
+                    <div class="text-center">
+                        <p class="font-bold text-sm">Regram</p>
+                        <p class="text-[10px] text-yellow-400 mt-1"><i class="fa-solid fa-star text-[9px]"></i> 4.6</p>
+                    </div>
+                    <button class="w-full bg-white/10 hover:bg-cyan-500 hover:text-white text-xs py-1.5 px-4 rounded-full transition duration-300">تنزيل</button>
+                </div>
+                <div class="min-w-[115px] liquid-glass rounded-[2.5rem] p-3 flex flex-col items-center justify-between gap-3 snap-start">
+                    <div class="w-16 h-16 rounded-[1.5rem] bg-gradient-to-tr from-green-400 to-green-600 flex items-center justify-center text-3xl shadow-md"><i class="fa-brands fa-whatsapp"></i></div>
+                    <div class="text-center">
+                        <p class="font-bold text-sm">WhatsApp</p>
+                        <p class="text-[10px] text-yellow-400 mt-1"><i class="fa-solid fa-star text-[9px]"></i> 4.4</p>
+                    </div>
+                    <button class="w-full bg-white/10 hover:bg-cyan-500 hover:text-white text-xs py-1.5 px-4 rounded-full transition duration-300">تنزيل</button>
+                </div>
+                <div class="min-w-[115px] liquid-glass rounded-[2.5rem] p-3 flex flex-col items-center justify-between gap-3 snap-start">
+                    <div class="min-w-[64px] h-16 rounded-[1.5rem] bg-gradient-to-tr from-blue-400 to-indigo-600 flex items-center justify-center text-3xl shadow-md"><i class="fa-brands fa-telegram"></i></div>
+                    <div class="text-center">
+                        <p class="font-bold text-sm">Beegram</p>
+                        <p class="text-[10px] text-yellow-400 mt-1"><i class="fa-solid fa-star text-[9px]"></i> 4.8</p>
+                    </div>
+                    <button class="w-full bg-white/10 hover:bg-cyan-500 hover:text-white text-xs py-1.5 px-4 rounded-full transition duration-300">تنزيل</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="my-8">
+            <h2 class="text-lg font-bold px-6 mb-4 text-right flex items-center gap-2">
+                <span class="w-1.5 h-4 bg-purple-500 rounded-full"></span> أفلام ومسلسلات
+            </h2>
+            <div class="flex overflow-x-auto gap-4 px-6 no-scrollbar snap-x snap-mandatory">
+                <div class="min-w-[115px] liquid-glass rounded-[2.5rem] p-3 flex flex-col items-center justify-between gap-3 snap-start">
+                    <div class="w-16 h-16 rounded-[1.5rem] bg-black border border-white/10 flex items-center justify-center text-2xl font-black text-red-500">3</div>
+                    <div class="text-center">
+                        <p class="font-bold text-sm">Bawa</p>
+                        <p class="text-[10px] text-yellow-400 mt-1"><i class="fa-solid fa-star text-[9px]"></i> 4.9</p>
+                    </div>
+                    <button class="w-full bg-white/10 hover:bg-purple-500 text-white text-xs py-1.5 px-4 rounded-full transition">تنزيل</button>
+                </div>
+                <div class="min-w-[115px] liquid-glass rounded-[2.5rem] p-3 flex flex-col items-center justify-between gap-3 snap-start">
+                    <div class="w-16 h-16 rounded-[1.5rem] bg-gradient-to-br from-purple-800 to-indigo-900 flex items-center justify-center text-xl text-white"><i class="fa-solid fa-play"></i></div>
+                    <div class="text-center">
+                        <p class="font-bold text-sm">Buz TV</p>
+                        <p class="text-[10px] text-yellow-400 mt-1"><i class="fa-solid fa-star text-[9px]"></i> 4.0</p>
+                    </div>
+                    <button class="w-full bg-white/10 hover:bg-purple-500 text-white text-xs py-1.5 px-4 rounded-full transition">تنزيل</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="apps-page" class="page-content hidden px-6 py-4">
+        <h2 class="text-xl font-bold mb-4">كل تطبيقات IPA</h2>
+        <p class="text-gray-400 text-sm mb-6">هنا تجد مكتبة حزم الـ IPA الكاملة المتاحة للتحميل المباشر.</p>
+        <div class="grid grid-cols-2 gap-4">
+            <div class="liquid-glass p-4 rounded-3xl flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center text-xl"><i class="fa-brands fa-facebook"></i></div>
+                <div>
+                    <h4 class="font-bold text-sm">Facebook++</h4>
+                    <span class="text-[10px] text-gray-400">حجم: 45MB</span>
+                </div>
+            </div>
+            <div class="liquid-glass p-4 rounded-3xl flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-red-600 flex items-center justify-center text-xl"><i class="fa-brands fa-youtube"></i></div>
+                <div>
+                    <h4 class="font-bold text-sm">YouTube Cercube</h4>
+                    <span class="text-[10px] text-gray-400">حجم: 80MB</span>
+                </div>
             </div>
         </div>
     </div>
 
+    <div id="sign-page" class="page-content hidden px-6 py-4">
+        <h2 class="text-xl font-bold mb-4">توقيع ملفات IPA</h2>
+        <div class="liquid-glass p-6 rounded-[2rem] text-center flex flex-col items-center justify-center border-dashed border-white/20 py-12">
+            <i class="fa-solid fa-cloud-arrow-up text-4xl text-cyan-400 mb-4 animate-pulse"></i>
+            <p class="font-bold mb-2">قم برفع ملف IPA الخاص بك لتوقيعه فوراً</p>
+            <p class="text-xs text-gray-400 mb-6">الحد الأقصى للملف هو 2 جيجابايت</p>
+            <button class="bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-2.5 rounded-full font-bold text-sm shadow-lg shadow-cyan-500/20">اختر الملف</button>
+        </div>
+    </div>
+
+    <div id="downloads-page" class="page-content hidden px-6 py-4">
+        <h2 class="text-xl font-bold mb-4">التنزيلات الحالية</h2>
+        <div class="liquid-glass p-4 rounded-2xl flex flex-col gap-3">
+            <div class="flex justify-between text-sm">
+                <span>تطبيق Instagram_Plus.ipa</span>
+                <span class="text-cyan-400">75%</span>
+            </div>
+            <div class="w-full bg-white/10 h-2 rounded-full overflow-hidden">
+                <div class="bg-gradient-to-r from-cyan-400 to-blue-500 h-full w-[75%] rounded-full"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="settings-page" class="page-content hidden px-6 py-4">
+        <h2 class="text-xl font-bold mb-6">الإعدادات العامة</h2>
+        <div class="liquid-glass rounded-2xl divide-y divide-white/5 overflow-hidden text-sm">
+            <div class="p-4 flex justify-between items-center cursor-pointer hover:bg-white/5">
+                <span>تحديث الشهادات والملفات تلقائياً</span>
+                <i class="fa-solid fa-chevron-left text-xs text-gray-500"></i>
+            </div>
+            <div class="p-4 flex justify-between items-center cursor-pointer hover:bg-white/5">
+                <span>تغيير المظهر (الزجاج الداكن والسائل)</span>
+                <i class="fa-solid fa-chevron-left text-xs text-gray-500"></i>
+            </div>
+            <div class="p-4 flex justify-between items-center text-red-400 cursor-pointer hover:bg-white/5">
+                <span>حذف التخزين المؤقت للتطبيق</span>
+                <i class="fa-solid fa-trash-can text-xs"></i>
+            </div>
+        </div>
+    </div>
+
+    <nav class="fixed bottom-4 left-4 right-4 bg-[#0a1026]/80 border border-white/10 rounded-3xl p-1.5 backdrop-blur-2xl shadow-2xl z-50">
+        <div class="flex justify-between items-center text-[11px] text-gray-400">
+            
+            <button onclick="switchTab('settings-page', this)" class="nav-btn flex flex-col items-center gap-1 py-2 w-1/5 transition duration-200">
+                <i class="fa-solid fa-gear text-lg"></i>
+                <span>الإعدادات</span>
+            </button>
+            
+            <button onclick="switchTab('downloads-page', this)" class="nav-btn flex flex-col items-center gap-1 py-2 w-1/5 transition duration-200">
+                <i class="fa-solid fa-circle-arrow-down text-lg"></i>
+                <span>التنزيلات</span>
+            </button>
+            
+            <button onclick="switchTab('sign-page', this)" class="nav-btn flex flex-col items-center gap-1 py-2 w-1/5 transition duration-200">
+                <i class="fa-solid fa-pen-nib text-lg"></i>
+                <span>التوقيع</span>
+            </button>
+            
+            <button onclick="switchTab('apps-page', this)" class="nav-btn flex flex-col items-center gap-1 py-2 w-1/5 transition duration-200">
+                <i class="fa-solid fa-layer-group text-lg"></i>
+                <span>التطبيقات</span>
+            </button>
+            
+            <button id="default-btn" onclick="switchTab('home-page', this)" class="nav-btn flex flex-col items-center gap-1 py-1.5 w-1/5 bg-white/10 text-white rounded-2xl border border-white/10 font-bold transition duration-200">
+                <i class="fa-solid fa-house text-lg text-cyan-400"></i>
+                <span>الرئيسية</span>
+            </button>
+            
+        </div>
+    </nav>
+
     <script>
-        const database = [
-            { id: 1, name: "Reddit", version: "v2026.19", icon: "fab fa-reddit", desc: "تطبيق ريديت معدل.", url: "#" },
-            { id: 2, name: "Messenger", version: "v562.0", icon: "fab fa-facebook-messenger", desc: "نسخة بلس.", url: "#" },
-            { id: 3, name: "WPS Office", version: "v26.4", icon: "fas fa-file-pdf", desc: "الحزمة المكتبية الاحترافية.", url: "#" },
-            { id: 4, name: "PUBG Mobile", version: "v3.2", icon: "fas fa-gamepad", desc: "نسخة ببجي المعدلة.", url: "#" },
-            { id: 5, name: "CapCut", version: "v12.1", icon: "fas fa-video", desc: "برنامج المونتاج الاحترافي.", url: "#" }
-        ];
-
-        window.onload = function() {
-            const container = document.getElementById('apps-container');
-            database.forEach(app => {
-                const card = document.createElement('div');
-                card.className = "liquid-glass rounded-2xl p-3 flex justify-between items-center";
-                card.innerHTML = `
-                    <div class="flex items-center gap-4">
-                        <div class="text-3xl text-white/90 w-10 text-center"><i class="${app.icon}"></i></div>
-                        <div>
-                            <h4 class="text-sm font-bold">${app.name}</h4>
-                            <p class="text-[10px] text-gray-400">${app.version}</p>
-                        </div>
-                    </div>
-                    <button onclick="openModal(${app.id})" class="text-blue-400 text-xs font-bold px-4 py-2">تنزيل</button>
-                `;
-                container.appendChild(card);
+        function switchTab(pageId, btnElement) {
+            // 1. إخفاء كافة الصفحات
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => {
+                page.classList.add('hidden');
+                page.classList.remove('block');
             });
-        };
 
-        function openModal(id) {
-            const app = database.find(a => a.id === id);
-            document.getElementById('modal-title').innerText = app.name;
-            document.getElementById('modal-desc').innerText = app.desc;
-            document.getElementById('modal-icon-container').innerHTML = `<i class="${app.icon} text-white"></i>`;
-            document.getElementById('download-modal').classList.remove('hidden');
+            // 2. إظهار الصفحة التي تم الضغط عليها
+            const targetPage = document.getElementById(pageId);
+            targetPage.classList.remove('hidden');
+            targetPage.classList.add('block');
+
+            // 3. إعادة تهيئة مظهر كل الأزرار في البار السفلي للوضع الافتراضي غير النشط
+            const allButtons = document.querySelectorAll('.nav-btn');
+            allButtons.forEach(btn => {
+                btn.className = "nav-btn flex flex-col items-center gap-1 py-2 w-1/5 transition duration-200 text-gray-400";
+                // إعادة الأيقونة للونها الطبيعي الرمادي
+                const icon = btn.querySelector('i');
+                if(icon) icon.className = icon.className.replace('text-cyan-400', '');
+            });
+
+            // 4. جعل الزر الحالي الذي تم الضغط عليه نشطاً (Active) بنفس تصميم الزجاج المضغوط بالصورة
+            btnElement.className = "nav-btn flex flex-col items-center gap-1 py-1.5 w-1/5 bg-white/10 text-white rounded-2xl border border-white/10 font-bold transition duration-200";
+            const currentIcon = btnElement.querySelector('i');
+            if(currentIcon) currentIcon.classList.add('text-cyan-400');
         }
-
-        function closeModal() { document.getElementById('download-modal').classList.add('hidden'); }
     </script>
 </body>
 </html>
