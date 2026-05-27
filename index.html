@@ -1,51 +1,58 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<style>
-    body { background-color: #0b1120; color: white; font-family: sans-serif; margin: 0; padding: 20px; }
-    .header { font-size: 24px; font-weight: bold; margin: 20px 0; }
-    
-    /* تصنيف التطبيقات */
-    .section-title { font-size: 18px; margin: 20px 0; }
-    .apps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-    .app-item { background: #1e293b; padding: 15px; border-radius: 20px; text-align: center; }
-    .app-icon { width: 60px; height: 60px; background: #334155; border-radius: 15px; margin: 0 auto 10px; }
-    .download-btn { background: #334155; color: white; border: none; padding: 5px 15px; border-radius: 15px; margin-top: 10px; cursor: pointer; }
-    
-    /* شريط التنقل السفلي */
-    .navbar { position: fixed; bottom: 10px; left: 10px; right: 10px; background: #1e293b; padding: 15px; border-radius: 30px; display: flex; justify-content: space-around; }
-</style>
+    <style>
+        body { background-color: #0c1221; color: #ffffff; font-family: sans-serif; margin: 0; padding: 20px; }
+        
+        /* الرأس والعنوان */
+        .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+        .store-title { font-size: 24px; font-weight: bold; }
+        
+        /* الأيقونات العلوية */
+        .top-categories { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 30px; }
+        .cat-item { display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 12px; }
+        .cat-icon { width: 50px; height: 50px; background: #1e293b; border-radius: 18px; display: flex; align-items: center; justify-content: center; }
+        
+        /* أقسام التطبيقات */
+        .section-title { font-size: 18px; margin-bottom: 15px; font-weight: bold; }
+        .app-row { display: flex; gap: 15px; overflow-x: auto; margin-bottom: 30px; }
+        .app-card { background: #1e293b; padding: 15px; border-radius: 25px; text-align: center; min-width: 110px; }
+        .app-img { width: 60px; height: 60px; background: #334155; border-radius: 20px; margin-bottom: 8px; }
+        .app-name { font-size: 14px; font-weight: bold; }
+        .rating { font-size: 12px; color: #f59e0b; margin: 5px 0; }
+        .btn { background: #334155; color: white; border: none; padding: 6px 20px; border-radius: 15px; font-size: 12px; }
+
+        /* الشريط السفلي */
+        .footer-nav { position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; padding: 15px; display: flex; justify-content: space-around; border-top-left-radius: 20px; border-top-right-radius: 20px; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; font-size: 10px; color: #94a3b8; }
+    </style>
 </head>
 <body>
 
-<div class="header">تطبيقات IPA</div>
+    <div class="header">
+        <div class="store-title">تطبيقات IPA</div>
+    </div>
 
-<div class="section-title">تواصل اجتماعي</div>
-<div class="apps-grid">
-    <div class="app-item">
-        <div class="app-icon"></div>
-        <div>Regram</div>
-        <button class="download-btn">تنزيل</button>
+    <div class="top-categories">
+        <div class="cat-item"><div class="cat-icon">🎮</div>الألعاب</div>
+        <div class="cat-item"><div class="cat-icon">📺</div>أفلام</div>
+        <div class="cat-item"><div class="cat-icon">👥</div>اجتماعي</div>
+        <div class="cat-item"><div class="cat-icon">▣</div>الكل</div>
     </div>
-    <div class="app-item">
-        <div class="app-icon"></div>
-        <div>WhatsApp</div>
-        <button class="download-btn">تنزيل</button>
-    </div>
-    <div class="app-item">
-        <div class="app-icon"></div>
-        <div>Beegram</div>
-        <button class="download-btn">تنزيل</button>
-    </div>
-</div>
 
-<div class="navbar">
-    <div>الإعدادات</div>
-    <div>التنزيلات</div>
-    <div>التوقيع</div>
-    <div>التطبيقات</div>
-    <div>الرئيسية</div>
-</div>
+    <div class="section-title">تواصل اجتماعي</div>
+    <div class="app-row">
+        <div class="app-card"><div class="app-img"></div><div class="app-name">Regram</div><div class="rating">★ 4.6</div><button class="btn">تنزيل</button></div>
+        <div class="app-card"><div class="app-img"></div><div class="app-name">WhatsApp</div><div class="rating">★ 4.4</div><button class="btn">تنزيل</button></div>
+    </div>
+
+    <div class="footer-nav">
+        <div class="nav-item">⚙️ الإعدادات</div>
+        <div class="nav-item">⬇️ التنزيلات</div>
+        <div class="nav-item">✒️ التوقيع</div>
+        <div class="nav-item">📦 التطبيقات</div>
+        <div class="nav-item">🏠 الرئيسية</div>
+    </div>
 
 </body>
 </html>
