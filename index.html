@@ -1,207 +1,93 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ستور الآيفون لتطبيقات IPA</title>
-    
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="iStore">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        body { font-family: 'Tajawal', sans-serif; background: #04060a; -webkit-tap-highlight-color: transparent; }
-        @keyframes fluid-move {
-            0%, 100’% { transform: translate(0px, 0px) scale(1); }
-            50% { transform: translate(30px, -30px) scale(1.1); }
-        }
-        .liquid-blob { animation: fluid-move 14s infinite ease-in-out; }
-        .liquid-glass {
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(25px) saturate(190%);
-            -webkit-backdrop-filter: blur(25px) saturate(190%);
-            border: 1px solid rgba(255, 255, 255, 0.11);
-            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), 0 10px 30px rgba(0, 0, 0, 0.4);
-        }
-        .liquid-nav {
-            background: rgba(8, 12, 22, 0.7);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-    </style>
-</head>
-<body class="text-white min-h-screen flex justify-center items-center p-4">
+<style>
+    .direct-install-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: linear-gradient(135deg, #111d3a, #070b14);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 24px;
+        padding: 20px;
+        text-decoration: none;
+        direction: rtl;
+        font-family: system-ui, -apple-system, sans-serif;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        margin: 16px;
+        cursor: pointer;
+    }
 
-    <div class="w-full max-w-md bg-[#060911] rounded-[45px] shadow-[0_0_50px_rgba(0,0,0,0.8)] border border-gray-900 overflow-hidden relative pb-28">
-        
-        <div class="absolute top-12 right-4 w-56 h-56 bg-blue-600/25 rounded-full blur-[60px] liquid-blob pointer-events-none z-0"></div>
-        <div class="absolute bottom-24 left-4 w-60 h-60 bg-purple-600/15 rounded-full blur-[70px] liquid-blob pointer-events-none z-0"></div>
+    .direct-install-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    }
 
-        <div class="relative z-10">
-            <div class="p-6 pb-2 flex justify-between items-center">
-                <button class="w-10 h-10 rounded-full liquid-glass flex items-center justify-center text-gray-300"><i class="fas fa-cog"></i></button>
-                <h1 class="text-base font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-300">متجر تطبيقات IPA</h1>
-                <button class="w-10 h-10 rounded-full liquid-glass flex items-center justify-center text-gray-300"><i class="fas fa-bars"></i></button>
-            </div>
+    .card-content {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        align-items: flex-start;
+    }
 
-            <div class="px-6 mb-5">
-                <div class="relative flex items-center">
-                    <span class="absolute right-4 text-gray-400"><i class="fas fa-search text-xs"></i></span>
-                    <input type="text" id="search-input" oninput="handleSearch()" placeholder="ابحث عن تطبيقات بلس أو ألعاب..." class="w-full liquid-glass rounded-2xl py-3 pr-11 pl-4 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-blue-500/40 transition">
-                </div>
-            </div>
+    .card-title {
+        color: #ffffff;
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin: 0;
+    }
 
-            <div id="content-home" class="tab-content block">
-                <div class="px-6 mb-6">
-                    <div class="liquid-glass rounded-3xl p-5 relative overflow-hidden flex justify-between items-center bg-gradient-to-l from-blue-900/20 to-transparent">
-                        <div class="z-10 max-w-[65%]">
-                            <h2 class="text-base font-bold mb-1">تثبيت مباشر بدون كمبيوتر</h2>
-                            <p class="text-[11px] text-gray-400 mb-4 leading-relaxed">اضغط تثبيت وانتظر ظهور التطبيق على شاشة الآيفون الرئيسية.</p>
-                            <span class="inline-flex items-center gap-1.5 bg-green-500/20 border border-green-500/30 text-green-400 text-[10px] font-bold py-1 px-2 rounded-lg">
-                                <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span> الشهادة شقالة
-                            </span>
-                        </div>
-                        <div class="absolute -left-2 bottom-2 w-24 h-24 flex items-center justify-center opacity-40">
-                            <i class="fab fa-apple text-7xl text-white"></i>
-                        </div>
-                    </div>
-                </div>
+    .card-desc {
+        color: #8a99ad;
+        font-size: 0.85rem;
+        margin: 0;
+        line-height: 1.5;
+        max-width: 250px;
+        text-align: right;
+    }
 
-                <div class="px-6 mb-4 flex justify-between items-center">
-                    <h3 id="list-title" class="font-bold text-xs text-gray-300">التطبيقات المتوفرة</h3>
-                    <span id="apps-count" class="liquid-glass text-blue-400 text-[11px] font-medium px-3 py-1 rounded-full">0 تطبيق</span>
-                </div>
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background-color: rgba(16, 185, 129, 0.12);
+        color: #10b981;
+        border: 1px solid rgba(16, 185, 129, 0.25);
+        padding: 6px 14px;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-top: 8px;
+    }
 
-                <div id="apps-container" class="px-6 space-y-3 overflow-y-auto max-h-[340px] pb-4"></div>
-            </div>
+    .status-badge .dot {
+        width: 7px;
+        height: 7px;
+        background-color: #10b981;
+        border-radius: 50%;
+        box-shadow: 0 0 8px #10b981;
+    }
 
-            <div id="content-apps" class="tab-content hidden px-6 text-center py-10 text-gray-400 text-xs">اضغط على زر الفئات بالأسفل للتصفية</div>
-            <div id="content-sources" class="tab-content hidden px-6 text-center py-10 text-gray-400 text-xs">سيرفرات الـ IPA مستقرة وتعمل بنسبة 100%</div>
+    .card-icon {
+        color: rgba(255, 255, 255, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 8px;
+    }
+</style>
+
+<a href="https://t.me/R8RIJ" class="direct-install-card" target="_blank">
+    <div class="card-content">
+        <h2 class="card-title">تثبيت مباشر بدون كمبيوتر</h2>
+        <p class="card-desc">اضغط تثبيت وانتظر ظهور التطبيق على شاشة الآيفون الرئيسية.</p>
+        <div class="status-badge">
+            <span class="dot"></span>
+            الشهادة شغالة
         </div>
-
-        <div id="download-modal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-md z-50 flex justify-center items-center p-6">
-            <div class="liquid-glass w-full max-w-sm rounded-[30px] p-6 text-center relative border border-white/20">
-                <button onclick="closeModal()" class="absolute top-4 left-4 text-gray-400 hover:text-white"><i class="fas fa-times"></i></button>
-                <div id="modal-icon-container" class="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center text-3xl mb-4"></div>
-                <h3 id="modal-title" class="text-base font-bold mb-1"></h3>
-                <p id="modal-version" class="text-xs text-gray-400 mb-4"></p>
-                <p id="modal-desc" class="text-xs text-gray-300 px-2 mb-6 leading-relaxed"></p>
-                
-                <a id="modal-download-link" href="#" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold py-3 rounded-xl shadow-lg transition">تثبيت IPA على الجهاز</a>
-            </div>
-        </div>
-
-        <div class="absolute bottom-4 left-4 right-4 h-20 liquid-nav rounded-3xl flex justify-around items-center px-4 shadow-xl z-20">
-            <button id="btn-home" onclick="switchTab('home')" class="nav-btn flex flex-col items-center gap-1 text-blue-400">
-                <div class="icon-box w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20"><i class="fas fa-home text-base"></i></div>
-                <span class="text-[10px] font-bold">الرئيسية</span>
-            </button>
-            <button id="btn-apps" onclick="switchTab('apps')" class="nav-btn flex flex-col items-center gap-1 text-gray-400">
-                <div class="icon-box w-10 h-10 flex items-center justify-center"><i class="fas fa-box-open text-base"></i></div>
-                <span class="text-[10px]">التطبيقات</span>
-            </button>
-            <button id="btn-sources" onclick="switchTab('sources')" class="nav-btn flex flex-col items-center gap-1 text-gray-400">
-                <div class="icon-box w-10 h-10 flex items-center justify-center"><i class="fas fa-layer-group text-base"></i></div>
-                <span class="text-[10px]">المصادر</span>
-            </button>
-        </div>
-
     </div>
-
-    <script>
-        // قاعدة بيانات تحتوي على روابط المانيفست (plist) لتثبيت تطبيقات الـ IPA تلقائياً للآيفون
-        const database = [
-            { 
-                id: 1, 
-                name: "TikTok Plus", 
-                version: "v34.0", 
-                icon: "fab fa-tiktok", 
-                iconBg: "#000000", 
-                desc: "تيك توك بلس: ميزة حفظ الفيديو بدون علامة مائية، زيادة الحروف في التعليقات، وتغيير الموقع الجغرافي.", 
-                plistUrl: "https://yourdomain.com/plists/tiktok.plist" // هنا تخلي رابط ملف الـ plist الخاص بالتطبيق
-            },
-            { 
-                id: 2, 
-                name: "WhatsApp Gold", 
-                version: "v24.9", 
-                icon: "fab fa-whatsapp", 
-                iconBg: "#25D366", 
-                desc: "واتساب الذهبي للآيفون: إخفاء متصل الآن، قراءة الرسائل المحذوفة، وحفظ الستوريات بضغطة زر.", 
-                plistUrl: "https://yourdomain.com/plists/whatsapp.plist"
-            },
-            { 
-                id: 3, 
-                name: "CapCut Pro iOS", 
-                version: "v12.0", 
-                icon: "fas fa-video", 
-                iconBg: "#19191b", 
-                desc: "كاب كات برو المعدل: فتح جميع الفلاتر المدفوعة والمؤثرات السينمائية بدون اشتراك شهري.", 
-                plistUrl: "https://yourdomain.com/plists/capcut.plist"
-            }
-        ];
-
-        window.onload = function() { renderApps(database); };
-
-        function renderApps(appsArray) {
-            const container = document.getElementById('apps-container');
-            document.getElementById('apps-count').innerText = `${appsArray.length} تطبيق`;
-            container.innerHTML = '';
-            
-            appsArray.forEach(app => {
-                const card = document.createElement('div');
-                card.className = "liquid-glass rounded-2xl p-3 flex justify-between items-center hover:bg-white/[0.02] transition";
-                card.innerHTML = `
-                    <div class="flex items-center gap-3">
-                        <div class="w-11 h-11 rounded-xl flex items-center justify-center" style="background: ${app.iconBg}">
-                            <i class="${app.icon} text-xl text-white"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-xs font-bold">${app.name}</h4>
-                            <p class="text-[10px] text-gray-400 mt-0.5">${app.version}</p>
-                        </div>
-                    </div>
-                    <button onclick="openModal(${app.id})" class="liquid-glass text-blue-400 text-[11px] font-medium py-2 px-4 rounded-xl transition active:scale-95">تثبيت</button>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function openModal(id) {
-            const app = database.find(a => a.id === id);
-            if(!app) return;
-
-            document.getElementById('modal-title').innerText = app.name;
-            document.getElementById('modal-version').innerText = app.version;
-            document.getElementById('modal-desc').innerText = app.desc;
-            
-            const iconContainer = document.getElementById('modal-icon-container');
-            iconContainer.style.background = app.iconBg;
-            iconContainer.innerHTML = `<i class="${app.icon} text-white"></i>`;
-            
-            // الرابط السحري من آبل لتثبيت الـ IPA تلقائياً عن طريق ملف الـ plist
-            document.getElementById('modal-download-link').href = `itms-services://?action=download-manifest&url=${app.plistUrl}`;
-
-            document.getElementById('download-modal').classList.remove('hidden');
-        }
-
-        function closeModal() { document.getElementById('download-modal').classList.add('hidden'); }
-        
-        function switchTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.getElementById(`content-${tabName}`).classList.remove('hidden');
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('text-blue-400'); btn.classList.add('text-gray-400');
-                btn.querySelector('.icon-box').className = "icon-box w-10 h-10 flex items-center justify-center transition-all";
-            });
-            const activeBtn = document.getElementById(`btn-${tabName}`);
-            activeBtn.classList.remove('text-gray-400'); activeBtn.classList.add('text-blue-400');
-            activeBtn.querySelector('.icon-box').className = "icon-box w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20";
-        }
-    </script>
-</body>
-</html>
+    <div class="card-icon">
+        <svg viewBox="0 0 170 170" width="55" height="55" fill="currentColor">
+            <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.34.13-9.13-1.78-14.36-5.75-3.72-2.87-7.85-7.75-12.37-14.65-4.99-7.59-9.12-16.43-12.41-26.54-3.29-10.12-4.94-19.83-4.94-29.14 0-14.15 3.44-25.13 10.33-32.96 6.89-7.82 15.11-11.73 24.67-11.73 4.47 0 9.42 1.22 14.86 3.65 5.43 2.44 9.17 3.65 11.22 3.65 1.79 0 5.82-1.34 12.09-4.01 6.27-2.68 11.53-3.83 15.77-3.47 14.16 1.15 24.87 6.53 32.13 16.14-11.39 6.89-16.94 16.14-16.65 27.76.31 9.22 3.84 16.9 10.6 23.01 6.75 6.12 14.61 9.43 23.56 9.94-2.18 6.4-5.26 13.1-9.22 20.08zM119.22 32.14c0-7.72 2.76-14.88 8.29-21.49 5.53-6.61 12.42-10.43 20.65-11.47.13 1.15.19 2.11.19 2.89 0 7.59-2.88 14.72-8.63 21.38-5.75 6.66-12.72 10.61-20.91 10.84-.39-1.41-.59-2.79-.59-4.15z"/>
+        </svg>
+    </div>
+</a>
