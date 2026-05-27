@@ -1,65 +1,280 @@
-import 'package:flutter/material.dart';
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر التطبيقات - IPA Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
 
-void main() {
-  runApp(const MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: AppStoreScreen(),
-  ));
-}
+        body {
+            background: linear-gradient(135deg, #0d0b21 0%, #070510 100%);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 10px;
+        }
 
-class AppStoreScreen extends StatelessWidget {
-  const AppStoreScreen({super.key});
+        /* حاوية تحاكي شاشة الهاتف */
+        .phone-container {
+            width: 100%;
+            max-width: 412px;
+            background: #0f0c25;
+            border-radius: 36px;
+            padding: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF0D0F1F),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // العنوان
-                const Text("تطبيقات IPA", style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 20),
-                
-                // كارد التطبيق
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF1B1E32),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.telegram, size: 50, color: Colors.blue),
-                      const SizedBox(width: 15),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text("Beegram", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
-                          const Text("4.8 ★", style: TextStyle(color: Colors.amber)),
-                        ],
-                      ),
-                      const Spacer(),
-                      ElevatedButton(
-                        onPressed: () {
-                          // هنا تضع كود التحميل
-                          print("تم الضغط على زر التنزيل!");
-                        },
-                        style: ElevatedButton.styleFrom(backgroundColor: Colors.blueAccent),
-                        child: const Text("تنزيل"),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
+        /* الهيدر العلوي */
+        .header {
+            text-align: center;
+            font-size: 14px;
+            color: #a0a0c0;
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* نافذة التحديثات (المنبثقة/المثبتة) */
+        .updates-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 16px;
+            margin-bottom: 25px;
+        }
+
+        .updates-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .updates-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .updates-title::before {
+            content: "🔔"; /* أيقونة الجرس */
+            font-size: 16px;
+        }
+
+        .clear-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: none;
+            color: #a0a0c0;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .clear-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* قائمة التطبيقات */
+        .apps-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .app-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .app-item:last-child {
+            border-bottom: none;
+        }
+
+        .app-info-side {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .app-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: #252044;
+            object-fit: cover;
+        }
+
+        .app-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .app-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .app-status {
+            font-size: 11px;
+            color: #8582a3;
+            margin-top: 2px;
+        }
+
+        .app-version-tag {
+            font-size: 11px;
+            color: #524f75;
+            font-weight: 600;
+        }
+
+        /* الكارت السفلي (مثال لتطبيق ريجرام) */
+        .featured-card {
+            background: linear-gradient(to bottom, #161233, #0f0c24);
+            border-radius: 24px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .featured-icon-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .featured-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 18px;
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); /* ألوان انستغرام */
+            padding: 2px;
+        }
+
+        .featured-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        /* الأزرار أو البادجات الصغيرة في الأسفل */
+        .badges-container {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(122, 79, 240, 0.15);
+            color: #9d7aff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            border: 1px solid rgba(122, 79, 240, 0.2);
+        }
+
+        .badge.gray {
+            background: rgba(255, 255, 255, 0.05);
+            color: #a0a0c0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="phone-container">
+        
+        <div class="header">IPA Store V3.0</div>
+
+        <div class="updates-card">
+            <div class="updates-header">
+                <span class="updates-title">التحديثات والإشعارات</span>
+                <button class="clear-btn">مسح الكل</button>
+            </div>
+
+            <div class="apps-list">
+                <div class="app-item">
+                    <div class="app-info-side">
+                        <img class="app-icon" src="https://via.placeholder.com/42" alt="Minichat">
+                        <div class="app-details">
+                            <span class="app-name">Minichat</span>
+                            <span class="app-status">تطبيق جديد — v5.379</span>
+                        </div>
+                    </div>
+                    <span class="app-version-tag">v35</span>
+                </div>
+
+                <div class="app-item">
+                    <div class="app-info-side">
+                        <img class="app-icon" src="https://via.placeholder.com/42" alt="جواكر">
+                        <div class="app-details">
+                            <span class="app-name">جواكر</span>
+                            <span class="app-status">تطبيق جديد — v28.2.92</span>
+                        </div>
+                    </div>
+                    <span class="app-version-tag">v34</span>
+                </div>
+
+                <div class="app-item">
+                    <div class="app-info-side">
+                        <img class="app-icon" src="https://via.placeholder.com/42" alt="WPS Office">
+                        <div class="app-details">
+                            <span class="app-name">WPS office ai</span>
+                            <span class="app-status">تطبيق جديد — v26.4.2</span>
+                        </div>
+                    </div>
+                    <span class="app-version-tag">v33</span>
+                </div>
+
+                <div class="app-item">
+                    <div class="app-info-side">
+                        <img class="app-icon" src="https://via.placeholder.com/42" alt="Reddit">
+                        <div class="app-details">
+                            <span class="app-name">reddit deluxe</span>
+                            <span class="app-status">تطبيق جديد — v2026.19.9</span>
+                        </div>
+                    </div>
+                    <span class="app-version-tag">v30</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="featured-card">
+            <div class="featured-icon-wrapper">
+                <img class="featured-icon" src="https://via.placeholder.com/70" alt="Reigram">
+            </div>
+            <div class="featured-title">ريجرام</div>
+            
+            <div class="badges-container">
+                <span class="badge gray">MB 325.5</span>
+                <span class="badge gray">v430.0.0</span>
+                <span class="badge">توافق</span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
