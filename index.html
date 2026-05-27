@@ -4,10 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تطبيقات IPA</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+        /* --- لوحة ألوان آبل الرسمية والواقعية (iOS Native Design System) --- */
+        :root {
+            /* الوضع الفاتح الافتراضي (iOS Light Mode) */
+            --bg-color: #F2F2F7;
+            --card-bg: #FFFFFF;
+            --search-bg: #E5E5EA;
+            --text-primary: #000000;
+            --text-secondary: #8E8E93;
+            --accent-blue: #007AFF;
+            --border-color: rgba(0, 0, 0, 0.05);
+            --nav-bg: rgba(255, 255, 255, 0.85);
+            --tg-circle-bg: linear-gradient(135deg, #34a853, #1d73c9);
+        }
+
+        /* التحول التلقائي والذكي للوضع الليلي الحقيقي (iOS Dark Mode) */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #000000; /* أسود حقيقي ومريح للعين */
+                --card-bg: #1C1C1E;  /* رمادي البطاقات الرسمي من آبل */
+                --search-bg: #2C2C2E; /* رمادي شريط البحث */
+                --text-primary: #FFFFFF;
+                --text-secondary: #8E8E93;
+                --accent-blue: #0A84FF; /* أزرق نيون هادئ مخصص للوضع الليلي */
+                --border-color: rgba(255, 255, 255, 0.05);
+                --nav-bg: rgba(28, 28, 30, 0.85);
+            }
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -17,68 +45,15 @@
         }
 
         body {
-            background-color: #05050d;
-            color: #ffffff;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
             min-height: 100vh;
-            padding: 20px 15px 100px 15px; /* مسافة سفلية لشريط التنقل */
+            padding: 20px 15px 100px 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
             overflow-x: hidden;
-        }
-
-        /* --- تأثير الزجاج السائل والخلفية الديناميكية للمتاجر الحقيقية --- */
-        .liquid-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            mix-blend-mode: screen;
-            opacity: 0.28;
-            animation: moveLiquid 14s infinite alternate ease-in-out;
-        }
-
-        .blob1 {
-            width: 340px;
-            height: 340px;
-            background: radial-gradient(circle, #183fdb 0%, transparent 70%);
-            top: -60px;
-            right: -60px;
-        }
-
-        .blob2 {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, #8c18db 0%, transparent 70%);
-            bottom: 12%;
-            left: -70px;
-            animation-duration: 18s;
-            animation-delay: -4s;
-        }
-
-        .blob3 {
-            width: 240px;
-            height: 240px;
-            background: radial-gradient(circle, #00f2fe 0%, transparent 70%);
-            top: 35%;
-            right: -30px;
-            animation-duration: 12s;
-            animation-delay: -2s;
-        }
-
-        @keyframes moveLiquid {
-            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-            50% { transform: translate(60px, 40px) scale(1.15) rotate(180deg); }
-            100% { transform: translate(-40px, -30px) scale(0.95) rotate(360deg); }
+            transition: background-color 0.3s, color 0.3s;
         }
 
         .container {
@@ -87,7 +62,6 @@
             display: flex;
             flex-direction: column;
             gap: 22px;
-            z-index: 1;
         }
 
         /* 1. الشريط العلوي Header */
@@ -99,31 +73,29 @@
         }
 
         .header h1 {
-            font-size: 22px; 
+            font-size: 23px; 
             font-weight: 700;
-            background: linear-gradient(135deg, #ffffff 60%, #00f2fe);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--text-primary);
         }
 
         .icon-btn {
             width: 44px;
             height: 44px;
-            background: rgba(255, 255, 255, 0.07);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--accent-blue);
             font-size: 19px;
             cursor: pointer;
-            transition: 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: 0.2s;
         }
 
         .icon-btn:active {
             transform: scale(0.9);
-            background: rgba(255, 255, 255, 0.15);
         }
 
         /* 2. شريط البحث Search */
@@ -136,74 +108,62 @@
 
         .search-bar input {
             width: 100%;
-            padding: 15px 48px 15px 22px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 25px;
-            color: #fff;
+            padding: 14px 46px 14px 20px;
+            background: var(--search-bg);
+            border: none;
+            border-radius: 12px;
+            color: var(--text-primary);
             font-size: 16px; 
             outline: none;
-            backdrop-filter: blur(10px);
             transition: 0.3s;
-        }
-
-        .search-bar input:focus {
-            background: rgba(255, 255, 255, 0.09);
-            border-color: rgba(24, 63, 219, 0.5);
-            box-shadow: 0 0 15px rgba(24, 63, 219, 0.2);
         }
 
         .search-bar i {
             position: absolute;
-            right: 20px;
-            color: rgba(255, 255, 255, 0.4);
+            right: 18px;
+            color: var(--text-secondary);
             font-size: 17px;
         }
 
-        /* 3. البانر الرئيسي الترويجي - مع اسم المتجر الجديد */
+        /* 3. البانر الرئيسي - واقعي وأنيق بدون بهرجة */
         .main-banner {
             width: 100%;
-            background: linear-gradient(135deg, rgba(24, 63, 219, 0.12), rgba(140, 24, 219, 0.04));
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 24px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
             padding: 22px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
         }
 
         .banner-info {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            z-index: 2;
+            gap: 6px;
         }
 
         .banner-info h2 {
-            font-size: 22px; 
+            font-size: 21px; 
             font-weight: 700;
-            line-height: 1.4;
+            color: var(--text-primary);
         }
 
         .banner-info p {
-            font-size: 13px; 
-            color: rgba(255, 255, 255, 0.75);
-            line-height: 1.6;
+            font-size: 13.5px; 
+            color: var(--text-secondary);
+            line-height: 1.5;
         }
 
         .telegram-btn {
             align-self: flex-start;
-            margin-top: 6px;
-            background: linear-gradient(135deg, #183fdb, #1232b5);
-            color: white;
+            margin-top: 10px;
+            background: var(--accent-blue);
+            color: #ffffff;
             border: none;
             padding: 9px 18px;
-            border-radius: 16px;
+            border-radius: 10px;
             font-size: 14px;
             font-weight: 600;
             display: flex;
@@ -211,21 +171,18 @@
             gap: 8px;
             text-decoration: none;
             cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(24, 63, 219, 0.4);
+            transition: 0.2s;
         }
 
         .telegram-btn:active {
-            transform: scale(0.95);
+            transform: scale(0.96);
         }
 
-        /* تصميم دائرة التليجرام المضيئة والحقيقية */
+        /* دائرة التليجرام الزرقاء المضيئة والواقعية بالكامل */
         .banner-icon-zone {
-            z-index: 2;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding-left: 5px;
         }
 
         .tg-circle {
@@ -236,8 +193,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 0 25px rgba(29, 115, 201, 0.5);
-            animation: floatIcon 4s ease-in-out infinite;
+            box-shadow: 0 4px 15px rgba(29, 115, 201, 0.3);
         }
 
         .tg-circle i {
@@ -245,36 +201,29 @@
             color: #ffffff;
         }
 
-        @keyframes floatIcon {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-5px) scale(1.02); }
-        }
-
-        /* 4. عنوان قسم التطبيقات والمعداد */
+        /* 4. قسم العناوين */
         .section-title {
             display: flex;
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            margin-top: 4px;
         }
 
         .section-title h3 {
-            font-size: 17px; 
-            font-weight: 600;
+            font-size: 18px; 
+            font-weight: 700;
         }
 
         .apps-count {
-            background: rgba(0, 242, 254, 0.12);
-            border: 1px solid rgba(0, 242, 254, 0.2);
-            color: #00f2fe;
-            padding: 4px 14px;
-            border-radius: 12px;
+            background: var(--search-bg);
+            color: var(--accent-blue);
+            padding: 4px 12px;
+            border-radius: 8px;
             font-size: 13px;
             font-weight: 600;
         }
 
-        /* 5. قائمة التطبيقات */
+        /* 5. قائمة التطبيقات الواقعية */
         .apps-list {
             display: flex;
             flex-direction: column;
@@ -283,100 +232,88 @@
         }
 
         .app-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            border-radius: 20px;
-            padding: 15px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 14px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
-            transition: 0.3s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
         }
 
         .app-details {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 14px;
         }
 
         .app-icon {
-            width: 52px;
-            height: 52px;
-            border-radius: 14px;
+            width: 54px;
+            height: 54px;
+            border-radius: 12px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 24px;
-            background: rgba(255, 255, 255, 0.07);
-            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1);
+            font-size: 26px;
+            background: var(--search-bg);
         }
 
         .app-info h4 {
-            font-size: 16px; 
+            font-size: 16.5px; 
             font-weight: 600;
-            margin-bottom: 3px;
+            color: var(--text-primary);
         }
 
         .app-info p {
-            font-size: 12px; 
-            color: rgba(255, 255, 255, 0.5);
+            font-size: 12.5px; 
+            color: var(--text-secondary);
+            margin-top: 2px;
         }
 
-        /* زر التنزيل */
+        /* زر التنزيل الرسمي بنمط iOS */
         .download-btn {
-            background: rgba(24, 63, 219, 0.16);
-            border: 1px solid rgba(24, 63, 219, 0.45);
-            color: #ffffff;
-            padding: 7px 20px;
-            border-radius: 18px;
+            background: var(--search-bg);
+            border: none;
+            color: var(--accent-blue);
+            padding: 6px 18px;
+            border-radius: 20px;
             font-size: 14px; 
             font-weight: 700;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.3s ease;
-            min-width: 88px;
-            justify-content: center;
+            transition: all 0.2s ease;
+            min-width: 85px;
+            text-align: center;
         }
 
         .download-btn:active {
-            transform: scale(0.92);
+            transform: scale(0.95);
+            opacity: 0.8;
         }
 
         .download-btn.loading {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
-            color: rgba(255, 255, 255, 0.6);
+            color: var(--text-secondary);
             cursor: not-allowed;
         }
 
         .download-btn.success {
-            background: rgba(46, 204, 113, 0.2);
-            border-color: rgba(46, 204, 113, 0.5);
-            color: #2ecc71;
+            background: #34c759;
+            color: #ffffff;
         }
 
-        /* 6. شريط التنقل السفلي الثابت (3 خانات متوازنة ومتناسقة) */
+        /* 6. شريط التنقل السفلي الأصلي الحقيقي */
         .bottom-nav {
             position: fixed;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: calc(100% - 30px);
-            max-width: 450px;
-            background: rgba(10, 15, 35, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.09);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border-radius: 25px;
-            padding: 12px 10px;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--nav-bg);
+            border-top: 1px solid var(--border-color);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 10px 0 max(12px, env(safe-area-inset-bottom));
             display: flex;
             justify-content: space-around;
-            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.65);
             z-index: 999;
         }
 
@@ -384,30 +321,28 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
             background: none;
             border: none;
-            color: rgba(255, 255, 255, 0.45);
-            font-size: 12px; 
+            color: var(--text-secondary);
+            font-size: 11px; 
             font-weight: 600;
             cursor: pointer;
             width: 30%; 
-            transition: 0.3s;
+            transition: 0.2s;
         }
 
         .nav-item i {
-            font-size: 20px; 
+            font-size: 21px; 
         }
 
         .nav-item.active {
-            color: #00f2fe;
-            text-shadow: 0 0 12px rgba(0, 242, 254, 0.4);
-            transform: scale(1.05);
+            color: var(--accent-blue);
         }
 
         .no-results {
             text-align: center;
-            color: rgba(255, 255, 255, 0.4);
+            color: var(--text-secondary);
             padding: 30px;
             font-size: 15px;
             display: none;
@@ -416,26 +351,20 @@
 </head>
 <body>
 
-    <div class="liquid-bg">
-        <div class="blob blob1"></div>
-        <div class="blob blob2"></div>
-        <div class="blob blob3"></div>
-    </div>
-
     <div class="container">
         
         <div class="header">
-            <button class="icon-btn" onclick="alert('فتح الإعدادات')">
+            <button class="icon-btn" onclick="alert('الإعدادات')">
                 <i class="fa-solid fa-gear"></i>
             </button>
             <h1>تطبيقات IPA</h1>
-            <button class="icon-btn" onclick="alert('فتح القائمة')">
+            <button class="icon-btn" onclick="alert('القائمة')">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
 
         <div class="search-bar">
-            <i class="fa-solid fa-magnifyingglass"></i>
+            <i class="fa-solid fa-magnifying-glass"></i>
             <input type="text" id="searchInput" placeholder="ابحث عن تطبيق...">
         </div>
 
@@ -463,9 +392,7 @@
         <div class="apps-list" id="appsList">
             
             <div class="app-card" data-name="instagram rocket">
-                <button class="download-btn" onclick="startDownload(this)">
-                    <i class="fa-solid fa-arrow-down"></i> تنزيل
-                </button>
+                <button class="download-btn" onclick="startDownload(this)">تنزيل</button>
                 <div class="app-details">
                     <div class="app-info">
                         <h4>Instagram Rocket</h4>
@@ -476,9 +403,7 @@
             </div>
 
             <div class="app-card" data-name="reddit deluxe">
-                <button class="download-btn" onclick="startDownload(this)">
-                    <i class="fa-solid fa-arrow-down"></i> تنزيل
-                </button>
+                <button class="download-btn" onclick="startDownload(this)">تنزيل</button>
                 <div class="app-details">
                     <div class="app-info">
                         <h4>Reddit Deluxe</h4>
@@ -489,9 +414,7 @@
             </div>
 
             <div class="app-card" data-name="messenger plus">
-                <button class="download-btn" onclick="startDownload(this)">
-                    <i class="fa-solid fa-arrow-down"></i> تنزيل
-                </button>
+                <button class="download-btn" onclick="startDownload(this)">تنزيل</button>
                 <div class="app-details">
                     <div class="app-info">
                         <h4>Messenger Plus</h4>
@@ -502,9 +425,7 @@
             </div>
 
             <div class="app-card" data-name="wps office pro">
-                <button class="download-btn" onclick="startDownload(this)">
-                    <i class="fa-solid fa-arrow-down"></i> تنزيل
-                </button>
+                <button class="download-btn" onclick="startDownload(this)">تنزيل</button>
                 <div class="app-details">
                     <div class="app-info">
                         <h4>WPS Office Pro</h4>
@@ -516,7 +437,7 @@
 
         </div>
 
-        <div class="no-results" id="noResults">لم يتم العثور على تطبيقات مطابقة!</div>
+        <div class="no-results" id="noResults">لم يتم العثور على تطبيقات!</div>
 
     </div>
 
@@ -536,7 +457,7 @@
     </div>
 
     <script>
-        // نظام البحث الفوري الذكي
+        // نظام البحث الفوري
         const searchInput = document.getElementById('searchInput');
         const appCards = document.querySelectorAll('.app-card');
         const noResults = document.getElementById('noResults');
@@ -557,35 +478,30 @@
             });
 
             appsCountLabel.innerText = `${visibleCount} تطبيق`;
-
-            if (visibleCount === 0) {
-                noResults.style.display = 'block';
-            } else {
-                noResults.style.display = 'none';
-            }
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
         });
 
-        // حركة التنزيل (Spinner التفاعلي)
+        // حركة التنزيل الذكية بنمط متجر آبل الرسمي
         function startDownload(button) {
             if (button.classList.contains('loading') || button.classList.contains('success')) return;
 
             button.classList.add('loading');
-            button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري...';
+            button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
 
             setTimeout(() => {
                 button.classList.remove('loading');
                 button.classList.add('success');
-                button.innerHTML = '<i class="fa-solid fa-check"></i> تم';
+                button.innerHTML = 'فتح';
 
                 setTimeout(() => {
                     button.classList.remove('success');
-                    button.innerHTML = '<i class="fa-solid fa-arrow-down"></i> تنزيل';
-                }, 2000);
+                    button.innerHTML = 'تنزيل';
+                }, 4000);
 
-            }, 3000);
+            }, 2500);
         }
 
-        // تحويل التبويبات بنعومة
+        // تنقل التبويبات السفلي
         function changeTab(element) {
             const navItems = document.querySelectorAll('.nav-item');
             navItems.forEach(item => item.classList.remove('active'));
