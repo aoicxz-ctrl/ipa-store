@@ -1,550 +1,351 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>ستور التطبيقات</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Tajawal',sans-serif;
--webkit-tap-highlight-color:transparent;
-}
-
-body{
-background:#000;
-overflow-x:hidden;
-}
-
 /* الخلفية */
 
-.bg{
-position:fixed;
-width:100%;
-height:100%;
-top:0;
-left:0;
-z-index:-1;
+body{
+
 background:
-linear-gradient(135deg,#030712,#000);
+radial-gradient(circle at top right,#003cff 0%,transparent 30%),
+radial-gradient(circle at bottom left,#6a00ff 0%,transparent 30%),
+#000;
+
+overflow-x:hidden;
+
+}
+
+/* الزجاج السائل */
+
+.glass,
+.card,
+.banner,
+.nav,
+.search{
+
+background:rgba(255,255,255,0.06);
+
+backdrop-filter:blur(30px) saturate(180%);
+-webkit-backdrop-filter:blur(30px) saturate(180%);
+
+border:1px solid rgba(255,255,255,0.08);
+
+box-shadow:
+0 8px 32px rgba(0,0,0,0.37),
+inset 0 1px 1px rgba(255,255,255,0.15),
+inset 0 -1px 1px rgba(255,255,255,0.05);
+
+position:relative;
 overflow:hidden;
+
 }
 
-.blur{
+/* لمعة الزجاج */
+
+.glass::before,
+.card::before,
+.banner::before,
+.nav::before{
+
+content:'';
+
 position:absolute;
-border-radius:50%;
-filter:blur(120px);
-opacity:.45;
-animation:float 10s infinite ease-in-out;
+
+top:0;
+left:-120%;
+
+width:200%;
+height:100%;
+
+background:linear-gradient(
+120deg,
+transparent,
+rgba(255,255,255,0.10),
+transparent
+);
+
+transform:skewX(-20deg);
+
+animation:shine 7s linear infinite;
+
 }
 
-.b1{
-width:320px;
-height:320px;
-background:#0066ff;
-top:-120px;
-right:-120px;
+/* حركة اللمعة */
+
+@keyframes shine{
+
+0%{
+left:-120%;
 }
 
-.b2{
-width:280px;
-height:280px;
-background:#7c3cff;
-bottom:-120px;
-left:-120px;
-animation-delay:2s;
+100%{
+left:120%;
 }
 
-.b3{
-width:200px;
-height:200px;
-background:#00bfff;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-animation-delay:4s;
 }
 
-@keyframes float{
-0%{transform:translateY(0px);}
-50%{transform:translateY(20px);}
-100%{transform:translateY(0px);}
-}
-
-/* التطبيق */
-
-.app{
-padding:24px;
-padding-bottom:120px;
-}
-
-/* الأعلى */
-
-.top{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-top:10px;
-margin-bottom:35px;
-}
+/* اسم المتجر */
 
 .logo{
-font-size:44px;
+
+font-size:28px;
 font-weight:800;
 color:#fff;
+
 letter-spacing:1px;
-text-shadow:0 0 25px rgba(0,153,255,.45);
+
+text-shadow:
+0 0 20px rgba(0,153,255,.35);
+
 }
 
+/* الأزرار العلوية */
+
 .glass{
-width:65px;
-height:65px;
-border-radius:24px;
+
+width:58px;
+height:58px;
+
+border-radius:20px;
+
 display:flex;
 justify-content:center;
 align-items:center;
-font-size:28px;
+
+font-size:22px;
 color:#fff;
-background:rgba(255,255,255,.05);
-backdrop-filter:blur(30px);
-border:1px solid rgba(255,255,255,.08);
-box-shadow:
-0 10px 35px rgba(0,0,0,.35),
-inset 0 0 0 1px rgba(255,255,255,.03);
+
 }
 
 /* البحث */
 
 .search{
+
 width:100%;
-height:62px;
-border-radius:24px;
-border:none;
-outline:none;
-padding:0 22px;
-font-size:18px;
+height:56px;
+
+border-radius:22px;
+
+padding:0 20px;
+
+font-size:16px;
 color:#fff;
-background:rgba(255,255,255,.05);
-backdrop-filter:blur(25px);
-border:1px solid rgba(255,255,255,.08);
-margin-bottom:30px;
+
+outline:none;
+border:none;
+
+margin-bottom:28px;
+
 }
 
 .search::placeholder{
+
 color:#94a3b8;
+
 }
 
 /* البنر */
 
 .banner{
-position:relative;
-overflow:hidden;
-padding:35px;
-border-radius:36px;
+
+padding:28px;
+
+border-radius:30px;
+
 margin-bottom:35px;
-background:
-linear-gradient(135deg,
-rgba(0,102,255,.25),
-rgba(124,60,255,.18));
-backdrop-filter:blur(30px);
-border:1px solid rgba(255,255,255,.08);
-box-shadow:
-0 15px 45px rgba(0,0,0,.35);
+
 }
 
-.banner::before{
-content:'';
-position:absolute;
-width:250px;
-height:250px;
-background:#0066ff;
-border-radius:50%;
-filter:blur(90px);
-top:-80px;
-left:-80px;
-opacity:.5;
-}
+/* عنوان البنر */
 
 .banner h1{
-font-size:48px;
-line-height:1.2;
+
+font-size:34px;
+line-height:1.3;
+
+margin-bottom:14px;
+
 color:#fff;
-margin-bottom:18px;
-position:relative;
-z-index:2;
+
 }
+
+/* وصف البنر */
 
 .banner p{
-font-size:24px;
-line-height:1.6;
-color:#d8e2ff;
-position:relative;
-z-index:2;
+
+font-size:19px;
+line-height:1.7;
+
+color:#dbe4ff;
+
 }
 
+/* زر التلي */
+
 .telegram{
-margin-top:25px;
+
 display:inline-flex;
 align-items:center;
 gap:10px;
-padding:16px 26px;
-border-radius:22px;
+
+padding:14px 22px;
+
+border-radius:18px;
+
+margin-top:22px;
+
 text-decoration:none;
-color:#fff;
-font-size:20px;
+
+font-size:17px;
 font-weight:700;
+
+color:#fff;
+
 background:rgba(255,255,255,.08);
-backdrop-filter:blur(20px);
-border:1px solid rgba(255,255,255,.1);
-position:relative;
-z-index:2;
+
 }
 
-/* العنوان */
-
-.section{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:25px;
-}
+/* عنوان القسم */
 
 .section h2{
-font-size:42px;
-color:#fff;
+
+font-size:30px;
 font-weight:800;
+
+color:#fff;
+
 }
+
+/* العدد */
 
 .count{
-padding:10px 18px;
-border-radius:18px;
-background:rgba(255,255,255,.05);
+
+padding:8px 15px;
+
+border-radius:16px;
+
+font-size:15px;
+
 color:#fff;
-font-size:18px;
-backdrop-filter:blur(20px);
+
+background:rgba(255,255,255,.05);
+
 }
 
-/* التطبيقات */
-
-.apps{
-display:flex;
-flex-direction:column;
-gap:22px;
-}
+/* الكروت */
 
 .card{
+
+padding:15px;
+
+border-radius:28px;
+
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:18px;
-border-radius:34px;
-background:rgba(255,255,255,.04);
-backdrop-filter:blur(35px);
-border:1px solid rgba(255,255,255,.06);
-box-shadow:
-0 12px 35px rgba(0,0,0,.3),
-inset 0 0 0 1px rgba(255,255,255,.03);
-transition:.3s;
+
+margin-bottom:20px;
+
 }
 
-.card:hover{
-transform:translateY(-5px);
-}
-
-.right{
-display:flex;
-align-items:center;
-gap:18px;
-}
+/* صورة التطبيق */
 
 .right img{
-width:88px;
-height:88px;
-border-radius:26px;
+
+width:72px;
+height:72px;
+
+border-radius:22px;
+
 object-fit:cover;
+
 }
+
+/* اسم التطبيق */
 
 .info h3{
-font-size:31px;
+
+font-size:22px;
+
+margin-bottom:5px;
+
 color:#fff;
-margin-bottom:8px;
+
 }
 
+/* وصف التطبيق */
+
 .info p{
-font-size:18px;
-color:#a5b4d4;
+
+font-size:15px;
+
 line-height:1.6;
+
+color:#a5b4d4;
+
 }
 
 /* زر التنزيل */
 
 .install{
-padding:16px 28px;
-border:none;
-border-radius:22px;
+
+padding:13px 20px;
+
+border-radius:18px;
+
+font-size:16px;
+font-weight:700;
+
+text-decoration:none;
+
+color:#fff;
+
 background:
 linear-gradient(135deg,#0084ff,#005dff);
-color:#fff;
-font-size:20px;
-font-weight:700;
-text-decoration:none;
+
 box-shadow:
 0 10px 30px rgba(0,102,255,.4);
+
 }
 
 /* النافبار */
 
 .nav{
+
 position:fixed;
+
 bottom:20px;
 left:50%;
+
 transform:translateX(-50%);
+
 width:90%;
-height:92px;
+height:82px;
+
+border-radius:30px;
+
 display:flex;
 justify-content:space-around;
 align-items:center;
-border-radius:36px;
-background:rgba(255,255,255,.05);
-backdrop-filter:blur(35px);
-border:1px solid rgba(255,255,255,.08);
-box-shadow:
-0 12px 40px rgba(0,0,0,.35);
+
 }
 
+/* عناصر النافبار */
+
 .item{
+
 display:flex;
 flex-direction:column;
 align-items:center;
-gap:6px;
+
+gap:4px;
+
+font-size:13px;
+
 color:#94a3b8;
-font-size:15px;
+
 }
+
+/* العنصر النشط */
 
 .active{
+
 color:#1d9cff;
+
 }
-
-::-webkit-scrollbar{
-width:0;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="bg">
-<div class="blur b1"></div>
-<div class="blur b2"></div>
-<div class="blur b3"></div>
-</div>
-
-<div class="app">
-
-<!-- الأعلى -->
-
-<div class="top">
-
-<div class="glass">☰</div>
-
-<div class="logo">
-ستور التطبيقات
-</div>
-
-<div class="glass">⚙️</div>
-
-</div>
-
-<!-- البحث -->
-
-<input type="text" class="search" placeholder="ابحث عن تطبيق...">
-
-<!-- البنر -->
-
-<div class="banner">
-
-<h1>
-أحدث التطبيقات والتحديثات
-</h1>
-
-<p>
-تابع آخر التطبيقات المعدلة والجديدة داخل ستور التطبيقات
-</p>
-
-<a href="https://t.me/R8RIJ" target="_blank" class="telegram">
-✈ قناة التليجرام
-</a>
-
-</div>
-
-<!-- التطبيقات -->
-
-<div class="section">
-
-<h2>
-محدث مؤخراً
-</h2>
-
-<div class="count">
-249
-</div>
-
-</div>
-
-<div class="apps">
-
-<!-- Instagram -->
-
-<div class="card">
-
-<div class="right">
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png">
-
-<div class="info">
-
-<h3>
-Instagram Rocket
-</h3>
-
-<p>
-تواصل اجتماعي • v430.0
-</p>
-
-</div>
-
-</div>
-
-<a href="#" class="install">
-تنزيل
-</a>
-
-</div>
-
-<!-- Reddit -->
-
-<div class="card">
-
-<div class="right">
-
-<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
-
-<div class="info">
-
-<h3>
-Reddit Deluxe
-</h3>
-
-<p>
-تطبيق اجتماعي • v2026.19
-</p>
-
-</div>
-
-</div>
-
-<a href="#" class="install">
-تنزيل
-</a>
-
-</div>
-
-<!-- Messenger -->
-
-<div class="card">
-
-<div class="right">
-
-<img src="https://cdn-icons-png.flaticon.com/512/5969/5969020.png">
-
-<div class="info">
-
-<h3>
-Messenger Plus
-</h3>
-
-<p>
-مراسلة • v562.0
-</p>
-
-</div>
-
-</div>
-
-<a href="#" class="install">
-تنزيل
-</a>
-
-</div>
-
-<!-- WPS -->
-
-<div class="card">
-
-<div class="right">
-
-<img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">
-
-<div class="info">
-
-<h3>
-WPS Office
-</h3>
-
-<p>
-إنتاجية • v26.4
-</p>
-
-</div>
-
-</div>
-
-<a href="#" class="install">
-تنزيل
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- النافبار -->
-
-<div class="nav">
-
-<div class="item active">
-🏠
-<span>الرئيسية</span>
-</div>
-
-<div class="item">
-📦
-<span>التطبيقات</span>
-</div>
-
-<div class="item">
-📚
-<span>المصادر</span>
-</div>
-
-<div class="item">
-📷
-<span>انستا</span>
-</div>
-
-</div>
-
-</body>
-</html>
