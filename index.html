@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>IPA - واجهة التطبيق</title>
-    <!-- Font Awesome 6 (أيقونات طبيعية) -->
+    <title>IPA - متجر التطبيقات</title>
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -23,37 +23,30 @@
             padding: 16px;
         }
 
+        /* تأثير الزجاج السائل */
         .phone {
-            max-width: 400px;
+            max-width: 450px;
             width: 100%;
-            background: rgba(20, 25, 40, 0.55);
+            background: rgba(20, 25, 40, 0.5);
             backdrop-filter: blur(20px);
-            border-radius: 48px;
+            border-radius: 44px;
             overflow: hidden;
-            box-shadow: 0 25px 45px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.15);
             position: relative;
         }
 
-        .status-bar {
-            background: transparent;
-            padding: 14px 20px 6px 20px;
-            display: flex;
-            justify-content: space-between;
-            font-size: 15px;
-            font-weight: 600;
-            color: rgba(255,255,255,0.9);
-        }
+        /* تم إزالة شريط الحالة (الساعة والبطارية) بالكامل */
 
         .main-header {
-            padding: 12px 20px;
+            padding: 20px 24px 12px 24px;
             display: flex;
             justify-content: space-between;
             align-items: baseline;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         .logo {
-            font-size: 28px;
+            font-size: 34px;
             font-weight: 800;
             background: linear-gradient(135deg, #fff, #a0c0ff, #6c9eff);
             -webkit-background-clip: text;
@@ -64,14 +57,15 @@
         }
         .menu-icon {
             color: rgba(255,255,255,0.8);
-            font-size: 24px;
+            font-size: 26px;
         }
 
+        /* الفئات الأفقية */
         .categories {
             display: flex;
             overflow-x: auto;
-            gap: 22px;
-            padding: 16px 20px;
+            gap: 26px;
+            padding: 18px 24px;
             border-bottom: 1px solid rgba(255,255,255,0.08);
             white-space: nowrap;
             scrollbar-width: thin;
@@ -81,9 +75,9 @@
             height: 3px;
         }
         .cat-item {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 500;
-            color: rgba(255,255,255,0.65);
+            color: rgba(255,255,255,0.7);
             cursor: pointer;
             transition: 0.2s;
             padding-bottom: 8px;
@@ -96,88 +90,88 @@
         }
 
         .content {
-            padding: 20px;
+            padding: 24px;
             display: flex;
             flex-direction: column;
-            gap: 28px;
-            max-height: 500px;
+            gap: 32px;
+            max-height: 520px;
             overflow-y: auto;
             background: rgba(0,0,0,0.2);
         }
 
         .section-title {
             color: rgba(255,255,255,0.95);
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 700;
             letter-spacing: -0.3px;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            margin-bottom: 8px;
         }
 
         .app-card {
-            background: rgba(30, 35, 55, 0.6);
+            background: rgba(35, 40, 60, 0.6);
             backdrop-filter: blur(8px);
-            border-radius: 24px;
-            padding: 12px 16px;
+            border-radius: 28px;
+            padding: 14px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             transition: 0.2s;
             border: 1px solid rgba(255,255,255,0.08);
             box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            margin-bottom: 12px;
         }
         .app-card:active {
             transform: scale(0.99);
-            background: rgba(40, 45, 70, 0.7);
+            background: rgba(50, 55, 80, 0.7);
         }
         .app-info {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 18px;
         }
         .app-icon {
-            width: 48px;
-            height: 48px;
+            width: 56px;
+            height: 56px;
             background: rgba(255,255,255,0.1);
             backdrop-filter: blur(4px);
-            border-radius: 18px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
+            font-size: 32px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             border: 0.5px solid rgba(255,255,255,0.15);
             color: white;
         }
         .app-details h4 {
             color: white;
-            font-size: 17px;
+            font-size: 20px;
             font-weight: 600;
-            text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+            margin-bottom: 6px;
         }
         .rating {
             display: flex;
             align-items: center;
-            gap: 6px;
-            margin-top: 5px;
+            gap: 8px;
         }
         .stars {
             color: #ffd966;
-            font-size: 14px;
-            letter-spacing: 2px;
-            text-shadow: 0 0 2px rgba(0,0,0,0.3);
+            font-size: 16px;
+            letter-spacing: 3px;
         }
         .rating-num {
-            color: rgba(255,255,255,0.7);
-            font-size: 13px;
+            color: rgba(255,255,255,0.8);
+            font-size: 15px;
+            font-weight: 500;
         }
         .download-btn {
             background: rgba(108, 158, 255, 0.85);
             backdrop-filter: blur(4px);
-            padding: 8px 18px;
+            padding: 10px 22px;
             border-radius: 40px;
             color: white;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 16px;
             cursor: pointer;
             transition: 0.15s;
             border: 0.5px solid rgba(255,255,255,0.2);
@@ -188,73 +182,106 @@
             transform: scale(0.96);
         }
 
+        /* القائمة السفلية */
         .bottom-nav {
             background: rgba(15, 18, 30, 0.7);
             backdrop-filter: blur(20px);
             display: flex;
             justify-content: space-around;
-            padding: 12px 20px 22px 20px;
+            padding: 14px 20px 20px 20px;
             border-top: 0.5px solid rgba(255,255,255,0.1);
         }
         .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             color: rgba(255,255,255,0.6);
-            font-size: 12px;
+            font-size: 13px;
             transition: 0.1s;
             cursor: pointer;
             font-weight: 500;
         }
         .nav-item span:first-child {
-            font-size: 22px;
+            font-size: 24px;
         }
         .nav-item.active {
             color: #6c9eff;
             text-shadow: 0 0 8px rgba(108,158,255,0.4);
         }
 
+        /* الرابط السفلي */
+        .footer-link {
+            text-align: center;
+            padding: 16px 0 20px 0;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(8px);
+            border-top: 0.5px solid rgba(255,255,255,0.05);
+        }
+        .footer-link a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: 0.2s;
+        }
+        .footer-link a:hover {
+            color: #6c9eff;
+        }
+
         .toast-msg {
             position: fixed;
-            bottom: 90px;
+            bottom: 100px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(40, 45, 60, 0.9);
+            background: rgba(40, 45, 60, 0.95);
             backdrop-filter: blur(20px);
             color: white;
-            padding: 10px 24px;
-            border-radius: 40px;
-            font-size: 13px;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-size: 14px;
             opacity: 0;
             transition: 0.2s;
             pointer-events: none;
             z-index: 200;
             white-space: nowrap;
-            border: 0.5px solid rgba(255,255,255,0.15);
+            border: 0.5px solid rgba(255,255,255,0.2);
+            font-weight: 500;
+        }
+
+        /* تحسين التمرير */
+        .content::-webkit-scrollbar {
+            width: 4px;
+        }
+        .content::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+        }
+        .content::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.3);
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
 <div class="phone">
-    <div class="status-bar">
-        <span class="time">9:41</span>
-        <div class="battery-icons">📶 🔋 98%</div>
-    </div>
+    <!-- لا يوجد شريط حالة (الساعة والبطارية محذوفة) -->
     <div class="main-header">
         <div class="logo">IPA</div>
         <div class="menu-icon"><i class="fas fa-bolt"></i></div>
     </div>
 
+    <!-- الأقسام الأفقية -->
     <div class="categories" id="categoriesList">
         <div class="cat-item active" data-cat="games">الألعاب</div>
         <div class="cat-item" data-cat="movies">أفلام ومسلسلات</div>
         <div class="cat-item" data-cat="social">تواصل اجتماعي</div>
         <div class="cat-item" data-cat="all">الكل</div>
+        <div class="cat-item" data-cat="design">التصميم والموتاج</div>
         <div class="cat-item" data-cat="other">غير ذلك</div>
         <div class="cat-item" data-cat="lifestyle">نمط الحياة</div>
         <div class="cat-item" data-cat="dev">مطور</div>
-        <div class="cat-item" data-cat="design">التصميم والموتاج</div>
     </div>
 
     <div class="content" id="appContent"></div>
@@ -266,7 +293,7 @@
         </div>
         <div class="nav-item" data-nav="downloads">
             <span><i class="fas fa-download"></i></span>
-            <span>التزلزلات</span>
+            <span>التزيلات</span>   <!-- كما في الصورة: التزيلات -->
         </div>
         <div class="nav-item" data-nav="sign">
             <span><i class="fas fa-signature"></i></span>
@@ -281,14 +308,19 @@
             <span>الرئيسية</span>
         </div>
     </div>
+
+    <!-- الرابط الموجود في الصورة -->
+    <div class="footer-link">
+        <a href="#" target="_blank">aoicxz-ctrl.github.io</a>
+    </div>
 </div>
 <div class="toast-msg" id="toastMsg">تمت المحاكاة</div>
 
 <script>
-    // كل تطبيق له أيقونة Font Awesome طبيعية
+    // بيانات التطبيقات مع أيقونات طبيعية وتقييمات محدثة
     const appDatabase = {
         games: [
-            { name: "PUBG Mobile", rating: 4.7, icon: "fab fa-fort-awesome", stars: "★★★★½", color: "#dd8a3a" },
+            { name: "PUBG Mobile", rating: 4.7, icon: "fab fa-fort-awesome", stars: "★★★★★", color: "#dd8a3a", starCount: 5 },
             { name: "Free Fire", rating: 4.5, icon: "fas fa-fire", stars: "★★★★½", color: "#ff6600" },
             { name: "Call of Duty", rating: 4.6, icon: "fas fa-crosshairs", stars: "★★★★½", color: "#3a6ea5" }
         ],
@@ -303,7 +335,7 @@
             { name: "Buzz TV", rating: 4.9, icon: "fas fa-broadcast-tower", stars: "★★★★★", color: "#2c7da0" }
         ],
         all: [
-            { name: "PUBG Mobile", rating: 4.7, icon: "fab fa-fort-awesome", stars: "★★★★½", color: "#dd8a3a" },
+            { name: "PUBG Mobile", rating: 4.7, icon: "fab fa-fort-awesome", stars: "★★★★★", color: "#dd8a3a" },
             { name: "Free Fire", rating: 4.5, icon: "fas fa-fire", stars: "★★★★½", color: "#ff6600" },
             { name: "Call of Duty", rating: 4.6, icon: "fas fa-crosshairs", stars: "★★★★½", color: "#3a6ea5" },
             { name: "Anime Slayer ipason", rating: 4.5, icon: "fas fa-film", stars: "★★★★½", color: "#b33b2c" },
@@ -315,7 +347,7 @@
         ],
         design: [
             { name: "CapCut", rating: 4.8, icon: "fas fa-cut", stars: "★★★★★", color: "#4a90e2" },
-            { name: "Adobe Premiere", rating: 4.7, icon: "fas fa-video", stars: "★★★★½", color: "#ea5a9f" }
+            { name: "Adobe Premiere", rating: 4.7, icon: "fas fa-video", stars: "★★★★★", color: "#ea5a9f" }
         ],
         other: [
             { name: "VPN Express", rating: 4.3, icon: "fas fa-shield-alt", stars: "★★★★☆", color: "#43b3a8" },
@@ -333,11 +365,11 @@
 
     const contentDiv = document.getElementById('appContent');
     const toast = document.getElementById('toastMsg');
-    let activeCategory = 'games';
+    let activeCategory = 'design';  // نبدأ بقسم التصميم والموتاج كما في الصورة
 
     function showDownloadMsg(appName) {
         toast.style.opacity = '1';
-        toast.innerText = `✅ تم تنزيل ${appName} (محاكاة)`;
+        toast.innerText = `✅ تم تنزيل ${appName}`;
         setTimeout(() => {
             toast.style.opacity = '0';
         }, 1500);
@@ -354,7 +386,7 @@
         }
 
         if (appsList.length === 0) {
-            contentDiv.innerHTML = `<div style="text-align:center; color:rgba(255,255,255,0.5); padding: 40px;">✨ لا توجد تطبيقات في هذا القسم</div>`;
+            contentDiv.innerHTML = `<div style="text-align:center; color:rgba(255,255,255,0.6); padding: 50px; font-size: 18px;">✨ لا توجد تطبيقات في هذا القسم</div>`;
             return;
         }
 
@@ -364,7 +396,7 @@
                 ${appsList.map(app => `
                     <div class="app-card">
                         <div class="app-info">
-                            <div class="app-icon" style="background: ${app.color}20; color: ${app.color};">
+                            <div class="app-icon" style="background: ${app.color}30; color: ${app.color};">
                                 <i class="${app.icon}"></i>
                             </div>
                             <div class="app-details">
@@ -397,10 +429,10 @@
             movies: 'أفلام ومسلسلات',
             social: 'تواصل اجتماعي',
             all: 'الكل',
+            design: 'التصميم والموتاج',
             other: 'غير ذلك',
             lifestyle: 'نمط الحياة',
-            dev: 'مطور',
-            design: 'التصميم والموتاج'
+            dev: 'مطور'
         };
         return titles[key] || 'تطبيقات';
     }
@@ -426,11 +458,11 @@
                 navItems.forEach(n => n.classList.remove('active'));
                 nav.classList.add('active');
                 if (navValue === 'settings') showDownloadMsg('فتح الإعدادات');
-                else if (navValue === 'downloads') showDownloadMsg('قائمة التزلزلات');
+                else if (navValue === 'downloads') showDownloadMsg('قائمة التزيلات');
                 else if (navValue === 'sign') showDownloadMsg('شاشة التوقيع');
                 else if (navValue === 'apps') showDownloadMsg('جميع التطبيقات');
                 else if (navValue === 'home') {
-                    showDownloadMsg('العودة للرئيسية');
+                    showDownloadMsg('الرئيسية');
                     setActiveCategory(activeCategory);
                 }
             });
@@ -450,7 +482,7 @@
     function init() {
         bindCategoryEvents();
         initBottomNav();
-        setActiveCategory('games');
+        setActiveCategory('design');  // يبدأ بقسم التصميم والموتاج مثل الصورة
     }
 
     init();
