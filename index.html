@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Zsign IPA</title>
+    <title>IPA Store</title>
     <style>
-        /* التنسيق العام المتدرج مثل الصورة */
+        /* التنسيق العام المتدرج الفخم */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background: linear-gradient(180deg, #0f1c3f 0%, #070b19 100%);
             background-attachment: fixed;
             color: #ffffff;
             margin: 0;
-            padding: 20px 15px 120px 15px; /* مسافة في الأسفل للشريط السفلي */
+            padding: 20px 15px 120px 15px;
             text-align: center;
             user-select: none;
             -webkit-user-select: none;
@@ -43,16 +43,17 @@
             color: #ffffff;
         }
 
+        /* الاسم الجديد المعدل بطلبك */
         .brand-title {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            padding: 8px 30px;
+            padding: 8px 35px;
             border-radius: 20px;
             font-size: 20px;
             font-weight: bold;
             border: 1px solid rgba(255, 255, 255, 0.15);
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
         }
 
         /* أقسام التصنيفات */
@@ -64,7 +65,7 @@
             color: #ffffff;
         }
 
-        /* شبكة عرض التطبيقات الطولية مثل الصورة */
+        /* شبكة عرض التطبيقات */
         .apps-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -76,7 +77,7 @@
         .app-card {
             background: linear-gradient(135deg, rgba(40, 59, 114, 0.4) 0%, rgba(16, 25, 53, 0.6) 100%);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 45px; /* انحناء دائري كبير من الأعلى والأسفل */
+            border-radius: 45px;
             padding: 20px 10px 15px 10px;
             display: flex;
             flex-direction: column;
@@ -84,11 +85,10 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
 
-        /* أيقونة التطبيق الدائرية الملونة */
         .app-icon {
             width: 65px;
             height: 65px;
-            border-radius: 50%; /* دائرية بالكامل مثل الصورة */
+            border-radius: 50%;
             margin-bottom: 12px;
             object-fit: cover;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
@@ -104,7 +104,6 @@
             width: 100%;
         }
 
-        /* التقييم بالنجوم */
         .app-rating {
             font-size: 11px;
             color: #ffcc00;
@@ -114,7 +113,6 @@
             gap: 3px;
         }
 
-        /* زر التنزيل البيضاوي */
         .btn-download {
             background: rgba(255, 255, 255, 0.12);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -124,7 +122,7 @@
             font-weight: bold;
             border-radius: 15px;
             cursor: pointer;
-            width: 70%;
+            width: 75%;
             transition: all 0.2s;
         }
 
@@ -133,66 +131,69 @@
             border-color: #007aff;
         }
 
-        /* المربع الأسفل (شريط التنقل السفلي الثابت) */
+        /* ⬇️ شريط الأزرار السفلي المحدث مثل الصورة الثانية تماماً ⬇️ */
         .tab-bar {
             position: fixed;
             bottom: 25px;
             left: 15px;
             right: 15px;
             height: 75px;
-            background: linear-gradient(135deg, rgba(29, 44, 87, 0.8) 0%, rgba(13, 20, 43, 0.9) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: linear-gradient(135deg, rgba(20, 32, 69, 0.95) 0%, rgba(10, 16, 36, 0.98) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 25px;
             display: flex;
             justify-content: space-around;
             align-items: center;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            box-shadow: 0 10px 35px rgba(0,0,0,0.6);
             z-index: 9999;
         }
 
-        /* أزرار الشريط السفلي */
         .tab-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: #8e8e93;
+            color: #7284a8;
             text-decoration: none;
             font-size: 11px;
-            font-weight: 500;
+            font-weight: bold;
             background: none;
             border: none;
             cursor: pointer;
             flex: 1;
         }
 
-        /* الزر النشط (الرئيسية) باللون الأبيض والأزرق */
+        /* التحديد للأزرار النشطة */
         .tab-item.active {
             color: #ffffff;
         }
 
+        /* تنسيق الأيقونات التعبيرية الملونة لتطابق الصورة */
         .tab-icon {
-            font-size: 22px;
-            margin-bottom: 4px;
+            font-size: 24px;
+            margin-bottom: 5px;
+            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.3));
         }
     </style>
 </head>
 <body>
 
+    <!-- الجزء العلوي بعد التعديل -->
     <div class="header">
-        <div class="brand-title">Zsign</div>
+        <div class="brand-title">IPA</div> <!-- تم تغيير الاسم هنا -->
         <div class="logo-area">Z</div>
     </div>
 
+    <!-- قسم تواصل اجتماعي -->
     <div class="section-title">تواصل اجتماعي</div>
     
     <div class="apps-grid">
         <div class="app-card">
-            <img class="app-icon" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-            <p class="app-name">WhatsApp</p>
-            <div class="app-rating">★ 5.0</div>
-            <button class="btn-download" onclick="installApp('WhatsApp')">تنزيل</button>
+            <img class="app-icon" src="https://upload.wikimedia.org/wikipedia/en/c/c4/Snapchat_logo.svg" alt="Snapchat">
+            <p class="app-name">Snapchat</p>
+            <div class="app-rating">★ 4.5</div>
+            <button class="btn-download" onclick="installApp('Snapchat')">تنزيل</button>
         </div>
 
         <div class="app-card">
@@ -203,21 +204,22 @@
         </div>
 
         <div class="app-card">
-            <img class="app-icon" src="https://upload.wikimedia.org/wikipedia/en/c/c4/Snapchat_logo.svg" alt="Snapchat">
-            <p class="app-name">Snapchat</p>
-            <div class="app-rating">★ 4.5</div>
-            <button class="btn-download" onclick="installApp('Snapchat')">تنزيل</button>
+            <img class="app-icon" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+            <p class="app-name">WhatsApp</p>
+            <div class="app-rating">★ 5.0</div>
+            <button class="btn-download" onclick="installApp('WhatsApp')">تنزيل</button>
         </div>
     </div>
 
+    <!-- قسم أفلام ومسلسلات -->
     <div class="section-title">أفلام ومسلسلات</div>
     
     <div class="apps-grid">
         <div class="app-card">
-            <img class="app-icon" src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Anime Slayer">
-            <p class="app-name">Anime Slayer</p>
-            <div class="app-rating">★ 4.8</div>
-            <button class="btn-download" onclick="installApp('Anime Slayer')">تنزيل</button>
+            <img class="app-icon" src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Buz TV">
+            <p class="app-name">Buz TV</p>
+            <div class="app-rating">★ 4.5</div>
+            <button class="btn-download" onclick="installApp('Buz TV')">تنزيل</button>
         </div>
 
         <div class="app-card">
@@ -228,30 +230,36 @@
         </div>
 
         <div class="app-card">
-            <img class="app-icon" src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Buz TV">
-            <p class="app-name">Buz TV</p>
-            <div class="app-rating">★ 4.5</div>
-            <button class="btn-download" onclick="installApp('Buz TV')">تنزيل</button>
+            <img class="app-icon" src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Anime Slayer">
+            <p class="app-name">Anime Slayer</p>
+            <div class="app-rating">★ 4.8</div>
+            <button class="btn-download" onclick="installApp('Anime Slayer')">تنزيل</button>
         </div>
     </div>
 
+    <!-- ⬇️ أزرار التحكم السفلية المتطابقة مع صورتك الثانية ⬇️ -->
     <div class="tab-bar">
+        <!-- زر الإعدادات -->
         <div class="tab-item" onclick="navigate('settings')">
             <span class="tab-icon">⚙️</span>
             <span>الإعدادات</span>
         </div>
+        <!-- زر التنزيلات -->
         <div class="tab-item" onclick="navigate('downloads')">
             <span class="tab-icon">📥</span>
             <span>التنزيلات</span>
         </div>
+        <!-- زر التوقيع -->
         <div class="tab-item" onclick="navigate('sign')">
             <span class="tab-icon">✍️</span>
             <span>التوقيع</span>
         </div>
+        <!-- زر التطبيقات -->
         <div class="tab-item" onclick="navigate('apps')">
             <span class="tab-icon">📚</span>
             <span>التطبيقات</span>
         </div>
+        <!-- زر الرئيسية النشط -->
         <div class="tab-item active" onclick="navigate('home')">
             <span class="tab-icon">📱</span>
             <span>الرئيسية</span>
@@ -260,18 +268,16 @@
 
     <script>
         function installApp(appName) {
-            alert("جاري بدء تثبيت تطبيق " + appName + " عبر متجر Zsign...");
-            // هنا يمكنك مستقبلاً إضافة روابط الـ plist لكل تطبيق
+            alert("جاري تجهيز ملف الـ IPA لتطبيق " + appName);
             var plistUrl = "https://yourwebsite.com/" + appName + ".plist";
             window.location.href = "itms-services://?action=download-manifest&url=" + plistUrl;
         }
 
         function navigate(page) {
             if(page === 'settings') {
-                // تحويل المستخدم لقناتك التليجرام عند الضغط على الإعدادات كمثال للتواصل
                 window.open('https://t.me/R8RIJ', '_blank');
             } else {
-                alert("تم الضغط على قسم: " + page);
+                alert("أنت تتصفح قسم: " + page);
             }
         }
     </script>
