@@ -2,209 +2,392 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZSign Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>IPA Store</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.06);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-blur: blur(25px);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
+        /* الخلفية الداكنة العميقة مع التموجات السائلة (المحاكات للزجاج الملون) */
         body {
-            background-color: #0d0d1a;
+            background-color: #070a13;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(31, 58, 120, 0.4) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(76, 29, 149, 0.35) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(17, 24, 39, 1) 0px, transparent 100%);
+            background-attachment: fixed;
             color: #ffffff;
-            padding: 20px 0;
+            padding-top: 70px;
+            padding-bottom: 100px;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* القائمة العلوية للتصنيفات */
-        .categories-container {
+        /* الهيدر العلوي الزجاجي الثابت */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 1000;
+        }
+
+        .header .logo {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .header .top-icon {
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        /* شريط التصنيفات الدائري المنساب */
+        .categories-wrapper {
             overflow-x: auto;
             white-space: nowrap;
-            padding: 10px 20px;
-            margin-bottom: 25px;
-            scrollbar-width: none; /* إخفاء شريط التمرير في فايرفوكس */
+            padding: 10px 15px;
+            margin-bottom: 15px;
         }
-        .categories-container::-webkit-scrollbar {
-            display: none; /* إخفاء شريط التمرير في كروم وسفاري */
-        }
+        .categories-wrapper::-webkit-scrollbar { display: none; }
 
-        .category-btn {
-            display: inline-block;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            padding: 8px 18px;
-            margin-left: 10px;
-            border-radius: 20px;
-            font-size: 14px;
-            text-decoration: none;
-            transition: 0.3s;
+        .category-item {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: 18px;
             cursor: pointer;
         }
-        .category-btn.active, .category-btn:hover {
-            background-color: #007aff;
-        }
 
-        /* عنوان القسم */
-        .section-title {
+        .category-icon-circle {
+            width: 55px;
+            height: 55px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 20px;
-            font-weight: bold;
-            margin: 20px 20px 15px 20px;
             color: #ffffff;
+            margin-bottom: 6px;
+            transition: all 0.3s ease;
         }
 
-        /* صف التمرير الأفقي للتطبيقات */
-        .apps-row {
+        .category-item.active .category-icon-circle {
+            background: #ffffff;
+            color: #070a13;
+        }
+
+        .category-name {
+            font-size: 11px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .category-item.active .category-name {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        /* أقسام العرض */
+        .section-container {
+            margin-bottom: 25px;
+        }
+
+        .section-header {
+            font-size: 18px;
+            font-weight: 700;
+            padding: 0 20px;
+            margin-bottom: 12px;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        /* صف التطبيقات الأفقي الهيدروليكي للتمرير السلس */
+        .apps-scroller {
             display: flex;
             overflow-x: auto;
-            padding: 10px 20px;
-            gap: 20px;
-            scrollbar-width: none;
+            padding: 5px 20px 15px 20px;
+            gap: 16px;
         }
-        .apps-row::-webkit-scrollbar {
-            display: none;
-        }
+        .apps-scroller::-webkit-scrollbar { display: none; }
 
-        /* كارت التطبيق الواحد */
-        .app-card {
-            flex: 0 0 95px;
+        /* كارت التطبيق بتأثير الزجاج الدقيق */
+        .app-node {
+            flex: 0 0 100px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 12px 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
-        /* الأيقونات الدائرية المتدرجة الألوان نفس الفيديو */
-        .app-icon {
-            width: 75px;
-            height: 75px;
+        /* حاوية الأيقونات وتدرج الألوان المماثل للفيديو */
+        .app-img-container {
+            position: relative;
+            width: 68px;
+            height: 68px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #8a2be2, #007aff);
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
+            font-size: 26px;
             color: white;
             margin-bottom: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         }
 
-        /* مخصص لتغيير ألوان بعض الأيقونات تلقائياً */
-        .app-card:nth-child(even) .app-icon {
-            background: linear-gradient(135deg, #ff007f, #7f00ff);
+        /* تدرجات ألوان مختلفة للأيقونات لمنع التكرار */
+        .app-node:nth-child(2n) .app-img-container {
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
+        }
+        .app-node:nth-child(3n) .app-img-container {
+            background: linear-gradient(135deg, #f59e0b, #e11d48);
         }
 
-        .app-name {
-            font-size: 13px;
+        .app-title-text {
+            font-size: 12px;
             font-weight: 600;
             color: #ffffff;
             width: 100%;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            margin-bottom: 3px;
+        }
+
+        .app-rate-box {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            margin-bottom: 10px;
+        }
+        .app-rate-box i { color: #f59e0b; }
+
+        /* زر التنزيل الزجاجي الأزرق الشفاف نفس طابع ZSign */
+        .action-btn {
+            background: rgba(37, 99, 235, 0.25);
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            color: #60a5fa;
+            width: 100%;
+            padding: 6px 0;
+            font-size: 11px;
+            font-weight: 700;
+            border-radius: 14px;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            transition: all 0.2s ease;
+        }
+        .action-btn:active {
+            background: #2563eb;
+            color: #fff;
+        }
+
+        /* القائمة السفلية العائمة (الزجاج السائل الشفاف بالكامل المتطابق) */
+        .tab-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            height: 65px;
+            background: rgba(13, 17, 30, 0.5);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: none;
+            font-size: 10px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .tab-item i {
+            font-size: 18px;
             margin-bottom: 4px;
         }
 
-        .app-rating {
-            font-size: 11px;
-            color: #a0a0a0;
-            display: flex;
-            align-items: center;
-            gap: 3px;
-            margin-bottom: 8px;
-        }
-        .app-rating i {
-            color: #ffcc00;
-        }
-
-        /* زر التنزيل الأزرق التفاعلي */
-        .download-btn {
-            background-color: #007aff;
-            color: white;
-            border: none;
-            padding: 6px 18px;
-            font-size: 12px;
-            font-weight: bold;
-            border-radius: 15px;
-            text-decoration: none;
-            transition: background 0.2s;
-            cursor: pointer;
-        }
-        .download-btn:hover {
-            background-color: #0056b3;
+        .tab-item.active {
+            color: #3b82f6;
         }
     </style>
 </head>
 <body>
 
-    <div class="categories-container">
-        <span class="category-btn active">الكل</span>
-        <span class="category-btn">تواصل اجتماعي</span>
-        <span class="category-btn">أفلام ومسلسلات</span>
-        <span class="category-btn">الألعاب</span>
-        <span class="category-btn">التصميم والمونتاج</span>
-        <span class="category-btn">مطور</span>
+    <!-- الهيدر العلوي المستوحى من ZSign -->
+    <div class="header">
+        <div class="top-icon"><i class="fas fa-search"></i></div>
+        <div class="logo">ZSign</div>
+        <div class="top-icon" style="background: transparent;"><img src="https://appiraq.com/favicon.ico" style="width:24px; border-radius:50%; display:none;" onerror="this.parentNode.innerHTML='<i class=\"fas fa-fingerprint\"></i>'"></div>
     </div>
 
-    <div class="section-title">تواصل اجتماعي</div>
-    <div class="apps-row">
-        
-        <div class="app-card">
-            <div class="app-icon"><i class="fab fa-whatsapp"></i></div>
-            <div class="app-name">WhatsApp</div>
-            <div class="app-rating"><i class="fas fa-star"></i> 4.4</div>
-            <a href="itms-services://?action=download-manifest&url=رابط_ملف_الـ_PLIST_هنا" class="download-btn">تنزيل</a>
+    <!-- شريط التصنيفات الدائرية العلوي المماثل للفيديو تماماً -->
+    <div class="categories-wrapper">
+        <div class="category-item active">
+            <div class="category-icon-circle"><i class="fas fa-th-large"></i></div>
+            <div class="category-name">الكل</div>
         </div>
-
-        <div class="app-card">
-            <div class="app-icon"><i class="fab fa-telegram"></i></div>
-            <div class="app-name">Beegram</div>
-            <div class="app-rating"><i class="fas fa-star"></i> 4.2</div>
-            <a href="#" class="download-btn">تنزيل</a>
+        <div class="category-item">
+            <div class="category-icon-circle"><i class="fas fa-users"></i></div>
+            <div class="category-name">تواصل اجتماعي</div>
         </div>
-
-        <div class="app-card">
-            <div class="app-icon"><i class="fab fa-snapchat"></i></div>
-            <div class="app-name">Snapchat</div>
-            <div class="app-rating"><i class="fas fa-star"></i> 4.0</div>
-            <a href="#" class="download-btn">تنزيل</a>
+        <div class="category-item">
+            <div class="category-icon-circle"><i class="fas fa-film"></i></div>
+            <div class="category-name">أفلام ومسلسلات</div>
         </div>
-
-        <div class="app-card">
-            <div class="app-icon"><i class="fab fa-instagram"></i></div>
-            <div class="app-name">Regram</div>
-            <div class="app-rating"><i class="fas fa-star"></i> 4.9</div>
-            <a href="#" class="download-btn">تنزيل</a>
+        <div class="category-item">
+            <div class="category-icon-circle"><i class="fas fa-gamepad"></i></div>
+            <div class="category-name">الألعاب</div>
         </div>
-
+        <div class="category-item">
+            <div class="category-icon-circle"><i class="fas fa-paint-brush"></i></div>
+            <div class="category-name">التصميم</div>
+        </div>
     </div>
 
-    <div class="section-title">أفلام ومسلسلات</div>
-    <div class="apps-row">
+    <!-- قسم تواصل اجتماعي -->
+    <div class="section-container">
+        <div class="section-header">تواصل اجتماعي</div>
+        <div class="apps-scroller">
+            
+            <div class="app-node">
+                <div class="app-img-container"><i class="fab fa-whatsapp"></i></div>
+                <div class="app-title-text">WhatsApp</div>
+                <div class="app-rate-box"><i class="fas fa-star"></i> 4.4</div>
+                <a href="#" class="action-btn">تنزيل</a>
+            </div>
 
-        <div class="app-card">
-            <div class="app-icon"><i class="fas fa-film"></i></div>
-            <div class="app-name">سينمانا</div>
-            <div class="app-rating"><i class="fas fa-star"></i> 4.1</div>
-            <a href="#" class="download-btn">تنزيل</a>
+            <div class="app-node">
+                <div class="app-img-container"><i class="fab fa-telegram-plane"></i></div>
+                <div class="app-title-text">Beegram</div>
+                <div class="app-rate-box"><i class="fas fa-star"></i> 4.9</div>
+                <a href="#" class="action-btn">تنزيل</a>
+            </div>
+
+            <div class="app-node">
+                <div class="app-img-container"><i class="fab fa-snapchat"></i></div>
+                <div class="app-title-text">Snapchat</div>
+                <div class="app-rate-box"><i class="fas fa-star"></i> 4.0</div>
+                <a href="#" class="action-btn">تنزيل</a>
+            </div>
+
+            <div class="app-node">
+                <div class="app-img-container"><i class="fab fa-instagram"></i></div>
+                <div class="app-title-text">Regram</div>
+                <div class="app-rate-box"><i class="fas fa-star"></i> 4.7</div>
+                <a href="#" class="action-btn">تنزيل</a>
+            </div>
+
         </div>
+    </div>
 
-        <div class="app-card">
-            <div class="app-icon"><i class="fas fa-tv"></i></div>
-            <div class="app-name">Bawa</div>
-            <div class="app-rating"><i class="fas fa-star"></i> 4.0</div>
-            <a href="#" class="download-btn">تنزيل</a>
+    <!-- قسم أفلام ومسلسلات -->
+    <div class="section-container">
+        <div class="section-header">أفلام ومسلسلات</div>
+        <div class="apps-scroller">
+
+            <div class="app-node">
+                <div class="app-img-container"><i class="fas fa-tv"></i></div>
+                <div class="app-title-text">Anime Cloud</div>
+                <div class="app-rate-box"><i class="fas fa-star"></i> 4.4</div>
+                <a href="#" class="action-btn">تنزيل</a>
+            </div>
+
+            <div class="app-node">
+                <div class="app-img-container"><i class="fas fa-play-circle"></i></div>
+                <div class="app-title-text">Bawa</div>
+                <div class="app-rate-box"><i class="fas fa-star"></i> 4.0</div>
+                <a href="#" class="action-btn">تنزيل</a>
+            </div>
+
+            <div class="app-node">
+                <div class="app-img-container"><i class="fas fa-film"></i></div>
+                <div class="app-title-text">HiTV</div>
+                <div class="app-rate-box"><i class="fas fa-star"></i> 4.3</div>
+                <a href="#" class="action-btn">تنزيل</a>
+            </div>
+
+            <div class="app-node">
+                <div class="app-img-container"><i class="fas fa-video"></i></div>
+                <div class="app-title-text">Netflix</div>
+                <div class="app-rate-box"><i class="fas fa-star"></i> 4.2</div>
+                <a href="#" class="action-btn">تنزيل</a>
+            </div>
+
         </div>
+    </div>
 
-        <div class="app-card">
-            <div class="app-icon"><i class="fas fa-play"></i></div>
-            <div class="app-name">HiTV</div>
-            <div class="app-rating"><i class="fas fa-star"></i> 4.3</div>
-            <a href="#" class="download-btn">تنزيل</a>
-        </div>
-
+    <!-- القائمة السفلية (Tab Bar) المستنسخة تماماً بتأثير الزجاج البلوري وعزل الخلفية السائلة -->
+    <div class="tab-bar">
+        <a href="#" class="tab-item active">
+            <i class="fas fa-home"></i>
+            <span>الرئيسية</span>
+        </a>
+        <a href="#" class="tab-item">
+            <i class="fas fa-cubes"></i>
+            <span>التطبيقات</span>
+        </a>
+        <a href="#" class="tab-item">
+            <i class="fas fa-file-signature"></i>
+            <span>التوقيع</span>
+        </a>
+        <a href="#" class="tab-item">
+            <i class="fas fa-download"></i>
+            <span>التنزيلات</span>
+        </a>
+        <a href="#" class="tab-item">
+            <i class="fas fa-cog"></i>
+            <span>الإعدادات</span>
+        </a>
     </div>
 
 </body>
