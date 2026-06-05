@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>متجر تطبيقات الـ IPA | كيرا بلس</title>
+    <title>متجر تطبيقات الـ IPA | عباس</title>
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -12,11 +12,52 @@
             padding: 0;
             box-sizing: border-box;
             font-family: system-ui, -apple-system, 'Segoe UI', 'Tahoma', sans-serif;
+            transition: background-color 0.3s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+
+        /* الوضع الفاتح (النهاري) - افتراضي */
+        :root {
+            --bg-body: #f5f7fb;
+            --card-bg: #ffffff;
+            --text-primary: #1a1e2b;
+            --text-secondary: #2c3e66;
+            --border-light: #eef2f6;
+            --border-card: #edf2f7;
+            --badge-bg: #eef2ff;
+            --badge-text: #2563eb;
+            --btn-bg: #2563eb;
+            --btn-hover: #1d4ed8;
+            --input-bg: #ffffff;
+            --input-border: #e2e8f0;
+            --desc-bg: #f8fafc;
+            --footer-text: #5b6e8c;
+            --shadow-sm: 0 8px 20px rgba(0,0,0,0.03), 0 2px 6px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        /* الوضع الليلي */
+        body.dark {
+            --bg-body: #121826;
+            --card-bg: #1e2435;
+            --text-primary: #eef2ff;
+            --text-secondary: #b9c7d9;
+            --border-light: #2a2f42;
+            --border-card: #2d3348;
+            --badge-bg: #2d3748;
+            --badge-text: #6c9eff;
+            --btn-bg: #3b82f6;
+            --btn-hover: #2563eb;
+            --input-bg: #2a2f42;
+            --input-border: #3f465e;
+            --desc-bg: #151c2b;
+            --footer-text: #8f9bb3;
+            --shadow-sm: 0 8px 20px rgba(0,0,0,0.2);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
         }
 
         body {
-            background: #f5f7fb;
-            color: #1a1e2b;
+            background: var(--bg-body);
+            color: var(--text-primary);
             padding: 20px;
         }
 
@@ -25,20 +66,45 @@
             margin: 0 auto;
         }
 
-        /* تنسيق البطاقات والعناصر */
+        /* زر تبديل الوضع */
+        .theme-toggle {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 60px;
+            padding: 12px 16px;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            backdrop-filter: blur(8px);
+            transition: 0.2s;
+        }
+        .theme-toggle i {
+            font-size: 20px;
+            color: #fbbf24;
+        }
+        body.dark .theme-toggle i {
+            color: #94a3b8;
+        }
+
         .card {
-            background: #ffffff;
+            background: var(--card-bg);
             border-radius: 28px;
             padding: 20px 24px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.03), 0 2px 6px rgba(0,0,0,0.05);
+            box-shadow: var(--shadow-sm);
             margin-bottom: 28px;
-            transition: 0.2s;
-            border: 1px solid #eef2f6;
+            border: 1px solid var(--border-light);
         }
 
         .badge {
-            background: #eef2ff;
-            color: #2563eb;
+            background: var(--badge-bg);
+            color: var(--badge-text);
             padding: 6px 14px;
             border-radius: 40px;
             font-size: 13px;
@@ -46,10 +112,11 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            cursor: pointer;
         }
 
         .btn {
-            background: #2563eb;
+            background: var(--btn-bg);
             color: white;
             border: none;
             padding: 10px 22px;
@@ -62,14 +129,17 @@
             align-items: center;
             gap: 8px;
         }
+        .btn:hover {
+            background: var(--btn-hover);
+            transform: scale(0.98);
+        }
         .btn-outline {
             background: transparent;
-            border: 1px solid #cbd5e1;
-            color: #1e293b;
+            border: 1px solid var(--input-border);
+            color: var(--text-primary);
         }
         .btn-outline:hover {
-            background: #f1f5f9;
-            border-color: #94a3b8;
+            background: var(--desc-bg);
         }
         .btn-sm {
             padding: 6px 16px;
@@ -78,7 +148,7 @@
 
         /* الإشعارات */
         .notification-box {
-            background: #fefce8;
+            background: var(--card-bg);
             border-right: 4px solid #eab308;
             display: flex;
             justify-content: space-between;
@@ -91,30 +161,15 @@
             align-items: center;
             gap: 10px;
         }
-        .mute-icon {
-            color: #6b7280;
-            cursor: pointer;
-        }
 
-        /* رأس المتجر */
-        .store-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
-            margin-bottom: 16px;
-        }
         .stats {
-            background: #eef2ff;
+            background: var(--badge-bg);
             padding: 8px 20px;
             border-radius: 80px;
             font-weight: 700;
+            color: var(--badge-text);
         }
 
-        /* طلب تطبيق */
-        .request-section {
-            background: linear-gradient(145deg, #ffffff, #fafcff);
-        }
         .chip-group {
             display: flex;
             gap: 12px;
@@ -122,7 +177,6 @@
             margin-top: 10px;
         }
 
-        /* قائمة التطبيقات */
         .apps-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -130,12 +184,11 @@
             margin-top: 16px;
         }
         .app-card {
-            background: #ffffff;
+            background: var(--card-bg);
             border-radius: 28px;
             padding: 18px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            border: 1px solid #edf2f7;
-            transition: 0.15s;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-card);
         }
         .app-name {
             font-size: 20px;
@@ -146,11 +199,11 @@
             margin-bottom: 12px;
         }
         .app-desc {
-            color: #334155;
+            color: var(--text-secondary);
             font-size: 14px;
             margin: 12px 0;
             line-height: 1.45;
-            background: #f8fafc;
+            background: var(--desc-bg);
             padding: 10px 12px;
             border-radius: 20px;
         }
@@ -159,52 +212,34 @@
             justify-content: flex-end;
             margin-top: 8px;
         }
-
-        /* طرق التثبيت */
         .method-step {
-            background: #f9fafb;
+            background: var(--desc-bg);
             border-radius: 24px;
             padding: 18px;
             margin-top: 16px;
         }
-
-        /* نموذج الطلب */
         .request-form input, .request-form textarea {
             width: 100%;
             padding: 14px 18px;
             border-radius: 28px;
-            border: 1px solid #e2e8f0;
-            background: white;
+            border: 1px solid var(--input-border);
+            background: var(--input-bg);
+            color: var(--text-primary);
             font-size: 15px;
             margin-bottom: 14px;
         }
-        .request-form textarea {
-            border-radius: 24px;
-            resize: vertical;
-        }
-
-        .footer {
-            text-align: center;
-            font-size: 14px;
-            color: #5b6e8c;
-            margin-top: 40px;
-            padding: 20px;
-            border-top: 1px solid #e2edf7;
-        }
-
-        /* بحث */
         .search-bar {
-            background: white;
+            background: var(--card-bg);
             border-radius: 60px;
             padding: 8px 20px;
             display: flex;
             align-items: center;
             gap: 10px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border-light);
             margin-bottom: 25px;
         }
         .search-bar i {
-            color: #94a3b8;
+            color: var(--text-secondary);
         }
         .search-bar input {
             flex: 1;
@@ -212,17 +247,35 @@
             outline: none;
             font-size: 16px;
             background: transparent;
+            color: var(--text-primary);
         }
-
+        .footer {
+            text-align: center;
+            font-size: 14px;
+            color: var(--footer-text);
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 1px solid var(--border-light);
+        }
         @media (max-width: 700px) {
             .container { padding: 0 4px; }
             .card { padding: 18px; }
+        }
+        .small-note {
+            font-size: 13px;
+            color: var(--footer-text);
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <!-- 🔔 التحديثات والإشعارات -->
+    <!-- زر تبديل الوضع الليلي/النهاري -->
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i> 
+        <span>الوضع الليلي</span>
+    </div>
+
+    <!-- 🔔 الإشعارات -->
     <div class="card notification-box">
         <div class="notification-title">
             <i class="fas fa-bell" style="color:#eab308;"></i> 
@@ -239,34 +292,34 @@
 
     <!-- رأس المتجر -->
     <div class="card">
-        <div class="store-header">
+        <div class="store-header" style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
             <h1 style="font-size: 28px;">📱 متجر تطبيقات الـ IPA</h1>
             <div class="stats"><i class="fas fa-database"></i> 215 تطبيق</div>
         </div>
-        <p style="margin-top: 8px; color: #2c3e66;">حمّل ملفات IPA في جهازك وثبّتها باستخدام برنامج Ksign أو Gbox أو بوتات التثبيت باستخدام شهادتك الخاصة.</p>
+        <p style="margin-top: 8px; color: var(--text-secondary);">حمّل ملفات IPA في جهازك وثبّتها باستخدام برنامج Ksign أو Gbox أو أدوات التثبيت باستخدام شهادتك الخاصة.</p>
         <div class="chip-group" style="margin-top: 18px;">
-            <span class="badge"><i class="fas fa-gamepad"></i> 🎮 اطلب تطبيق</span>
-            <span class="badge"><i class="fas fa-question-circle"></i> شلون أثبت هذي التطبيقات؟</span>
-            <span class="badge"><i class="fas fa-ticket-alt"></i> شراء شهادة</span>
+            <span class="badge" data-action="request"><i class="fas fa-gamepad"></i> 🎮 اطلب تطبيق</span>
+            <span class="badge" data-action="howto"><i class="fas fa-question-circle"></i> شلون أثبت هذي التطبيقات؟</span>
+            <span class="badge" data-action="cert"><i class="fas fa-ticket-alt"></i> شراء شهادة</span>
         </div>
     </div>
 
-    <!-- ريكرام + بحث -->
+    <!-- بحث -->
     <div class="search-bar">
         <i class="fas fa-search"></i>
         <input type="text" id="searchInput" placeholder="⌕ ريكرام ... ابحث عن تطبيق" autocomplete="off">
         <i class="fas fa-sliders-h" style="opacity:0.6;"></i>
     </div>
 
-    <!-- قائمة التطبيقات بالكامل (مطابقة للمحتوى الأصلي) -->
+    <!-- قائمة التطبيقات -->
     <div id="appsContainer">
         <div class="apps-grid" id="appsGrid"></div>
     </div>
 
-    <!-- كيف تثبّت ملف الـ IPA بعد التحميل؟ -->
+    <!-- كيف تثبّت ملف الـ IPA بعد التحميل؟ (تم إزالة ذكر البوت) -->
     <div class="card">
         <h3 style="margin-bottom: 12px;"><i class="fas fa-download"></i> كيف تثبّت ملف الـ IPA بعد التحميل؟</h3>
-        <p style="color: #475569;">واجهتك مشكلة؟ <a href="#" style="color:#2563eb;">تواصل معنا</a> — Website designed by Dyala Youssif</p>
+        <p style="color: var(--text-secondary);">واجهتك مشكلة؟ <a href="#" id="contactLink" style="color:#2563eb;">تواصل معنا</a> — Website designed by Dyala Youssif</p>
         
         <div class="method-step">
             <div><strong>📌 الطريقة الأولى</strong></div>
@@ -278,13 +331,12 @@
         </div>
 
         <div class="method-step">
-            <div><strong>🤖 الطريقة الثانية (بوت التليجرام)</strong></div>
+            <div><strong>🔄 الطريقة الثانية (بدون بوت)</strong></div>
             <ol style="margin-top: 8px; margin-right: 20px;">
-                <li>اذهب لهذا البوت <strong>@ipasignxbot</strong>.</li>
-                <li>اضغط Add IPA.</li>
-                <li>اضغط Add Cert وأضف ملفات شهادتك والباسورد.</li>
-                <li>أرسل للبوت ملف الـ IPA واضغط Sign.</li>
-                <li>بعدها اضغط Install ثم Install Now.</li>
+                <li>استخدم تطبيق التوقيع المفضل لديك (Ksign، Gbox، Esign).</li>
+                <li>قم باستيراد ملف الشهادة (p12/mobileprovision).</li>
+                <li>اختر ملف IPA ووقعه ثم ثبته مباشرة.</li>
+                <li>يمكنك أيضاً استخدام خدمات التوقيع عبر الويب إذا كنت لا تملك شهادة.</li>
             </ol>
         </div>
     </div>
@@ -301,17 +353,17 @@
             <input type="url" placeholder="رابط التطبيق (اختياري) — 💡 إضافة الرابط يساعدنا نوصلك أسرع — من App Store أو أي مصدر آخر" id="appLinkInput">
             <button type="submit" class="btn" style="width:100%; justify-content: center;">📨 إرسال الطلب</button>
         </form>
-        <p class="small-note" style="font-size: 13px; margin-top: 12px; color:#5b6e8c;">راح يوصل طلبك مباشرة لفريق كيرا بلس</p>
+        <p class="small-note" style="margin-top: 12px;">راح يوصل طلبك مباشرة لفريق <strong>عباس</strong></p>
     </div>
 
     <div class="footer">
-        <i class="fas fa-crown"></i> كيرا بلس — متجر IPA شامل<br>
+        <i class="fas fa-crown"></i> عباس — متجر IPA شامل<br>
         Website designed by Dyala Youssif
     </div>
 </div>
 
 <script>
-    // بيانات التطبيقات مطابقة تماماً للمحتوى الأصلي
+    // بيانات التطبيقات (نفس المحتوى الأصلي)
     const appsList = [
         { name: "Snapchat root", desc: "حسابك مسؤليتك .........", features: "لتفعيل مميزات النسخة : - قم بتحويل لغة النسخة من الانكليزية الى العربية او بالعكس." },
         { name: "WhatsApp Gold", desc: "سجل بالنسخة كجهاز مصاحب فقطططط.", features: "نسخة خاصة بذهب واتساب" },
@@ -324,6 +376,7 @@
         { name: "Swiftgram", desc: "لتفعيل مميزات النسخة اتبع التالي : - الاعدادات - انزل للاسفل - اضغط ضغطة مطوله على ايقونه ( اسال سوالا ) ومبروك تم فتح المميزات", features: "" }
     ];
 
+    // دالة العرض مع البحث
     function renderApps(filterText = "") {
         const grid = document.getElementById("appsGrid");
         if (!grid) return;
@@ -348,7 +401,7 @@
                 <div class="app-desc">
                     <i class="fas fa-info-circle" style="margin-left: 6px; opacity:0.7;"></i> 
                     ${app.desc}
-                    ${app.features ? `<div style="margin-top: 8px; font-size:13px; background: #f1f5f9; border-radius: 16px; padding: 8px;"><i class="fas fa-magic"></i> ${app.features}</div>` : ''}
+                    ${app.features ? `<div style="margin-top: 8px; font-size:13px; background: var(--desc-bg); border-radius: 16px; padding: 8px;"><i class="fas fa-magic"></i> ${app.features}</div>` : ''}
                 </div>
                 <div class="install-row">
                     <button class="btn btn-sm install-btn" data-app="${app.name}"><i class="fas fa-download"></i> تثبيت</button>
@@ -356,17 +409,16 @@
             </div>
         `).join('');
         
-        // attach events to install buttons
         document.querySelectorAll('.install-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const appName = btn.getAttribute('data-app');
-                showToast(`⚡ بدء محاكاة تثبيت: ${appName}\nملف IPA جاهز للتوقيع.`, "success");
+                showToast(`⚡ بدء محاكاة تثبيت: ${appName}\nملف IPA جاهز للتوقيع.`);
             });
         });
     }
-    
+
     // رسالة منبثقة
-    function showToast(msg, type = "info") {
+    function showToast(msg) {
         let toastDiv = document.getElementById('dynamicToast');
         if(!toastDiv){
             toastDiv = document.createElement('div');
@@ -394,30 +446,47 @@
             setTimeout(() => toastDiv.remove(), 500);
         }, 2500);
     }
-    
-    // إرسال نموذج الطلب
+
+    // تبديل الوضع الليلي/النهاري
+    const themeToggle = document.getElementById('themeToggle');
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'dark') {
+        document.body.classList.add('dark');
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i> <span>الوضع النهاري</span>';
+    } else {
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i> <span>الوضع الليلي</span>';
+    }
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+        if (document.body.classList.contains('dark')) {
+            localStorage.setItem('theme', 'dark');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i> <span>الوضع النهاري</span>';
+        } else {
+            localStorage.setItem('theme', 'light');
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i> <span>الوضع الليلي</span>';
+        }
+    });
+
+    // نموذج الطلب
     const form = document.getElementById('appRequestForm');
     if(form){
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             const appNameVal = document.getElementById('appNameInput').value.trim();
             if(!appNameVal){
-                showToast('يرجى إدخال اسم التطبيق أو اللعبة', 'error');
+                showToast('يرجى إدخال اسم التطبيق أو اللعبة');
                 return;
             }
             showToast(`✅ تم استلام طلبك: ${appNameVal} — سيصلك رد في القناة قريباً.`);
             form.reset();
         });
     }
-    
-    // زر كتم الإشعارات
-    const muteBtn = document.getElementById('muteBtn');
-    if(muteBtn){
-        muteBtn.addEventListener('click', () => {
-            showToast('🔕 تم إسكات الإشعارات (محاكاة)', 'info');
-        });
-    }
-    
+
+    // كتم الإشعارات
+    document.getElementById('muteBtn')?.addEventListener('click', () => {
+        showToast('🔕 تم إسكات الإشعارات (محاكاة)');
+    });
+
     // البحث الحي
     const searchInput = document.getElementById('searchInput');
     if(searchInput){
@@ -425,31 +494,28 @@
             renderApps(e.target.value);
         });
     }
-    
-    // شلون أثبت / شراء شهادة تفاعلية (إشعارات فقط)
-    document.querySelectorAll('.badge').forEach(badge => {
-        badge.addEventListener('click', (e) => {
-            const text = badge.innerText;
-            if(text.includes('شلون أثبت')) showToast('🔧 الطريقتان مذكورتان في الأسفل (طرق التثبيت)');
-            else if(text.includes('شراء شهادة')) showToast('💳 شهادات مدفوعة: يمكنك الحصول عليها من خدمات مثل ksign أو من القناة');
-            else if(text.includes('اطلب تطبيق')) showToast('🎮 استخدم النموذج في الأسفل لطلب تطبيق أو لعبة');
-            else showToast(`ℹ️ ${text}`);
+
+    // تفاعل البادجات (اطلب تطبيق، شلون أثبت، شراء شهادة)
+    document.querySelectorAll('.badge[data-action]').forEach(badge => {
+        badge.addEventListener('click', () => {
+            const action = badge.getAttribute('data-action');
+            if(action === 'request') showToast('🎮 استخدم النموذج في الأسفل لطلب تطبيق أو لعبة');
+            else if(action === 'howto') showToast('🔧 الطريقتان مذكورتان في الأسفل (طرق التثبيت)');
+            else if(action === 'cert') showToast('💳 شهادات مدفوعة: يمكنك الحصول عليها من خدمات مثل ksign أو من القناة');
         });
     });
-    
-    // بدء العرض
-    renderApps();
-    
-    // إضافة تواصل معنا تفاعلي
-    const contactLink = document.querySelector('a[href="#"]');
-    if(contactLink && contactLink.innerText.includes('تواصل معنا')){
+
+    // رابط تواصل معنا
+    const contactLink = document.getElementById('contactLink');
+    if(contactLink){
         contactLink.addEventListener('click', (e) => {
             e.preventDefault();
-            showToast('📧 للتواصل: عبر قناة كيرا بلس أو البوت @ipasignxbot');
+            showToast('📧 للتواصل: عبر قناة عباس أو البريد الإلكتروني الموجود في الوصف');
         });
     }
-    
-    // زر تثبيت محاكي للتطبيقات الظاهرة - سيتم عبر الـ dynamic
+
+    // بدء العرض
+    renderApps();
 </script>
 </body>
 </html>
