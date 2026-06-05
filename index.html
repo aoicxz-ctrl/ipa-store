@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>IPA - واجهة التطبيق</title>
+    <!-- Font Awesome 6 (أيقونات طبيعية) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -21,7 +23,6 @@
             padding: 16px;
         }
 
-        /* تأثير الزجاج السائل على الهيكل الرئيسي */
         .phone {
             max-width: 400px;
             width: 100%;
@@ -34,7 +35,6 @@
             position: relative;
         }
 
-        /* شريط الحالة */
         .status-bar {
             background: transparent;
             padding: 14px 20px 6px 20px;
@@ -45,7 +45,6 @@
             color: rgba(255,255,255,0.9);
         }
 
-        /* الشريط العلوي */
         .main-header {
             padding: 12px 20px;
             display: flex;
@@ -66,10 +65,8 @@
         .menu-icon {
             color: rgba(255,255,255,0.8);
             font-size: 24px;
-            font-weight: 400;
         }
 
-        /* الفئات الأفقية - زجاجية */
         .categories {
             display: flex;
             overflow-x: auto;
@@ -98,7 +95,6 @@
             text-shadow: 0 0 8px rgba(108,158,255,0.5);
         }
 
-        /* المحتوى الرئيسي بخلفية شفافة زجاجية */
         .content {
             padding: 20px;
             display: flex;
@@ -117,7 +113,6 @@
             text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
 
-        /* بطاقات زجاجية سائلة */
         .app-card {
             background: rgba(30, 35, 55, 0.6);
             backdrop-filter: blur(8px);
@@ -151,6 +146,7 @@
             font-size: 28px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             border: 0.5px solid rgba(255,255,255,0.15);
+            color: white;
         }
         .app-details h4 {
             color: white;
@@ -192,7 +188,6 @@
             transform: scale(0.96);
         }
 
-        /* شريط سفلي زجاجي */
         .bottom-nav {
             background: rgba(15, 18, 30, 0.7);
             backdrop-filter: blur(20px);
@@ -247,41 +242,42 @@
         <div class="battery-icons">📶 🔋 98%</div>
     </div>
     <div class="main-header">
-        <div class="logo">IPA</div>   <!-- تم التغيير من Zsign إلى IPA -->
-        <div class="menu-icon">✨</div>
+        <div class="logo">IPA</div>
+        <div class="menu-icon"><i class="fas fa-bolt"></i></div>
     </div>
 
     <div class="categories" id="categoriesList">
-        <div class="cat-item active" data-cat="social">تواصل اجتماعي</div>
+        <div class="cat-item active" data-cat="games">الألعاب</div>
         <div class="cat-item" data-cat="movies">أفلام ومسلسلات</div>
+        <div class="cat-item" data-cat="social">تواصل اجتماعي</div>
         <div class="cat-item" data-cat="all">الكل</div>
-        <div class="cat-item" data-cat="design">التصميم والمونتاج</div>
         <div class="cat-item" data-cat="other">غير ذلك</div>
         <div class="cat-item" data-cat="lifestyle">نمط الحياة</div>
         <div class="cat-item" data-cat="dev">مطور</div>
+        <div class="cat-item" data-cat="design">التصميم والموتاج</div>
     </div>
 
     <div class="content" id="appContent"></div>
 
     <div class="bottom-nav">
         <div class="nav-item active" data-nav="settings">
-            <span>⚙️</span>
+            <span><i class="fas fa-cog"></i></span>
             <span>الإعدادات</span>
         </div>
         <div class="nav-item" data-nav="downloads">
-            <span>📥</span>
-            <span>التنزيلات</span>
+            <span><i class="fas fa-download"></i></span>
+            <span>التزلزلات</span>
         </div>
         <div class="nav-item" data-nav="sign">
-            <span>✍️</span>
+            <span><i class="fas fa-signature"></i></span>
             <span>التوقيع</span>
         </div>
         <div class="nav-item" data-nav="apps">
-            <span>📱</span>
+            <span><i class="fas fa-th"></i></span>
             <span>التطبيقات</span>
         </div>
         <div class="nav-item" data-nav="home">
-            <span>🏠</span>
+            <span><i class="fas fa-home"></i></span>
             <span>الرئيسية</span>
         </div>
     </div>
@@ -289,48 +285,55 @@
 <div class="toast-msg" id="toastMsg">تمت المحاكاة</div>
 
 <script>
+    // كل تطبيق له أيقونة Font Awesome طبيعية
     const appDatabase = {
+        games: [
+            { name: "PUBG Mobile", rating: 4.7, icon: "fab fa-fort-awesome", stars: "★★★★½", color: "#dd8a3a" },
+            { name: "Free Fire", rating: 4.5, icon: "fas fa-fire", stars: "★★★★½", color: "#ff6600" },
+            { name: "Call of Duty", rating: 4.6, icon: "fas fa-crosshairs", stars: "★★★★½", color: "#3a6ea5" }
+        ],
         social: [
-            { name: "WhatsApp", rating: 5.0, icon: "💬", stars: "★★★★★" },
-            { name: "Beegram", rating: 4.2, icon: "🐝", stars: "★★★★☆" },
-            { name: "Snapchat", rating: 4.5, icon: "👻", stars: "★★★★½" }
+            { name: "WhatsApp", rating: 4.1, icon: "fab fa-whatsapp", stars: "★★★★☆", color: "#25D366" },
+            { name: "Beegram", rating: 4.1, icon: "fab fa-telegram", stars: "★★★★☆", color: "#26A5E4" },
+            { name: "Snapchat", rating: 4.8, icon: "fab fa-snapchat-ghost", stars: "★★★★★", color: "#FFFC00" }
         ],
         movies: [
-            { name: "Cloud", rating: 3.3, icon: "☁️", stars: "★★★☆☆" },
-            { name: "Anime Slayer ipason", rating: 4.8, icon: "🎬", stars: "★★★★★" },
-            { name: "Bawa", rating: 4.4, icon: "🍿", stars: "★★★★☆" },
-            { name: "Buzz TV", rating: 4.5, icon: "📺", stars: "★★★★½" }
+            { name: "Anime Slayer ipason", rating: 4.5, icon: "fas fa-film", stars: "★★★★½", color: "#b33b2c" },
+            { name: "Bawa", rating: 4.6, icon: "fas fa-tv", stars: "★★★★½", color: "#5a3e2b" },
+            { name: "Buzz TV", rating: 4.9, icon: "fas fa-broadcast-tower", stars: "★★★★★", color: "#2c7da0" }
         ],
         all: [
-            { name: "WhatsApp", rating: 5.0, icon: "💬", stars: "★★★★★" },
-            { name: "Beegram", rating: 4.2, icon: "🐝", stars: "★★★★☆" },
-            { name: "Snapchat", rating: 4.5, icon: "👻", stars: "★★★★½" },
-            { name: "Cloud", rating: 3.3, icon: "☁️", stars: "★★★☆☆" },
-            { name: "Anime Slayer ipason", rating: 4.8, icon: "🎬", stars: "★★★★★" },
-            { name: "Bawa", rating: 4.4, icon: "🍿", stars: "★★★★☆" },
-            { name: "Buzz TV", rating: 4.5, icon: "📺", stars: "★★★★½" }
+            { name: "PUBG Mobile", rating: 4.7, icon: "fab fa-fort-awesome", stars: "★★★★½", color: "#dd8a3a" },
+            { name: "Free Fire", rating: 4.5, icon: "fas fa-fire", stars: "★★★★½", color: "#ff6600" },
+            { name: "Call of Duty", rating: 4.6, icon: "fas fa-crosshairs", stars: "★★★★½", color: "#3a6ea5" },
+            { name: "Anime Slayer ipason", rating: 4.5, icon: "fas fa-film", stars: "★★★★½", color: "#b33b2c" },
+            { name: "Bawa", rating: 4.6, icon: "fas fa-tv", stars: "★★★★½", color: "#5a3e2b" },
+            { name: "Buzz TV", rating: 4.9, icon: "fas fa-broadcast-tower", stars: "★★★★★", color: "#2c7da0" },
+            { name: "WhatsApp", rating: 4.1, icon: "fab fa-whatsapp", stars: "★★★★☆", color: "#25D366" },
+            { name: "Beegram", rating: 4.1, icon: "fab fa-telegram", stars: "★★★★☆", color: "#26A5E4" },
+            { name: "Snapchat", rating: 4.8, icon: "fab fa-snapchat-ghost", stars: "★★★★★", color: "#FFFC00" }
         ],
         design: [
-            { name: "CapCut", rating: 4.7, icon: "✂️", stars: "★★★★½" },
-            { name: "Adobe Lightroom", rating: 4.6, icon: "🎨", stars: "★★★★½" }
+            { name: "CapCut", rating: 4.8, icon: "fas fa-cut", stars: "★★★★★", color: "#4a90e2" },
+            { name: "Adobe Premiere", rating: 4.7, icon: "fas fa-video", stars: "★★★★½", color: "#ea5a9f" }
         ],
         other: [
-            { name: "VPN Express", rating: 4.3, icon: "🔒", stars: "★★★★☆" },
-            { name: "Cleaner Kit", rating: 4.0, icon: "🧹", stars: "★★★★☆" }
+            { name: "VPN Express", rating: 4.3, icon: "fas fa-shield-alt", stars: "★★★★☆", color: "#43b3a8" },
+            { name: "Cleaner Kit", rating: 4.0, icon: "fas fa-broom", stars: "★★★★☆", color: "#b0a07c" }
         ],
         lifestyle: [
-            { name: "Calm", rating: 4.8, icon: "🧘", stars: "★★★★★" },
-            { name: "Food App", rating: 4.2, icon: "🍔", stars: "★★★★☆" }
+            { name: "Calm", rating: 4.8, icon: "fas fa-bed", stars: "★★★★★", color: "#4c9f9c" },
+            { name: "Food App", rating: 4.2, icon: "fas fa-utensils", stars: "★★★★☆", color: "#e67e22" }
         ],
         dev: [
-            { name: "Terminal IDE", rating: 4.4, icon: "🖥️", stars: "★★★★☆" },
-            { name: "GitHub", rating: 4.9, icon: "🐙", stars: "★★★★★" }
+            { name: "Terminal IDE", rating: 4.4, icon: "fas fa-terminal", stars: "★★★★☆", color: "#2ecc71" },
+            { name: "GitHub", rating: 4.9, icon: "fab fa-github", stars: "★★★★★", color: "#f5f5f5" }
         ]
     };
 
     const contentDiv = document.getElementById('appContent');
     const toast = document.getElementById('toastMsg');
-    let activeCategory = 'social';
+    let activeCategory = 'games';
 
     function showDownloadMsg(appName) {
         toast.style.opacity = '1';
@@ -361,7 +364,9 @@
                 ${appsList.map(app => `
                     <div class="app-card">
                         <div class="app-info">
-                            <div class="app-icon">${app.icon}</div>
+                            <div class="app-icon" style="background: ${app.color}20; color: ${app.color};">
+                                <i class="${app.icon}"></i>
+                            </div>
                             <div class="app-details">
                                 <h4>${app.name}</h4>
                                 <div class="rating">
@@ -388,13 +393,14 @@
 
     function getCategoryTitle(key) {
         const titles = {
-            social: 'تواصل اجتماعي',
+            games: 'الألعاب',
             movies: 'أفلام ومسلسلات',
+            social: 'تواصل اجتماعي',
             all: 'الكل',
-            design: 'التصميم والمونتاج',
             other: 'غير ذلك',
             lifestyle: 'نمط الحياة',
-            dev: 'مطور'
+            dev: 'مطور',
+            design: 'التصميم والموتاج'
         };
         return titles[key] || 'تطبيقات';
     }
@@ -420,7 +426,7 @@
                 navItems.forEach(n => n.classList.remove('active'));
                 nav.classList.add('active');
                 if (navValue === 'settings') showDownloadMsg('فتح الإعدادات');
-                else if (navValue === 'downloads') showDownloadMsg('قائمة التنزيلات');
+                else if (navValue === 'downloads') showDownloadMsg('قائمة التزلزلات');
                 else if (navValue === 'sign') showDownloadMsg('شاشة التوقيع');
                 else if (navValue === 'apps') showDownloadMsg('جميع التطبيقات');
                 else if (navValue === 'home') {
@@ -444,7 +450,7 @@
     function init() {
         bindCategoryEvents();
         initBottomNav();
-        setActiveCategory('social');
+        setActiveCategory('games');
     }
 
     init();
