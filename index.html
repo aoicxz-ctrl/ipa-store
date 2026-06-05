@@ -280,6 +280,7 @@
 </head>
 <body>
 <div class="container">
+    <!-- زر الوضع الليلي/النهاري: عند الضغط على الشمس يصير نهاري، على الهلال يصير ليلي -->
     <div class="theme-switch" id="themeToggle">🌙</div>
 
     <div class="card notify-bar">
@@ -343,7 +344,6 @@
             <input type="url" id="appLink" placeholder="رابط التطبيق (اختياري)" style="width:100%; padding:12px; border-radius:60px; border:1px solid var(--input-border); background:var(--input-bg); color:var(--text-primary);">
             <button type="submit" class="install-btn" style="width:100%; margin-top:15px; justify-content:center;">📨 إرسال الطلب</button>
         </form>
-        <!-- تم حذف الجملة "راح يوصل طلبك مباشرة لفريق..." -->
     </div>
 
     <div class="footer">
@@ -356,7 +356,6 @@
 <div id="toastMessage" class="toast-msg">تم</div>
 
 <script>
-    // قائمة التطبيقات (نفسها تماماً بدون أي تغيير)
     const applications = [
         { name: "Snapchat root", desc: "حسابك مسؤليتك .........", features: "لتفعيل مميزات النسخة : - قم بتحويل لغة النسخة من الانكليزية الى العربية او بالعكس.", icon: "fab fa-snapchat-ghost", color: "#FFFC00" },
         { name: "WhatsApp Gold", desc: "سجل بالنسخة كجهاز مصاحب فقطططط.", features: "نسخة ذهبية بميزات إضافية", icon: "fab fa-whatsapp", color: "#25D366" },
@@ -390,7 +389,6 @@
                 <button class="install-btn" data-app="${app.name}"><i class="fas fa-download"></i> تثبيت</button>
             </div>
         `).join('');
-        // تعديل الرسالة إلى "قريبا" بدلاً من محاكاة
         document.querySelectorAll('.install-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const appName = btn.getAttribute('data-app');
@@ -425,16 +423,30 @@
             else if (action === 'cert') showToast('💳 لشراء شهادة مدفوعة: تواصل مع قنوات الدعم أو استخدم خدمات مثل ksign.');
         });
     });
+
+    // منطق زر الوضع الليلي والنهاري حسب الطلب
     const themeToggle = document.getElementById('themeToggle');
     const currentTheme = localStorage.getItem('theme');
-    if (currentTheme === 'dark') { document.body.classList.add('dark'); themeToggle.innerHTML = '☀️'; }
-    else themeToggle.innerHTML = '🌙';
+    // إذا كان الوضع المخزن dark نعرض الشمس (لأن الضغط عليها يذهب إلى النهاري)
+    if (currentTheme === 'dark') {
+        document.body.classList.add('dark');
+        themeToggle.innerHTML = '☀️';
+    } else {
+        themeToggle.innerHTML = '🌙';
+    }
     themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark');
-        const isDark = document.body.classList.contains('dark');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        themeToggle.innerHTML = isDark ? '☀️' : '🌙';
+        // إذا كانت الأيقونة شمس => نريد النهاري، إذا هلال => نريد الليلي
+        if (themeToggle.innerHTML === '☀️') {
+            document.body.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+            themeToggle.innerHTML = '🌙'; // بعد التحول إلى النهاري، تصبح الأيقونة هلال (للذهاب إلى الليلي)
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+            themeToggle.innerHTML = '☀️'; // بعد التحول إلى الليلي، تصبح الأيقونة شمس (للذهاب إلى النهاري)
+        }
     });
+
     renderApps();
 </script>
 </body>
