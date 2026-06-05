@@ -1,286 +1,39 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IPA Store</title>
-    <style>
-        /* التنسيق العام المتدرج الفخم */
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(180deg, #0f1c3f 0%, #070b19 100%);
-            background-attachment: fixed;
-            color: #ffffff;
-            margin: 0;
-            padding: 20px 15px 120px 15px;
-            text-align: center;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-
-        /* هيدر الموقع العلوي */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            padding: 10px 5px;
-        }
-
-        .logo-area {
-            width: 55px;
-            height: 55px;
-            background: radial-gradient(circle, #2a3c6d 0%, #111a36 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 15px rgba(0, 122, 255, 0.3);
-            border: 1px solid #3a4f85;
-            font-size: 24px;
-            font-weight: bold;
-            font-style: italic;
-            color: #ffffff;
-        }
-
-        /* الاسم الجديد المعدل بطلبك */
-        .brand-title {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 8px 35px;
-            border-radius: 20px;
-            font-size: 20px;
-            font-weight: bold;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            letter-spacing: 1px;
-        }
-
-        /* أقسام التصنيفات */
-        .section-title {
-            text-align: right;
-            font-size: 22px;
-            font-weight: bold;
-            margin: 25px 10px 15px 10px;
-            color: #ffffff;
-        }
-
-        /* شبكة عرض التطبيقات */
-        .apps-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            padding: 5px;
-        }
-
-        /* كرت التطبيق الدائري الطولي */
-        .app-card {
-            background: linear-gradient(135deg, rgba(40, 59, 114, 0.4) 0%, rgba(16, 25, 53, 0.6) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 45px;
-            padding: 20px 10px 15px 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-        }
-
-        .app-icon {
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            margin-bottom: 12px;
-            object-fit: cover;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-
-        .app-name {
-            font-size: 14px;
-            font-weight: bold;
-            margin: 0 0 5px 0;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            width: 100%;
-        }
-
-        .app-rating {
-            font-size: 11px;
-            color: #ffcc00;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 3px;
-        }
-
-        .btn-download {
-            background: rgba(255, 255, 255, 0.12);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #ffffff;
-            padding: 6px 22px;
-            font-size: 13px;
-            font-weight: bold;
-            border-radius: 15px;
-            cursor: pointer;
-            width: 75%;
-            transition: all 0.2s;
-        }
-
-        .btn-download:active {
-            background: #007aff;
-            border-color: #007aff;
-        }
-
-        /* ⬇️ شريط الأزرار السفلي المحدث مثل الصورة الثانية تماماً ⬇️ */
-        .tab-bar {
-            position: fixed;
-            bottom: 25px;
-            left: 15px;
-            right: 15px;
-            height: 75px;
-            background: linear-gradient(135deg, rgba(20, 32, 69, 0.95) 0%, rgba(10, 16, 36, 0.98) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 25px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            box-shadow: 0 10px 35px rgba(0,0,0,0.6);
-            z-index: 9999;
-        }
-
-        .tab-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #7284a8;
-            text-decoration: none;
-            font-size: 11px;
-            font-weight: bold;
-            background: none;
-            border: none;
-            cursor: pointer;
-            flex: 1;
-        }
-
-        /* التحديد للأزرار النشطة */
-        .tab-item.active {
-            color: #ffffff;
-        }
-
-        /* تنسيق الأيقونات التعبيرية الملونة لتطابق الصورة */
-        .tab-icon {
-            font-size: 24px;
-            margin-bottom: 5px;
-            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.3));
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IPA Store</title>
+<style>
+body{
+    margin:0;
+    background:#f5f5f5;
+    font-family:sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+.ipa-btn{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    border:none;
+    background:#888;
+    color:white;
+    font-size:22px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 4px 10px rgba(0,0,0,.2);
+}
+.ipa-btn:hover{
+    transform:scale(1.05);
+}
+</style>
 </head>
 <body>
 
-    <!-- الجزء العلوي بعد التعديل -->
-    <div class="header">
-        <div class="brand-title">IPA</div> <!-- تم تغيير الاسم هنا -->
-        <div class="logo-area">Z</div>
-    </div>
-
-    <!-- قسم تواصل اجتماعي -->
-    <div class="section-title">تواصل اجتماعي</div>
-    
-    <div class="apps-grid">
-        <div class="app-card">
-            <img class="app-icon" src="https://upload.wikimedia.org/wikipedia/en/c/c4/Snapchat_logo.svg" alt="Snapchat">
-            <p class="app-name">Snapchat</p>
-            <div class="app-rating">★ 4.5</div>
-            <button class="btn-download" onclick="installApp('Snapchat')">تنزيل</button>
-        </div>
-
-        <div class="app-card">
-            <img class="app-icon" src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Beegram">
-            <p class="app-name">Beegram</p>
-            <div class="app-rating">★ 4.2</div>
-            <button class="btn-download" onclick="installApp('Beegram')">تنزيل</button>
-        </div>
-
-        <div class="app-card">
-            <img class="app-icon" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-            <p class="app-name">WhatsApp</p>
-            <div class="app-rating">★ 5.0</div>
-            <button class="btn-download" onclick="installApp('WhatsApp')">تنزيل</button>
-        </div>
-    </div>
-
-    <!-- قسم أفلام ومسلسلات -->
-    <div class="section-title">أفلام ومسلسلات</div>
-    
-    <div class="apps-grid">
-        <div class="app-card">
-            <img class="app-icon" src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Buz TV">
-            <p class="app-name">Buz TV</p>
-            <div class="app-rating">★ 4.5</div>
-            <button class="btn-download" onclick="installApp('Buz TV')">تنزيل</button>
-        </div>
-
-        <div class="app-card">
-            <img class="app-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Bilibili_Logo.svg" alt="Bawa">
-            <p class="app-name">Bawa</p>
-            <div class="app-rating">★ 4.4</div>
-            <button class="btn-download" onclick="installApp('Bawa')">تنزيل</button>
-        </div>
-
-        <div class="app-card">
-            <img class="app-icon" src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Anime Slayer">
-            <p class="app-name">Anime Slayer</p>
-            <div class="app-rating">★ 4.8</div>
-            <button class="btn-download" onclick="installApp('Anime Slayer')">تنزيل</button>
-        </div>
-    </div>
-
-    <!-- ⬇️ أزرار التحكم السفلية المتطابقة مع صورتك الثانية ⬇️ -->
-    <div class="tab-bar">
-        <!-- زر الإعدادات -->
-        <div class="tab-item" onclick="navigate('settings')">
-            <span class="tab-icon">⚙️</span>
-            <span>الإعدادات</span>
-        </div>
-        <!-- زر التنزيلات -->
-        <div class="tab-item" onclick="navigate('downloads')">
-            <span class="tab-icon">📥</span>
-            <span>التنزيلات</span>
-        </div>
-        <!-- زر التوقيع -->
-        <div class="tab-item" onclick="navigate('sign')">
-            <span class="tab-icon">✍️</span>
-            <span>التوقيع</span>
-        </div>
-        <!-- زر التطبيقات -->
-        <div class="tab-item" onclick="navigate('apps')">
-            <span class="tab-icon">📚</span>
-            <span>التطبيقات</span>
-        </div>
-        <!-- زر الرئيسية النشط -->
-        <div class="tab-item active" onclick="navigate('home')">
-            <span class="tab-icon">📱</span>
-            <span>الرئيسية</span>
-        </div>
-    </div>
-
-    <script>
-        function installApp(appName) {
-            alert("جاري تجهيز ملف الـ IPA لتطبيق " + appName);
-            var plistUrl = "https://yourwebsite.com/" + appName + ".plist";
-            window.location.href = "itms-services://?action=download-manifest&url=" + plistUrl;
-        }
-
-        function navigate(page) {
-            if(page === 'settings') {
-                window.open('https://t.me/R8RIJ', '_blank');
-            } else {
-                alert("أنت تتصفح قسم: " + page);
-            }
-        }
-    </script>
+<button class="ipa-btn">IPA</button>
 
 </body>
 </html>
