@@ -7,10 +7,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            /* إعدادات الزجاج البلوري السائل */
-            --glass-bg: rgba(255, 255, 255, 0.04);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-blur: blur(25px);
+            /* إعدادات ألوان الزجاج الداكن السائل المأخوذة من الفيديو بدقة */
+            --glass-card: rgba(22, 28, 54, 0.65);
+            --glass-nav: rgba(13, 17, 34, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --glass-blur: blur(35px);
         }
 
         * {
@@ -32,37 +33,37 @@
             position: relative;
         }
 
-        /* تأثير فقاعات السائل الملونة التي تسبح خلف الزجاج */
+        /* محاكاة إضاءة الزجاج السائل الخلفي المتموج */
         body::before, body::after {
             content: "";
             position: fixed;
-            width: 300px;
-            height: 300px;
+            width: 320px;
+            height: 320px;
             border-radius: 50%;
-            filter: blur(80px);
-            z-index: -1;
-            opacity: 0.4;
+            filter: blur(90px);
+            z-index: -2;
+            opacity: 0.35;
             pointer-events: none;
         }
         body::before {
-            top: -50px;
-            left: -50px;
-            background: linear-gradient(45deg, #1e40af, #3b82f6);
+            top: -40px;
+            left: -40px;
+            background: radial-gradient(circle, #1d4ed8, transparent);
         }
         body::after {
-            bottom: 50px;
-            right: -50px;
-            background: linear-gradient(45deg, #6d28d9, #a855f7);
+            bottom: 60px;
+            right: -40px;
+            background: radial-gradient(circle, #6b21a8, transparent);
         }
 
-        /* الهيدر العلوي الزجاجي الشفاف */
+        /* الهيدر العلوي الزجاجي الفخم */
         .header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             height: 60px;
-            background: rgba(5, 7, 15, 0.4);
+            background: var(--glass-nav);
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
             border-bottom: 1px solid var(--glass-border);
@@ -73,20 +74,19 @@
             z-index: 1000;
         }
 
-        /* الاسم الجديد المعدل بـ خط أصغر وأنيق */
+        /* اسم المتجر IPA بحجم صغير وأنيق */
         .header .logo {
-            font-size: 19px;
+            font-size: 18px;
             font-weight: 800;
-            letter-spacing: 1px;
-            background: linear-gradient(to left, #ffffff, #c084fc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+            opacity: 0.95;
         }
 
         .header .top-icon {
             width: 38px;
             height: 38px;
-            background: var(--glass-bg);
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--glass-border);
             border-radius: 50%;
             display: flex;
@@ -96,12 +96,14 @@
             cursor: pointer;
         }
 
-        /* شريط التصنيفات الدائري */
+        /* شريط التصنيفات الدائرية */
         .categories-wrapper {
             overflow-x: auto;
             white-space: nowrap;
             padding: 10px 15px;
             margin-bottom: 15px;
+            display: flex;
+            gap: 16px;
         }
         .categories-wrapper::-webkit-scrollbar { display: none; }
 
@@ -109,14 +111,14 @@
             display: inline-flex;
             flex-direction: column;
             align-items: center;
-            margin-left: 20px;
             cursor: pointer;
+            flex-shrink: 0;
         }
 
         .category-icon-circle {
-            width: 60px;
-            height: 60px;
-            background: var(--glass-bg);
+            width: 58px;
+            height: 58px;
+            background: var(--glass-card);
             border: 1px solid var(--glass-border);
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
@@ -124,7 +126,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 18px;
             color: #ffffff;
             margin-bottom: 6px;
             transition: all 0.2s ease;
@@ -137,72 +139,81 @@
             transform: scale(0.95);
         }
 
-        /* خط أسماء التصنيفات أصغر */
         .category-name {
             font-size: 11px;
-            font-weight: 600;
+            font-weight: 500;
             color: rgba(255, 255, 255, 0.5);
         }
         .category-item.active .category-name {
             color: #ffffff;
         }
 
-        /* أقسام المحتوى */
+        /* أقسام المحتوى والعناوين */
         .section-container {
             margin-bottom: 25px;
         }
 
-        /* خط عناوين الأقسام أصغر وأنعم */
         .section-header {
-            font-size: 17px;
+            font-size: 15px;
             font-weight: 700;
             padding: 0 20px;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             color: rgba(255, 255, 255, 0.9);
+            letter-spacing: 0.3px;
         }
 
-        /* سكرول التطبيقات */
+        /* إصلاح التوسيط الكامل للتطبيقات بشكل متناسق في منتصف الشاشة */
         .apps-scroller {
             display: flex;
             overflow-x: auto;
             padding: 5px 20px 15px 20px;
-            gap: 16px;
+            gap: 14px;
+            justify-content: flex-start;
+            align-items: center;
         }
         .apps-scroller::-webkit-scrollbar { display: none; }
 
+        /* كارت التطبيق الفاخر بتأثير الزجاج البلوري السائل المنحني */
         .app-node {
-            flex: 0 0 100px;
+            flex: 0 0 102px;
+            background: var(--glass-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 22px;
+            padding: 12px 6px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center;
+            justify-content: center;
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
         }
 
-        /* الأيقونات الدائرية المتجانسة مع السائل الخلفي */
+        /* أيقونات التطبيقات الدائرية المتناسقة تماماً في المنتصف */
         .app-img-container {
-            width: 76px;
-            height: 76px;
+            width: 66px;
+            height: 66px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #1e40af, #6d28d9);
+            background: linear-gradient(135deg, #2563eb, #6d28d9);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 30px;
+            font-size: 26px;
             color: white;
             margin-bottom: 8px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.35);
             transition: transform 0.1s ease;
         }
         .app-node:active .app-img-container {
             transform: scale(0.94);
         }
 
-        .app-node:nth-child(2n) .app-img-container { background: linear-gradient(135deg, #db2777, #7c3aed); }
-        .app-node:nth-child(3n) .app-img-container { background: linear-gradient(135deg, #d97706, #dc2626); }
+        .app-node:nth-child(2n) .app-img-container { background: linear-gradient(135deg, #ec4899, #7c3aed); }
+        .app-node:nth-child(3n) .app-img-container { background: linear-gradient(135deg, #f59e0b, #e11d48); }
 
-        /* خط اسم التطبيق أصغر وبدقة عالية */
+        /* ضبط الخطوط لتكون أصغر وأكثر دقة وجمالية */
         .app-title-text {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             color: #ffffff;
             width: 100%;
@@ -210,34 +221,37 @@
             overflow: hidden;
             text-overflow: ellipsis;
             margin-bottom: 3px;
+            text-align: center;
         }
 
-        /* خط التقييم أصغر */
         .app-rate-box {
-            font-size: 11px;
+            font-size: 10px;
             color: rgba(255, 255, 255, 0.4);
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 2px;
             margin-bottom: 10px;
         }
         .app-rate-box i { color: #fbbf24; }
 
-        /* أزرار التنزيل الزجاجية السائلة */
+        /* أزرار تنزيل ناعمة ومتناسقة وفي المنتصف تماماً */
         .action-btn {
-            background: rgba(59, 130, 246, 0.15);
-            border: 1px solid rgba(59, 130, 246, 0.35);
+            background: rgba(59, 130, 246, 0.12);
+            border: 1px solid rgba(59, 130, 246, 0.3);
             color: #60a5fa;
-            width: 100%;
-            padding: 8px 0;
-            font-size: 12px;
+            width: 85%;
+            padding: 6px 0;
+            font-size: 11px;
             font-weight: 700;
-            border-radius: 16px;
+            border-radius: 14px;
             text-decoration: none;
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
             display: block;
+            text-align: center;
             transition: all 0.2s ease;
+            cursor: pointer;
         }
         .action-btn:active {
             background: #2563eb;
@@ -245,34 +259,33 @@
             transform: scale(0.92);
         }
 
-        /* التاب بار السفلي بتأثير عزل الزجاج البلوري الكامل */
+        /* التاب بار السفلي المعزول والمطابق للفيديو الأخير */
         .tab-bar {
             position: fixed;
             bottom: 20px;
-            left: 20px;
-            right: 20px;
-            height: 68px;
-            background: rgba(5, 7, 15, 0.5);
+            left: 15px;
+            right: 15px;
+            height: 65px;
+            background: var(--glass-nav);
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
             border: 1px solid var(--glass-border);
-            border-radius: 24px;
+            border-radius: 22px;
             display: flex;
             justify-content: space-around;
             align-items: center;
             z-index: 1000;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
             padding-bottom: env(safe-area-inset-bottom);
         }
 
-        /* خطوط شريط التصفح السفلي أصغر */
         .tab-item {
             display: flex;
             flex-direction: column;
             align-items: center;
             color: rgba(255, 255, 255, 0.35);
             text-decoration: none;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             flex: 1;
             height: 100%;
@@ -280,7 +293,7 @@
         }
 
         .tab-item i {
-            font-size: 19px;
+            font-size: 18px;
             margin-bottom: 4px;
         }
 
@@ -396,6 +409,7 @@
     </div>
 
     <script>
+        // دوال تفاعلية بسيطة لتغيير الأقسام والتابات
         function selectCategory(element) {
             document.querySelectorAll('.category-item').forEach(item => item.classList.remove('active'));
             element.classList.add('active');
@@ -407,7 +421,7 @@
         }
 
         function startDownload(appName) {
-            alert('جاري التوقيع والتثبيت لـ: ' + appName);
+            alert('جاري بدء التوقيع الفوري والتثبيت لـ: ' + appName);
         }
     </script>
 </body>
