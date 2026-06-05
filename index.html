@@ -2,66 +2,176 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>متجر تطبيقاتي</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر تطبيقات iOS</title>
     <style>
+        /* تصميم الواجهة باللون المظلم (Dark Mode) العصري */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
         body {
-            background: #0a0a0a;
-            color: white;
-            font-family: Arial;
+            background-color: #0b0f19;
+            color: #ffffff;
             padding: 20px;
         }
-        .app-card {
-            background: #1e1e1e;
-            padding: 15px;
-            margin: 10px;
-            border-radius: 15px;
-            display: inline-block;
-            width: 150px;
-            text-align: center;
-            cursor: pointer;
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
         }
-        .search {
-            width: 90%;
-            padding: 10px;
-            margin: 20px;
-            border-radius: 25px;
+        /* رأس الصفحة */
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 20px 0;
+        }
+        header h1 {
+            font-size: 28px;
+            color: #2f80ed;
+            margin-bottom: 5px;
+        }
+        header p {
+            color: #707e94;
+            font-size: 14px;
+        }
+        /* شريط البحث */
+        .search-bar {
+            width: 100%;
+            padding: 12px 20px;
+            background-color: #1a2236;
+            border: 1px solid #2d3a57;
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            margin-bottom: 25px;
+            outline: none;
+        }
+        .search-bar::placeholder {
+            color: #526484;
+        }
+        /* بطاقة التطبيق */
+        .app-card {
+            display: flex;
+            align-items: center;
+            background-color: #111827;
+            border: 1px solid #1f2937;
+            padding: 15px;
+            border-radius: 16px;
+            margin-bottom: 15px;
+            transition: transform 0.2s;
+        }
+        .app-card:active {
+            transform: scale(0.98);
+        }
+        /* أيقونة التطبيق */
+        .app-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 14px;
+            object-fit: cover;
+            margin-left: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        /* تفاصيل التطبيق */
+        .app-details {
+            flex-grow: 1;
+        }
+        .app-name {
+            font-size: 16px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+        .app-version {
+            font-size: 12px;
+            color: #9ca3af;
+        }
+        /* زر التثبيت السحري للآيفون */
+        .btn-install {
+            background: linear-gradient(135deg, #2f80ed, #0056b3);
+            color: white;
             border: none;
+            padding: 8px 18px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(47, 128, 237, 0.3);
+            transition: background 0.3s;
+        }
+        .btn-install:hover {
+            background: #1b66ca;
         }
     </style>
 </head>
 <body>
 
-<center>
-    <h1>📱 متجر IPA</h1>
-    <input type="text" id="search" class="search" placeholder="🔍 بحث..." onkeyup="searchApps()">
-    <div id="appsList"></div>
-</center>
+<div class="container">
+    <header>
+        <h1>متجر تطبيقات بلس</h1>
+        <p>تطبيقات iOS المعدلة والموقعة مجاناً</p>
+    </header>
+
+    <input type="text" class="search-bar" id="search" placeholder="ابحث عن تطبيقك المفضل..." onkeyup="filterApps()">
+
+    <div id="apps-list">
+        
+        <div class="app-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Instagram" class="app-icon">
+            <div class="app-details">
+                <div class="app-name">إنستغرام بلس</div>
+                <div class="app-version">إصدار: v315.0 • IPA</div>
+            </div>
+            <button class="btn-install" onclick="installApp('https://yourwebsite.com/instagram.plist')">تثبيت</button>
+        </div>
+
+        <div class="app-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube" class="app-icon">
+            <div class="app-details">
+                <div class="app-name">يوتيوب فانسد iOS</div>
+                <div class="app-version">إصدار: v19.02 • IPA</div>
+            </div>
+            <button class="btn-install" onclick="installApp('https://yourwebsite.com/youtube.plist')">تثبيت</button>
+        </div>
+
+        <div class="app-card">
+            <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" alt="TikTok" class="app-icon">
+            <div class="app-details">
+                <div class="app-name">تيك توك ميوزك بلس</div>
+                <div class="app-version">إصدار: v33.1 • IPA</div>
+            </div>
+            <button class="btn-install" onclick="installApp('https://yourwebsite.com/tiktok.plist')">تثبيت</button>
+        </div>
+
+    </div>
+</div>
 
 <script>
-    const apps = [
-        { name: "WhatsApp Gold", link: "#", icon: "💛" },
-        { name: "Telegram Dark", link: "#", icon: "🌙" },
-        { name: "Instagram DL", link: "#", icon: "📸" }
-    ];
+    // 1. كود تشغيل التثبيت الفوري للآيفون
+    function installApp(plistUrl) {
+        alert("تنبيه: سيتم توجيهك الآن لتثبيت التطبيق على جهازك.");
+        // الكود البرمجي الذي يجبر نظام iOS على فتح نافذة التثبيت الرسمية
+        window.location.href = "itms-services://?action=download-manifest&url=" + plistUrl;
+    }
 
-    function showApps(list) {
-        let html = "";
-        for(let app of list) {
-            html += `<div class="app-card" onclick="window.open('${app.link}','_blank')">
-                        <div style="font-size:40px">${app.icon}</div>
-                        <div>${app.name}</div>
-                    </div>`;
+    // 2. كود محرك البحث السريع لتصفية التطبيقات أثناء الكتابة
+    function filterApps() {
+        var input = document.getElementById('search');
+        var filter = input.value.toLowerCase();
+        var appsList = document.getElementById('apps-list');
+        var cards = appsList.getElementsByClassName('app-card');
+
+        for (var i = 0; i < cards.length; i++) {
+            var appName = cards[i].getElementsByClassName('app-name')[0];
+            if (appName.innerHTML.toLowerCase().indexOf(filter) > -1) {
+                cards[i].style.display = "";
+            } else {
+                cards[i].style.display = "none";
+            }
         }
-        document.getElementById("appsList").innerHTML = html;
     }
-
-    function searchApps() {
-        let searchWord = document.getElementById("search").value.toLowerCase();
-        let filtered = apps.filter(app => app.name.toLowerCase().includes(searchWord));
-        showApps(filtered);
-    }
-
-    showApps(apps);
 </script>
 
 </body>
