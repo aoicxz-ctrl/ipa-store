@@ -2,177 +2,279 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر تطبيقات iOS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Zsign IPA</title>
     <style>
-        /* تصميم الواجهة باللون المظلم (Dark Mode) العصري */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
+        /* التنسيق العام المتدرج مثل الصورة */
         body {
-            background-color: #0b0f19;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(180deg, #0f1c3f 0%, #070b19 100%);
+            background-attachment: fixed;
             color: #ffffff;
-            padding: 20px;
-        }
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-        }
-        /* رأس الصفحة */
-        header {
+            margin: 0;
+            padding: 20px 15px 120px 15px; /* مسافة في الأسفل للشريط السفلي */
             text-align: center;
-            margin-bottom: 25px;
-            padding: 20px 0;
+            user-select: none;
+            -webkit-user-select: none;
         }
-        header h1 {
-            font-size: 28px;
-            color: #2f80ed;
-            margin-bottom: 5px;
+
+        /* هيدر الموقع العلوي */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 10px 5px;
         }
-        header p {
-            color: #707e94;
-            font-size: 14px;
-        }
-        /* شريط البحث */
-        .search-bar {
-            width: 100%;
-            padding: 12px 20px;
-            background-color: #1a2236;
-            border: 1px solid #2d3a57;
-            border-radius: 12px;
-            color: white;
-            font-size: 16px;
-            margin-bottom: 25px;
-            outline: none;
-        }
-        .search-bar::placeholder {
-            color: #526484;
-        }
-        /* بطاقة التطبيق */
-        .app-card {
+
+        .logo-area {
+            width: 55px;
+            height: 55px;
+            background: radial-gradient(circle, #2a3c6d 0%, #111a36 100%);
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            background-color: #111827;
-            border: 1px solid #1f2937;
-            padding: 15px;
-            border-radius: 16px;
-            margin-bottom: 15px;
-            transition: transform 0.2s;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(0, 122, 255, 0.3);
+            border: 1px solid #3a4f85;
+            font-size: 24px;
+            font-weight: bold;
+            font-style: italic;
+            color: #ffffff;
         }
-        .app-card:active {
-            transform: scale(0.98);
+
+        .brand-title {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 8px 30px;
+            border-radius: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            letter-spacing: 0.5px;
         }
-        /* أيقونة التطبيق */
+
+        /* أقسام التصنيفات */
+        .section-title {
+            text-align: right;
+            font-size: 22px;
+            font-weight: bold;
+            margin: 25px 10px 15px 10px;
+            color: #ffffff;
+        }
+
+        /* شبكة عرض التطبيقات الطولية مثل الصورة */
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            padding: 5px;
+        }
+
+        /* كرت التطبيق الدائري الطولي */
+        .app-card {
+            background: linear-gradient(135deg, rgba(40, 59, 114, 0.4) 0%, rgba(16, 25, 53, 0.6) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 45px; /* انحناء دائري كبير من الأعلى والأسفل */
+            padding: 20px 10px 15px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        /* أيقونة التطبيق الدائرية الملونة */
         .app-icon {
             width: 65px;
             height: 65px;
-            border-radius: 14px;
+            border-radius: 50%; /* دائرية بالكامل مثل الصورة */
+            margin-bottom: 12px;
             object-fit: cover;
-            margin-left: 15px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
-        /* تفاصيل التطبيق */
-        .app-details {
-            flex-grow: 1;
-        }
+
         .app-name {
-            font-size: 16px;
-            font-weight: bold;
-            color: #ffffff;
-            margin-bottom: 4px;
-        }
-        .app-version {
-            font-size: 12px;
-            color: #9ca3af;
-        }
-        /* زر التثبيت السحري للآيفون */
-        .btn-install {
-            background: linear-gradient(135deg, #2f80ed, #0056b3);
-            color: white;
-            border: none;
-            padding: 8px 18px;
             font-size: 14px;
             font-weight: bold;
-            border-radius: 20px;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(47, 128, 237, 0.3);
-            transition: background 0.3s;
+            margin: 0 0 5px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
         }
-        .btn-install:hover {
-            background: #1b66ca;
+
+        /* التقييم بالنجوم */
+        .app-rating {
+            font-size: 11px;
+            color: #ffcc00;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        /* زر التنزيل البيضاوي */
+        .btn-download {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            padding: 6px 22px;
+            font-size: 13px;
+            font-weight: bold;
+            border-radius: 15px;
+            cursor: pointer;
+            width: 70%;
+            transition: all 0.2s;
+        }
+
+        .btn-download:active {
+            background: #007aff;
+            border-color: #007aff;
+        }
+
+        /* المربع الأسفل (شريط التنقل السفلي الثابت) */
+        .tab-bar {
+            position: fixed;
+            bottom: 25px;
+            left: 15px;
+            right: 15px;
+            height: 75px;
+            background: linear-gradient(135deg, rgba(29, 44, 87, 0.8) 0%, rgba(13, 20, 43, 0.9) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 9999;
+        }
+
+        /* أزرار الشريط السفلي */
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #8e8e93;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 500;
+            background: none;
+            border: none;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        /* الزر النشط (الرئيسية) باللون الأبيض والأزرق */
+        .tab-item.active {
+            color: #ffffff;
+        }
+
+        .tab-icon {
+            font-size: 22px;
+            margin-bottom: 4px;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <h1>متجر تطبيقات بلس</h1>
-        <p>تطبيقات iOS المعدلة والموقعة مجاناً</p>
-    </header>
-
-    <input type="text" class="search-bar" id="search" placeholder="ابحث عن تطبيقك المفضل..." onkeyup="filterApps()">
-
-    <div id="apps-list">
-        
-        <div class="app-card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Instagram" class="app-icon">
-            <div class="app-details">
-                <div class="app-name">إنستغرام بلس</div>
-                <div class="app-version">إصدار: v315.0 • IPA</div>
-            </div>
-            <button class="btn-install" onclick="installApp('https://yourwebsite.com/instagram.plist')">تثبيت</button>
-        </div>
-
-        <div class="app-card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube" class="app-icon">
-            <div class="app-details">
-                <div class="app-name">يوتيوب فانسد iOS</div>
-                <div class="app-version">إصدار: v19.02 • IPA</div>
-            </div>
-            <button class="btn-install" onclick="installApp('https://yourwebsite.com/youtube.plist')">تثبيت</button>
-        </div>
-
-        <div class="app-card">
-            <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" alt="TikTok" class="app-icon">
-            <div class="app-details">
-                <div class="app-name">تيك توك ميوزك بلس</div>
-                <div class="app-version">إصدار: v33.1 • IPA</div>
-            </div>
-            <button class="btn-install" onclick="installApp('https://yourwebsite.com/tiktok.plist')">تثبيت</button>
-        </div>
-
+    <div class="header">
+        <div class="brand-title">Zsign</div>
+        <div class="logo-area">Z</div>
     </div>
-</div>
 
-<script>
-    // 1. كود تشغيل التثبيت الفوري للآيفون
-    function installApp(plistUrl) {
-        alert("تنبيه: سيتم توجيهك الآن لتثبيت التطبيق على جهازك.");
-        // الكود البرمجي الذي يجبر نظام iOS على فتح نافذة التثبيت الرسمية
-        window.location.href = "itms-services://?action=download-manifest&url=" + plistUrl;
-    }
+    <div class="section-title">تواصل اجتماعي</div>
+    
+    <div class="apps-grid">
+        <div class="app-card">
+            <img class="app-icon" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+            <p class="app-name">WhatsApp</p>
+            <div class="app-rating">★ 5.0</div>
+            <button class="btn-download" onclick="installApp('WhatsApp')">تنزيل</button>
+        </div>
 
-    // 2. كود محرك البحث السريع لتصفية التطبيقات أثناء الكتابة
-    function filterApps() {
-        var input = document.getElementById('search');
-        var filter = input.value.toLowerCase();
-        var appsList = document.getElementById('apps-list');
-        var cards = appsList.getElementsByClassName('app-card');
+        <div class="app-card">
+            <img class="app-icon" src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Beegram">
+            <p class="app-name">Beegram</p>
+            <div class="app-rating">★ 4.2</div>
+            <button class="btn-download" onclick="installApp('Beegram')">تنزيل</button>
+        </div>
 
-        for (var i = 0; i < cards.length; i++) {
-            var appName = cards[i].getElementsByClassName('app-name')[0];
-            if (appName.innerHTML.toLowerCase().indexOf(filter) > -1) {
-                cards[i].style.display = "";
+        <div class="app-card">
+            <img class="app-icon" src="https://upload.wikimedia.org/wikipedia/en/c/c4/Snapchat_logo.svg" alt="Snapchat">
+            <p class="app-name">Snapchat</p>
+            <div class="app-rating">★ 4.5</div>
+            <button class="btn-download" onclick="installApp('Snapchat')">تنزيل</button>
+        </div>
+    </div>
+
+    <div class="section-title">أفلام ومسلسلات</div>
+    
+    <div class="apps-grid">
+        <div class="app-card">
+            <img class="app-icon" src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Anime Slayer">
+            <p class="app-name">Anime Slayer</p>
+            <div class="app-rating">★ 4.8</div>
+            <button class="btn-download" onclick="installApp('Anime Slayer')">تنزيل</button>
+        </div>
+
+        <div class="app-card">
+            <img class="app-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Bilibili_Logo.svg" alt="Bawa">
+            <p class="app-name">Bawa</p>
+            <div class="app-rating">★ 4.4</div>
+            <button class="btn-download" onclick="installApp('Bawa')">تنزيل</button>
+        </div>
+
+        <div class="app-card">
+            <img class="app-icon" src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Buz TV">
+            <p class="app-name">Buz TV</p>
+            <div class="app-rating">★ 4.5</div>
+            <button class="btn-download" onclick="installApp('Buz TV')">تنزيل</button>
+        </div>
+    </div>
+
+    <div class="tab-bar">
+        <div class="tab-item" onclick="navigate('settings')">
+            <span class="tab-icon">⚙️</span>
+            <span>الإعدادات</span>
+        </div>
+        <div class="tab-item" onclick="navigate('downloads')">
+            <span class="tab-icon">📥</span>
+            <span>التنزيلات</span>
+        </div>
+        <div class="tab-item" onclick="navigate('sign')">
+            <span class="tab-icon">✍️</span>
+            <span>التوقيع</span>
+        </div>
+        <div class="tab-item" onclick="navigate('apps')">
+            <span class="tab-icon">📚</span>
+            <span>التطبيقات</span>
+        </div>
+        <div class="tab-item active" onclick="navigate('home')">
+            <span class="tab-icon">📱</span>
+            <span>الرئيسية</span>
+        </div>
+    </div>
+
+    <script>
+        function installApp(appName) {
+            alert("جاري بدء تثبيت تطبيق " + appName + " عبر متجر Zsign...");
+            // هنا يمكنك مستقبلاً إضافة روابط الـ plist لكل تطبيق
+            var plistUrl = "https://yourwebsite.com/" + appName + ".plist";
+            window.location.href = "itms-services://?action=download-manifest&url=" + plistUrl;
+        }
+
+        function navigate(page) {
+            if(page === 'settings') {
+                // تحويل المستخدم لقناتك التليجرام عند الضغط على الإعدادات كمثال للتواصل
+                window.open('https://t.me/R8RIJ', '_blank');
             } else {
-                cards[i].style.display = "none";
+                alert("تم الضغط على قسم: " + page);
             }
         }
-    }
-</script>
+    </script>
 
 </body>
 </html>
