@@ -3,84 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>ZSign Store</title>
+    <title>IPA Store</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --glass-bg: rgba(255, 255, 255, 0.07);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --glass-blur: blur(30px);
+            /* إعدادات الزجاج البلوري السائل */
+            --glass-bg: rgba(255, 255, 255, 0.04);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-blur: blur(25px);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             -webkit-tap-highlight-color: transparent;
             user-select: none;
         }
 
         body {
-            background-color: #090c15;
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.35) 0px, transparent 60%),
-                radial-gradient(at 100% 100%, rgba(124, 58, 237, 0.3) 0px, transparent 60%);
-            background-attachment: fixed;
+            background-color: #05070f;
             color: #ffffff;
-            padding-top: 85px; /* مسافة للهيدر العلوي */
-            padding-bottom: 120px; /* مسافة للتاب بار السفلي الكبيير */
+            padding-top: 75px;
+            padding-bottom: 110px;
             min-height: 100vh;
             overflow-x: hidden;
-            -webkit-overflow-scrolling: touch;
+            position: relative;
         }
 
-        /* هيدر علوي متناسق وضخم المنافذ */
+        /* تأثير فقاعات السائل الملونة التي تسبح خلف الزجاج */
+        body::before, body::after {
+            content: "";
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+        body::before {
+            top: -50px;
+            left: -50px;
+            background: linear-gradient(45deg, #1e40af, #3b82f6);
+        }
+        body::after {
+            bottom: 50px;
+            right: -50px;
+            background: linear-gradient(45deg, #6d28d9, #a855f7);
+        }
+
+        /* الهيدر العلوي الزجاجي الشفاف */
         .header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            height: 70px;
-            background: rgba(9, 12, 21, 0.5);
+            height: 60px;
+            background: rgba(5, 7, 15, 0.4);
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
             border-bottom: 1px solid var(--glass-border);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 25px;
+            padding: 0 20px;
             z-index: 1000;
         }
 
+        /* الاسم الجديد المعدل بـ خط أصغر وأنيق */
         .header .logo {
-            font-size: 22px;
+            font-size: 19px;
             font-weight: 800;
-            letter-spacing: 0.5px;
-            background: linear-gradient(to left, #fff, #a78bfa);
+            letter-spacing: 1px;
+            background: linear-gradient(to left, #ffffff, #c084fc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .header .top-icon {
-            width: 44px;
-            height: 44px;
+            width: 38px;
+            height: 38px;
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
+            font-size: 14px;
             cursor: pointer;
         }
 
-        /* تصنيفات علوية دائرية بحجم ممتاز للضغط */
+        /* شريط التصنيفات الدائري */
         .categories-wrapper {
             overflow-x: auto;
             white-space: nowrap;
-            padding: 10px 20px;
-            margin-bottom: 25px;
+            padding: 10px 15px;
+            margin-bottom: 15px;
         }
         .categories-wrapper::-webkit-scrollbar { display: none; }
 
@@ -88,13 +109,13 @@
             display: inline-flex;
             flex-direction: column;
             align-items: center;
-            margin-left: 22px;
+            margin-left: 20px;
             cursor: pointer;
         }
 
         .category-icon-circle {
-            width: 68px;
-            height: 68px;
+            width: 60px;
+            height: 60px;
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
             backdrop-filter: var(--glass-blur);
@@ -103,23 +124,24 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 20px;
             color: #ffffff;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             transition: all 0.2s ease;
         }
 
         .category-item:active .category-icon-circle,
         .category-item.active .category-icon-circle {
             background: #ffffff;
-            color: #090c15;
+            color: #05070f;
             transform: scale(0.95);
         }
 
+        /* خط أسماء التصنيفات أصغر */
         .category-name {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.5);
         }
         .category-item.active .category-name {
             color: #ffffff;
@@ -127,143 +149,139 @@
 
         /* أقسام المحتوى */
         .section-container {
-            margin-bottom: 35px;
+            margin-bottom: 25px;
         }
 
+        /* خط عناوين الأقسام أصغر وأنعم */
         .section-header {
-            font-size: 22px;
-            font-weight: 800;
-            padding: 0 24px;
-            margin-bottom: 18px;
-            color: #ffffff;
+            font-size: 17px;
+            font-weight: 700;
+            padding: 0 20px;
+            margin-bottom: 12px;
+            color: rgba(255, 255, 255, 0.9);
         }
 
-        /* سكرول أفقي للتطبيقات */
+        /* سكرول التطبيقات */
         .apps-scroller {
             display: flex;
             overflow-x: auto;
-            padding: 5px 24px 20px 24px;
-            gap: 20px;
+            padding: 5px 20px 15px 20px;
+            gap: 16px;
         }
         .apps-scroller::-webkit-scrollbar { display: none; }
 
-        /* كارت التطبيق - أبعاد أكبر ومريحة للعين */
         .app-node {
-            flex: 0 0 115px;
+            flex: 0 0 100px;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
         }
 
-        /* الأيقونة مطابقة لحجم الفيديو تماماً */
+        /* الأيقونات الدائرية المتجانسة مع السائل الخلفي */
         .app-img-container {
-            width: 85px;
-            height: 85px;
+            width: 76px;
+            height: 76px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            background: linear-gradient(135deg, #1e40af, #6d28d9);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 36px;
+            font-size: 30px;
             color: white;
-            margin-bottom: 10px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            margin-bottom: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
             transition: transform 0.1s ease;
         }
         .app-node:active .app-img-container {
-            transform: scale(0.93);
+            transform: scale(0.94);
         }
 
-        .app-node:nth-child(2n) .app-img-container { background: linear-gradient(135deg, #ec4899, #8b5cf6); }
-        .app-node:nth-child(3n) .app-img-container { background: linear-gradient(135deg, #f59e0b, #e11d48); }
+        .app-node:nth-child(2n) .app-img-container { background: linear-gradient(135deg, #db2777, #7c3aed); }
+        .app-node:nth-child(3n) .app-img-container { background: linear-gradient(135deg, #d97706, #dc2626); }
 
+        /* خط اسم التطبيق أصغر وبدقة عالية */
         .app-title-text {
-            font-size: 14px;
-            font-weight: 700;
+            font-size: 12px;
+            font-weight: 600;
             color: #ffffff;
             width: 100%;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
 
+        /* خط التقييم أصغر */
         .app-rate-box {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.5);
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.4);
             display: flex;
             align-items: center;
-            gap: 3px;
-            margin-bottom: 12px;
+            gap: 2px;
+            margin-bottom: 10px;
         }
-        .app-rate-box i { color: #f59e0b; }
+        .app-rate-box i { color: #fbbf24; }
 
-        /* زر التنزيل - عريض وكبير جداً ومناسب للمس والضغط الفوري */
+        /* أزرار التنزيل الزجاجية السائلة */
         .action-btn {
-            background: rgba(37, 99, 235, 0.2);
-            border: 1px solid rgba(59, 130, 246, 0.5);
+            background: rgba(59, 130, 246, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.35);
             color: #60a5fa;
             width: 100%;
-            padding: 10px 0;
-            font-size: 14px;
-            font-weight: 800;
-            border-radius: 20px;
+            padding: 8px 0;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 16px;
             text-decoration: none;
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
             display: block;
             transition: all 0.2s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
-        .action-btn:transparent { background: rgba(37, 99, 235, 0.4); }
         .action-btn:active {
             background: #2563eb;
             color: #ffffff;
-            transform: scale(0.9);
+            transform: scale(0.92);
         }
 
-        /* القائمة السفلية الزجاجية الكبيرة المتطابقة مع التطبيقات الرسمية */
+        /* التاب بار السفلي بتأثير عزل الزجاج البلوري الكامل */
         .tab-bar {
             position: fixed;
-            bottom: 25px;
+            bottom: 20px;
             left: 20px;
             right: 20px;
-            height: 75px;
-            background: rgba(9, 12, 21, 0.6);
+            height: 68px;
+            background: rgba(5, 7, 15, 0.5);
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
             border: 1px solid var(--glass-border);
-            border-radius: 28px;
+            border-radius: 24px;
             display: flex;
             justify-content: space-around;
             align-items: center;
             z-index: 1000;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-            padding-bottom: env(safe-area-inset-bottom); /* حماية شريط الايفون السفلي السحب */
+            box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+            padding-bottom: env(safe-area-inset-bottom);
         }
 
+        /* خطوط شريط التصفح السفلي أصغر */
         .tab-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.35);
             text-decoration: none;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
-            transition: all 0.2s ease;
             flex: 1;
             height: 100%;
             justify-content: center;
         }
 
         .tab-item i {
-            font-size: 22px;
-            margin-bottom: 5px;
-        }
-
-        .tab-item:active {
-            transform: scale(0.9);
+            font-size: 19px;
+            margin-bottom: 4px;
         }
 
         .tab-item.active {
@@ -275,7 +293,7 @@
 
     <div class="header">
         <div class="top-icon" onclick="alert('البحث قادم قريباً!')"><i class="fas fa-search"></i></div>
-        <div class="logo">ZSign</div>
+        <div class="logo">IPA</div>
         <div class="top-icon" onclick="location.reload()"><i class="fas fa-redo-alt"></i></div>
     </div>
 
@@ -295,10 +313,6 @@
         <div class="category-item" onclick="selectCategory(this)">
             <div class="category-icon-circle"><i class="fas fa-gamepad"></i></div>
             <div class="category-name">الألعاب</div>
-        </div>
-        <div class="category-item" onclick="selectCategory(this)">
-            <div class="category-icon-circle"><i class="fas fa-paint-brush"></i></div>
-            <div class="category-name">التصميم</div>
         </div>
     </div>
 
@@ -393,8 +407,7 @@
         }
 
         function startDownload(appName) {
-            alert('جاري بدء عملية التوقيع والتنزيل لتطبيق: ' + appName);
-            // هنا يمكنك مستقبلاً وضع كود التثبيت المباشر itms-services
+            alert('جاري التوقيع والتثبيت لـ: ' + appName);
         }
     </script>
 </body>
