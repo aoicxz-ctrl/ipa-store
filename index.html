@@ -2,336 +2,540 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>IPA Store V3.0 | نظام إدارة متكامل</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>متجر تطبيقات الـ IPA | عباس</title>
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* نفس الأنماط السابقة مع إضافة تنسيق للوحة التحكم */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; }
-        body { background: linear-gradient(145deg, #1a1f2e 0%, #0c0f1a 100%); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
-        .glass-card { background: rgba(20, 25, 40, 0.55); backdrop-filter: blur(18px); border-radius: 48px; border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 25px 45px rgba(0,0,0,0.3); padding: 24px 28px; transition: 0.2s; }
-        .container { max-width: 550px; width: 100%; margin: 0 auto; }
-        .store-header { text-align: center; margin-bottom: 28px; }
-        .store-header h1 { font-size: 34px; font-weight: 800; background: linear-gradient(135deg, #fff, #a0c0ff, #6c9eff); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .store-header p { color: rgba(255,255,255,0.8); font-size: 14px; margin-top: 12px; }
-        .action-buttons { display: flex; justify-content: space-between; gap: 12px; margin: 24px 0 20px; }
-        .glass-btn { background: rgba(255,255,255,0.1); backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.2); border-radius: 60px; padding: 12px 0; text-align: center; flex: 1; font-weight: 600; font-size: 15px; color: white; cursor: pointer; transition: 0.15s; display: flex; flex-direction: column; align-items: center; gap: 6px; }
-        .apps-count { background: rgba(108, 158, 255, 0.2); border-radius: 60px; padding: 12px 20px; text-align: center; margin: 10px 0 24px; border: 1px solid rgba(108,158,255,0.3); }
-        .apps-count .number { font-size: 42px; font-weight: 800; color: #6c9eff; }
-        .search-bar { background: rgba(255,255,255,0.1); backdrop-filter: blur(4px); border-radius: 60px; padding: 12px 20px; display: flex; align-items: center; gap: 12px; border: 1px solid rgba(255,255,255,0.15); margin-bottom: 20px; }
-        .search-bar input { flex: 1; background: transparent; border: none; outline: none; color: white; font-size: 16px; }
-        .search-bar input::placeholder { color: rgba(255,255,255,0.5); }
-        .categories { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 20px; }
-        .cat-item { background: rgba(255,255,255,0.08); border-radius: 40px; padding: 8px 20px; font-size: 15px; color: rgba(255,255,255,0.8); cursor: pointer; border: 1px solid rgba(255,255,255,0.1); transition: 0.1s; white-space: nowrap; }
-        .cat-item.active { background: #6c9eff; color: white; border-color: #6c9eff; }
-        .apps-list { max-height: 380px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
-        .app-item { background: rgba(30, 35, 55, 0.6); backdrop-filter: blur(8px); border-radius: 28px; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.08); }
-        .app-info { display: flex; align-items: center; gap: 14px; }
-        .app-icon { width: 48px; height: 48px; background: rgba(255,255,255,0.1); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 28px; }
-        .app-details h4 { color: white; font-size: 18px; font-weight: 600; }
-        .app-details p { color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 4px; }
-        .download-btn, .delete-app { background: rgba(108, 158, 255, 0.8); border-radius: 40px; padding: 8px 16px; color: white; font-weight: 600; font-size: 13px; cursor: pointer; border: none; margin-right: 6px; }
-        .delete-app { background: rgba(220, 60, 60, 0.8); }
-        .toast-msg { position: fixed; bottom: 30px; left: 20px; right: 20px; background: rgba(0,0,0,0.8); backdrop-filter: blur(20px); color: white; padding: 12px 20px; border-radius: 60px; text-align: center; z-index: 1000; opacity: 0; transition: 0.2s; pointer-events: none; }
-        .admin-panel { position: fixed; top: 20px; left: 20px; background: rgba(0,0,0,0.7); backdrop-filter: blur(12px); border-radius: 40px; padding: 10px 18px; z-index: 1100; display: flex; gap: 12px; border: 1px solid rgba(255,255,255,0.2); }
-        .admin-btn { background: #6c9eff; border: none; color: white; padding: 8px 16px; border-radius: 30px; cursor: pointer; font-weight: bold; }
-        .admin-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 2000; display: flex; align-items: center; justify-content: center; visibility: hidden; opacity: 0; transition: 0.2s; }
-        .admin-modal.active { visibility: visible; opacity: 1; }
-        .modal-content { background: #1e2435; border-radius: 48px; max-width: 500px; width: 90%; padding: 24px; color: white; max-height: 80vh; overflow-y: auto; }
-        .modal-content input, .modal-content select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 30px; border: none; background: #2d3348; color: white; }
-        .modal-content button { margin-top: 12px; }
-        .close-modal { float: left; font-size: 28px; cursor: pointer; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            transition: background-color 0.3s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+
+        /* الوضع الفاتح (النهاري) - افتراضي */
+        :root {
+            --bg-body: #f5f7fb;
+            --card-bg: #ffffff;
+            --text-primary: #1a1e2b;
+            --text-secondary: #2c3e66;
+            --border-light: #eef2f6;
+            --border-card: #edf2f8;
+            --badge-bg: #eef2ff;
+            --badge-text: #1e40af;
+            --btn-bg: #2563eb;
+            --btn-hover: #1d4ed8;
+            --input-bg: #ffffff;
+            --input-border: #e2e8f0;
+            --desc-bg: #f8fafc;
+            --feature-bg: #f1f5f9;
+            --footer-text: #5b6e8c;
+            --shadow-sm: 0 8px 24px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.02);
+            --notify-bg: #fefce8;
+        }
+
+        /* الوضع الليلي */
+        body.dark {
+            --bg-body: #121826;
+            --card-bg: #1e2435;
+            --text-primary: #eef2ff;
+            --text-secondary: #b9c7d9;
+            --border-light: #2a2f42;
+            --border-card: #2d3348;
+            --badge-bg: #2d3748;
+            --badge-text: #6c9eff;
+            --btn-bg: #3b82f6;
+            --btn-hover: #2563eb;
+            --input-bg: #2a2f42;
+            --input-border: #3f465e;
+            --desc-bg: #151c2b;
+            --feature-bg: #1a1f2e;
+            --footer-text: #8f9bb3;
+            --shadow-sm: 0 8px 24px rgba(0,0,0,0.2);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
+            --notify-bg: #2d2a1e;
+        }
+
+        body {
+            background: var(--bg-body);
+            color: var(--text-primary);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* زر تبديل الوضع في أعلى اليمين */
+        .theme-switch {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 60px;
+            padding: 10px 16px;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            backdrop-filter: blur(4px);
+            transition: 0.2s;
+        }
+        .theme-switch i {
+            font-size: 20px;
+            color: #fbbf24;
+        }
+        body.dark .theme-switch i {
+            color: #94a3b8;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 32px;
+            padding: 24px 28px;
+            margin-bottom: 28px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+        }
+
+        .notify-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--notify-bg);
+            border-right: 5px solid #eab308;
+        }
+        .notify-title {
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .mute-icon {
+            color: #6b7280;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .badge-group {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin: 16px 0 8px;
+        }
+        .badge {
+            background: var(--badge-bg);
+            color: var(--badge-text);
+            padding: 8px 18px;
+            border-radius: 60px;
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .store-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+        .stats {
+            background: var(--badge-bg);
+            padding: 8px 20px;
+            border-radius: 60px;
+            font-weight: 700;
+            color: var(--badge-text);
+        }
+
+        .search-box {
+            background: var(--card-bg);
+            border-radius: 80px;
+            padding: 10px 22px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid var(--border-light);
+            margin-bottom: 28px;
+        }
+        .search-box i {
+            color: var(--text-secondary);
+        }
+        .search-box input {
+            flex: 1;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: 16px;
+            color: var(--text-primary);
+        }
+        .search-box input::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 22px;
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
+        .app-card {
+            background: var(--card-bg);
+            border-radius: 28px;
+            padding: 20px;
+            border: 1px solid var(--border-card);
+            box-shadow: var(--shadow-md);
+        }
+        .app-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .app-desc {
+            background: var(--desc-bg);
+            padding: 12px 14px;
+            border-radius: 24px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.45;
+            margin: 12px 0;
+        }
+        .feature-text {
+            margin-top: 8px;
+            font-size: 13px;
+            background: var(--feature-bg);
+            border-radius: 18px;
+            padding: 8px 12px;
+            color: var(--text-primary);
+        }
+        .install-btn {
+            background: var(--btn-bg);
+            color: white;
+            border: none;
+            padding: 8px 22px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.15s;
+            margin-top: 8px;
+            float: left;
+        }
+        .install-btn:hover {
+            background: var(--btn-hover);
+            transform: scale(0.97);
+        }
+
+        .method-step {
+            background: var(--desc-bg);
+            border-radius: 26px;
+            padding: 18px 22px;
+            margin-top: 20px;
+            border: 1px solid var(--border-light);
+        }
+
+        .request-form input, .request-form textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 60px;
+            border: 1px solid var(--input-border);
+            background: var(--input-bg);
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+        .request-form textarea {
+            border-radius: 28px;
+            resize: vertical;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 45px;
+            padding: 18px;
+            font-size: 13px;
+            color: var(--footer-text);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .btn-submit {
+            background: var(--btn-bg);
+            width: 100%;
+            justify-content: center;
+            padding: 14px;
+            font-size: 16px;
+        }
+
+        .toast-msg {
+            position: fixed;
+            bottom: 30px;
+            left: 20px;
+            right: 20px;
+            background: #1e293b;
+            color: white;
+            padding: 14px 20px;
+            border-radius: 60px;
+            text-align: center;
+            font-weight: 500;
+            z-index: 1000;
+            opacity: 0;
+            transition: 0.2s;
+            pointer-events: none;
+            backdrop-filter: blur(12px);
+            background: rgba(0,0,0,0.85);
+        }
+        @media (max-width: 700px) {
+            .card { padding: 18px; }
+            .app-title { font-size: 1.2rem; }
+            .theme-switch { padding: 6px 12px; top: 0; left: 0; }
+            .container { padding-top: 50px; }
+        }
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="glass-card">
+    <!-- زر تبديل الوضع الليلي والنهاري في أعلى الشاشة -->
+    <div class="theme-switch" id="themeToggle">
+        <i class="fas fa-moon"></i> 
+        <span>الوضع الليلي</span>
+    </div>
+
+    <!-- 🔔 التحديثات والإشعارات -->
+    <div class="card notify-bar">
+        <div class="notify-title">
+            <i class="fas fa-bell" style="color:#eab308;"></i>
+            <span>🔔 التحديثات والإشعارات</span>
+        </div>
+        <div class="mute-icon" id="muteNotifyBtn">
+            <i class="fas fa-volume-off"></i> 🔕
+        </div>
+    </div>
+    <div class="card" id="noNoticeCard" style="display: flex; justify-content: space-between;">
+        <span>📭 لا توجد إشعارات جديدة</span>
+        <i class="fas fa-check-circle" style="color:#22c55e;"></i>
+    </div>
+
+    <!-- رأس المتجر مع العداد -->
+    <div class="card">
         <div class="store-header">
-            <h1>IPA Store <span style="font-size: 20px;">V3.0</span></h1>
-            <p><strong>IPA</strong> متجر تطبيقات الـ</p>
-            <p>حمّل ملفات IPA في جهازك وثبّتها باستخدام برنامج Ksign أو Gbox أو بوتات التثبيت باستخدام شهادتك الخاصة.</p>
+            <h1 style="font-size: 28px;">📱 متجر تطبيقات الـ IPA</h1>
+            <div class="stats"><i class="fas fa-database"></i> 215 تطبيق</div>
         </div>
-        <div class="action-buttons">
-            <div class="glass-btn" data-action="cert"> <i class="fas fa-ticket-alt"></i> <span>شراء شهادة</span> </div>
-            <div class="glass-btn" data-action="howto"> <i class="fas fa-question-circle"></i> <span>شلون أثبت<br>هذي التطبيقات؟</span> </div>
-            <div class="glass-btn" data-action="request"> <i class="fas fa-gamepad"></i> <span>اطلب تطبيق<br>أو لعبة</span> </div>
+        <p style="margin: 12px 0 6px; color: var(--text-secondary);">حمّل ملفات IPA في جهازك وثبّتها باستخدام برنامج Ksign أو Gbox أو بوتات التثبيت باستخدام شهادتك الخاصة.</p>
+        <div class="badge-group">
+            <div class="badge" data-action="request"><i class="fas fa-gamepad"></i> 🎮 اطلب تطبيق</div>
+            <div class="badge" data-action="howto"><i class="fas fa-question-circle"></i> شلون أثبت هذي التطبيقات؟</div>
+            <div class="badge" data-action="cert"><i class="fas fa-ticket-alt"></i> شراء شهادة</div>
         </div>
-        <div class="apps-count"> <div class="number" id="appsCount">0</div> <div class="label">تطبيق</div> </div>
-        <div class="search-bar"> <i class="fas fa-search"></i> <input type="text" id="searchInput" placeholder="ابحث عن تطبيق..."> <i class="fas fa-sliders-h"></i> </div>
-        <div class="categories" id="categoriesContainer"></div>
-        <div class="apps-list" id="appsList"></div>
+    </div>
+
+    <!-- شريط البحث -->
+    <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="⌕ ابحث عن تطبيق..." autocomplete="off">
+        <i class="fas fa-sliders-h" style="opacity: 0.5;"></i>
+    </div>
+
+    <!-- حاوية التطبيقات -->
+    <div id="appsGridContainer" class="apps-grid"></div>
+
+    <!-- كيف تثبّت ملف الـ IPA بعد التحميل؟ -->
+    <div class="card">
+        <h3 style="margin-bottom: 8px;"><i class="fas fa-download"></i> كيف تثبّت ملف الـ IPA بعد التحميل؟</h3>
+        <p style="margin-bottom: 10px;">واجهتك مشكلة؟ <a href="#" id="contactSupportLink" style="color:#2563eb; text-decoration: none;">تواصل معنا</a> — Website designed by Dyala Youssif</p>
+        
+        <div class="method-step">
+            <strong>📌 الطريقة الأولى</strong>
+            <ol style="margin-top: 10px; margin-right: 20px;">
+                <li>تأكد أنك تمتلك شهادة مدفوعة.</li>
+                <li>افتح الملف وقم بمشاركته لأي برنامج توقيع تطبيقات IPA مثل Ksign أو Gbox أو Esign أو غيرها.</li>
+                <li>سيفتح الملف في التطبيق، اضغط عليه واختر (توقيع وتثبيت) أو Sign & Install.</li>
+            </ol>
+        </div>
+
+        <div class="method-step">
+            <strong>🔄 الطريقة الثانية (عبر المعرف R8RIJ)</strong>
+            <ol style="margin-top: 10px; margin-right: 20px;">
+                <li>استخدم المعرف الخاص: <strong>R8RIJ</strong> للحصول على مساعدة التثبيت.</li>
+                <li>تواصل مع الدعم عبر المعرف المذكور لإتمام عملية توقيع وتثبيت IPA.</li>
+                <li>قم بمشاركة ملف IPA مع المعرف وسيتم توجيهك خطوة بخطوة.</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- طلب تطبيق أو لعبة -->
+    <div class="card request-section">
+        <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 16px;">
+            <i class="fas fa-gamepad" style="font-size: 32px;"></i>
+            <h2>🎮 اطلب تطبيق أو لعبة</h2>
+        </div>
+        <p style="margin-bottom: 12px;">سيصلك ردنا في أقرب وقت عبر القناة</p>
+        <form id="requestAppForm">
+            <input type="text" placeholder="اسم التطبيق أو اللعبة *" required id="appName">
+            <input type="url" placeholder="رابط التطبيق (اختياري) — 💡 إضافة الرابط يساعدنا نوصلك أسرع — من App Store أو أي مصدر آخر" id="appLink">
+            <button type="submit" class="install-btn btn-submit" style="width:100%;"><i class="fas fa-paper-plane"></i> إرسال الطلب</button>
+        </form>
+        <p class="small-note" style="font-size: 13px; margin-top: 15px; color: var(--footer-text);">راح يوصل طلبك مباشرة لفريق <strong>عباس</strong></p>
+    </div>
+
+    <div class="footer">
+        <i class="fas fa-crown"></i> <strong>عباس</strong> — متجر IPA شامل<br>
+        Website designed by Dyala Youssif
     </div>
 </div>
 
-<!-- لوحة تحكم المدير -->
-<div class="admin-panel">
-    <button class="admin-btn" id="openAdminBtn"><i class="fas fa-crown"></i> إدارة المتجر</button>
-</div>
-
-<!-- نافذة إدارة المحتوى -->
-<div id="adminModal" class="admin-modal">
-    <div class="modal-content">
-        <span class="close-modal" id="closeModalBtn">&times;</span>
-        <h2><i class="fas fa-database"></i> إدارة التطبيقات والفئات</h2>
-        <hr style="margin: 15px 0;">
-        <h3>➕ إضافة تطبيق جديد</h3>
-        <input type="text" id="newAppName" placeholder="اسم التطبيق">
-        <input type="text" id="newAppDesc" placeholder="وصف التطبيق">
-        <select id="newAppCat">
-            <option value="">اختر الفئة</option>
-        </select>
-        <input type="text" id="newAppIcon" placeholder="أيقونة (مثلاً fab fa-whatsapp)">
-        <button id="addAppBtn" class="admin-btn">إضافة التطبيق</button>
-        
-        <hr style="margin: 20px 0;">
-        <h3>📁 إدارة الفئات</h3>
-        <div id="catsList"></div>
-        <input type="text" id="newCatName" placeholder="اسم فئة جديدة (مثل: رياضة)">
-        <button id="addCatBtn" class="admin-btn">إضافة فئة</button>
-        
-        <hr style="margin: 20px 0;">
-        <button id="resetDefaultBtn" class="admin-btn" style="background:#dc3c3c;">↺ إعادة ضبط البيانات الافتراضية</button>
-    </div>
-</div>
-
-<div id="toastMsg" class="toast-msg"></div>
+<div id="toastMessage" class="toast-msg">تم</div>
 
 <script>
-    // البيانات الافتراضية (في حال عدم وجود بيانات محفوظة)
-    const defaultData = {
-        categories: ["الكل", "تواصل", "ترفيه", "أدوات", "دراسة وذكاء"],
-        apps: {
-            "الكل": [
-                { name: "WhatsApp", desc: "تواصل اجتماعي", icon: "fab fa-whatsapp", color: "#25D366" },
-                { name: "Telegram", desc: "تراسل فوري", icon: "fab fa-telegram", color: "#26A5E4" },
-                { name: "Snapchat", desc: "صور وفيديوهات", icon: "fab fa-snapchat-ghost", color: "#FFFC00" },
-                { name: "PUBG Mobile", desc: "لعبة باتل رويال", icon: "fas fa-gamepad", color: "#dd8a3a" },
-                { name: "CapCut", desc: "مونتاج فيديو", icon: "fas fa-cut", color: "#4a90e2" }
-            ],
-            "تواصل": [
-                { name: "WhatsApp", desc: "تواصل اجتماعي", icon: "fab fa-whatsapp", color: "#25D366" },
-                { name: "Telegram", desc: "تراسل فوري", icon: "fab fa-telegram", color: "#26A5E4" },
-                { name: "Snapchat", desc: "صور وفيديوهات", icon: "fab fa-snapchat-ghost", color: "#FFFC00" }
-            ],
-            "ترفيه": [
-                { name: "PUBG Mobile", desc: "لعبة باتل رويال", icon: "fas fa-gamepad", color: "#dd8a3a" },
-                { name: "Anime Slayer", desc: "مشاهدة أنمي", icon: "fas fa-film", color: "#b33b2c" }
-            ],
-            "أدوات": [
-                { name: "CapCut", desc: "مونتاج فيديو", icon: "fas fa-cut", color: "#4a90e2" }
-            ],
-            "دراسة وذكاء": [
-                { name: "Quizlet", desc: "بطاقات تعليمية", icon: "fas fa-graduation-cap", color: "#4257b2" }
-            ]
-        }
-    };
+    // قائمة التطبيقات (نفس الأصل)
+    const applications = [
+        { name: "Snapchat root", desc: "حسابك مسؤليتك .........", features: "لتفعيل مميزات النسخة : - قم بتحويل لغة النسخة من الانكليزية الى العربية او بالعكس." },
+        { name: "WhatsApp Gold", desc: "سجل بالنسخة كجهاز مصاحب فقطططط.", features: "نسخة ذهبية بميزات إضافية" },
+        { name: "Telegram Dark", desc: "نسخة تدعم الاشعارات ( قم بتثبيتها مباشرة لا تكررها ولا تغير الباندل ) مدمجة مع مميزات Tgextra", features: "" },
+        { name: "instagram DL", desc: "لتفعيل مميزات النسخة : - اضغط على زر الـ Home ضغطة مطوله", features: "" },
+        { name: "بيكرام", desc: "instagram IG", features: "لتفعيل مميزات النسخة : - اضغط على زر الـبروفايل وستجيد ايقونة الريشه اضغط عليها وتفتح معك المميزات" },
+        { name: "instagram IG", desc: "لتفعيل مميزات النسخة : - اضغط على زر الـبروفايل وستجيد ايقونة الريشه اضغط عليها وتفتح معك المميزات", features: "" },
+        { name: "Watusi", desc: "سجل بالنسخة كجهاز مصاحب فقطططط.", features: "واتساب معدل Watusi" },
+        { name: "WhatsApp Business - Watusi", desc: "سجل بالنسخة كجهاز مصاحب فقطططط.", features: "" },
+        { name: "Swiftgram", desc: "لتفعيل مميزات النسخة اتبع التالي : - الاعدادات - انزل للاسفل - اضغط ضغطة مطوله على ايقونه ( اسال سوالا ) ومبروك تم فتح المميزات", features: "" }
+    ];
 
-    // تحميل البيانات من localStorage أو استخدام الافتراضية
-    let storeData = JSON.parse(localStorage.getItem("IPA_Store_Data"));
-    if (!storeData) {
-        storeData = defaultData;
-        saveData();
-    }
-
-    function saveData() {
-        localStorage.setItem("IPA_Store_Data", JSON.stringify(storeData));
-    }
-
-    // عرض الفئات في الواجهة الرئيسية
-    function renderCategories() {
-        const container = document.getElementById("categoriesContainer");
-        container.innerHTML = "";
-        storeData.categories.forEach(cat => {
-            const catDiv = document.createElement("div");
-            catDiv.className = "cat-item";
-            if (currentCategory === cat) catDiv.classList.add("active");
-            catDiv.innerText = cat;
-            catDiv.dataset.cat = cat;
-            catDiv.addEventListener("click", () => {
-                document.querySelectorAll(".cat-item").forEach(c => c.classList.remove("active"));
-                catDiv.classList.add("active");
-                currentCategory = cat;
-                renderApps();
-            });
-            container.appendChild(catDiv);
-        });
-    }
-
-    let currentCategory = storeData.categories[0] || "الكل";
-    let searchText = "";
-
-    function renderApps() {
-        let apps = storeData.apps[currentCategory] || [];
-        if (searchText.trim() !== "") {
-            apps = apps.filter(app => app.name.toLowerCase().includes(searchText.toLowerCase()) || app.desc.toLowerCase().includes(searchText.toLowerCase()));
-        }
-        const container = document.getElementById("appsList");
-        const countSpan = document.getElementById("appsCount");
-        countSpan.innerText = apps.length;
-        if (apps.length === 0) {
-            container.innerHTML = `<div style="text-align:center; color:rgba(255,255,255,0.5); padding: 40px;">لا توجد تطبيقات في هذا القسم</div>`;
+    function renderApps(filter = "") {
+        const container = document.getElementById("appsGridContainer");
+        if (!container) return;
+        const filtered = applications.filter(app => 
+            app.name.toLowerCase().includes(filter.toLowerCase()) || 
+            app.desc.toLowerCase().includes(filter.toLowerCase()) ||
+            (app.features && app.features.toLowerCase().includes(filter.toLowerCase()))
+        );
+        
+        if (filtered.length === 0) {
+            container.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding: 40px;">🔍 لا توجد تطبيقات تطابق "${filter}"</div>`;
             return;
         }
-        container.innerHTML = apps.map((app, idx) => `
-            <div class="app-item" data-index="${idx}">
-                <div class="app-info">
-                    <div class="app-icon" style="background: ${app.color || '#6c9eff'}30; color: ${app.color || '#6c9eff'};"><i class="${app.icon}"></i></div>
-                    <div class="app-details">
-                        <h4>${app.name}</h4>
-                        <p>${app.desc}</p>
-                    </div>
+        
+        container.innerHTML = filtered.map(app => `
+            <div class="app-card">
+                <div class="app-title">
+                    <span><i class="fab fa-app-store-ios" style="color:#2563eb; margin-left: 6px;"></i> ${app.name}</span>
+                    <span class="badge" style="font-size: 12px;">IPA</span>
                 </div>
-                <div>
-                    <button class="download-btn" data-appname="${app.name}"><i class="fas fa-download"></i> تنزيل</button>
-                    ${isAdminMode ? `<button class="delete-app" data-appname="${app.name}" data-cat="${currentCategory}" data-idx="${idx}"><i class="fas fa-trash"></i> حذف</button>` : ''}
+                <div class="app-desc">
+                    <i class="fas fa-info-circle" style="margin-left: 6px; opacity:0.7;"></i> ${app.desc}
+                    ${app.features ? `<div class="feature-text"><i class="fas fa-magic"></i> ${app.features}</div>` : ''}
                 </div>
+                <button class="install-btn" data-app="${app.name.replace(/"/g, '&quot;')}"><i class="fas fa-download"></i> تثبيت</button>
+                <div style="clear:both"></div>
             </div>
-        `).join("");
-        // أزرار التنزيل
-        document.querySelectorAll('.download-btn').forEach(btn => {
+        `).join('');
+        
+        document.querySelectorAll('.install-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                showToast(`✅ جاري محاكاة تنزيل ${btn.getAttribute("data-appname")}`);
+                const appName = btn.getAttribute('data-app');
+                showToast(`⚡ بدء تثبيت: ${appName} (محاكاة) — ملف IPA جاهز للتوقيع عبر Ksign/Gbox`);
             });
         });
-        // أزرار الحذف (في وضع الإدارة فقط)
-        if (isAdminMode) {
-            document.querySelectorAll('.delete-app').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const appName = btn.getAttribute("data-appname");
-                    const cat = btn.getAttribute("data-cat");
-                    const idx = parseInt(btn.getAttribute("data-idx"));
-                    if (confirm(`هل تريد حذف التطبيق "${appName}" نهائياً؟`)) {
-                        storeData.apps[cat].splice(idx, 1);
-                        saveData();
-                        renderApps();
-                        showToast(`🗑 تم حذف ${appName}`);
-                    }
-                });
-            });
-        }
     }
-
-    let isAdminMode = false;
+    
+    let toastTimeout;
     function showToast(msg) {
-        const toast = document.getElementById("toastMsg");
+        const toast = document.getElementById('toastMessage');
+        if (!toast) return;
+        clearTimeout(toastTimeout);
         toast.innerText = msg;
-        toast.style.opacity = "1";
-        setTimeout(() => toast.style.opacity = "0", 2000);
+        toast.style.opacity = '1';
+        toastTimeout = setTimeout(() => {
+            toast.style.opacity = '0';
+        }, 2600);
     }
-
-    // إعادة ملء القوائم في لوحة التحكم
-    function refreshAdminPanel() {
-        const catSelect = document.getElementById("newAppCat");
-        catSelect.innerHTML = '<option value="">اختر الفئة</option>';
-        storeData.categories.forEach(cat => {
-            const option = document.createElement("option");
-            option.value = cat;
-            option.innerText = cat;
-            catSelect.appendChild(option);
-        });
-        const catsListDiv = document.getElementById("catsList");
-        catsListDiv.innerHTML = "";
-        storeData.categories.forEach((cat, idx) => {
-            catsListDiv.innerHTML += `<div style="display:flex; justify-content:space-between; margin:8px 0;"><span>${cat}</span><button class="delete-cat-btn" data-cat="${cat}" data-idx="${idx}" style="background:#dc3c3c; border:none; border-radius:30px; padding:4px 12px; color:white;">حذف</button></div>`;
-        });
-        document.querySelectorAll('.delete-cat-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const catName = btn.getAttribute("data-cat");
-                const idx = parseInt(btn.getAttribute("data-idx"));
-                if (catName === "الكل") { showToast("لا يمكن حذف فئة 'الكل'"); return; }
-                if (confirm(`حذف فئة "${catName}" سيؤدي إلى حذف جميع تطبيقاتها. استمرار؟`)) {
-                    delete storeData.apps[catName];
-                    storeData.categories.splice(idx, 1);
-                    saveData();
-                    if (currentCategory === catName) currentCategory = storeData.categories[0];
-                    refreshAdminPanel();
-                    renderCategories();
-                    renderApps();
-                    showToast(`تم حذف الفئة ${catName}`);
-                }
-            });
+    
+    // البحث
+    const searchField = document.getElementById('searchInput');
+    if (searchField) {
+        searchField.addEventListener('input', (e) => renderApps(e.target.value));
+    }
+    
+    // نموذج الطلب
+    const requestForm = document.getElementById('requestAppForm');
+    if (requestForm) {
+        requestForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const appNameVal = document.getElementById('appName').value.trim();
+            if (!appNameVal) {
+                showToast('يرجى كتابة اسم التطبيق أو اللعبة');
+                return;
+            }
+            showToast(`✅ تم إرسال طلب: ${appNameVal} — سيتم الرد عبر القناة قريبًا.`);
+            requestForm.reset();
         });
     }
-
-    // إضافة تطبيق
-    document.getElementById("addAppBtn")?.addEventListener("click", () => {
-        const name = document.getElementById("newAppName").value.trim();
-        const desc = document.getElementById("newAppDesc").value.trim();
-        const cat = document.getElementById("newAppCat").value;
-        const icon = document.getElementById("newAppIcon").value.trim() || "fas fa-app-store";
-        if (!name || !desc || !cat) { showToast("يرجى ملء جميع الحقول (الاسم، الوصف، الفئة)"); return; }
-        if (!storeData.apps[cat]) storeData.apps[cat] = [];
-        storeData.apps[cat].push({ name, desc, icon, color: "#6c9eff" });
-        saveData();
-        renderCategories();
-        renderApps();
-        refreshAdminPanel();
-        document.getElementById("newAppName").value = "";
-        document.getElementById("newAppDesc").value = "";
-        document.getElementById("newAppIcon").value = "";
-        showToast(`✅ تم إضافة ${name} إلى قسم ${cat}`);
+    
+    // كتم الإشعارات
+    const muteBtn = document.getElementById('muteNotifyBtn');
+    if (muteBtn) {
+        muteBtn.addEventListener('click', () => showToast('🔕 تم إسكات الإشعارات (محاكاة)'));
+    }
+    
+    // البادجات التفاعلية
+    document.querySelectorAll('.badge[data-action]').forEach(b => {
+        b.addEventListener('click', () => {
+            const action = b.getAttribute('data-action');
+            if (action === 'request') showToast('🎮 يمكنك طلب تطبيق أو لعبة عبر النموذج الموجود بالأسفل.');
+            else if (action === 'howto') showToast('🔧 شرح التثبيت موجود في القسم (كيف تثبّت IPA)');
+            else if (action === 'cert') showToast('💳 لشراء شهادة مدفوعة: تواصل مع قنوات الدعم أو استخدم خدمات مثل ksign.');
+        });
     });
-
-    // إضافة فئة
-    document.getElementById("addCatBtn")?.addEventListener("click", () => {
-        const newCat = document.getElementById("newCatName").value.trim();
-        if (!newCat) return;
-        if (storeData.categories.includes(newCat)) { showToast("الفئة موجودة مسبقاً"); return; }
-        storeData.categories.push(newCat);
-        storeData.apps[newCat] = [];
-        saveData();
-        renderCategories();
-        refreshAdminPanel();
-        document.getElementById("newCatName").value = "";
-        showToast(`تم إضافة فئة ${newCat}`);
-    });
-
-    // إعادة ضبط للبيانات الافتراضية
-    document.getElementById("resetDefaultBtn")?.addEventListener("click", () => {
-        if (confirm("سيتم استبدال جميع البيانات الحالية بالبيانات الافتراضية. هل أنت متأكد؟")) {
-            storeData = JSON.parse(JSON.stringify(defaultData));
-            saveData();
-            currentCategory = storeData.categories[0];
-            renderCategories();
-            renderApps();
-            refreshAdminPanel();
-            showToast("تمت إعادة الضبط إلى البيانات الأصلية");
+    
+    // رابط تواصل معنا
+    const contactLink = document.getElementById('contactSupportLink');
+    if (contactLink) {
+        contactLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showToast('📩 للتواصل: عبر المعرف R8RIJ أو قناة عباس');
+        });
+    }
+    
+    // تبديل الوضع الليلي والنهاري
+    const themeToggle = document.getElementById('themeToggle');
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'dark') {
+        document.body.classList.add('dark');
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i> <span>الوضع النهاري</span>';
+    } else {
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i> <span>الوضع الليلي</span>';
+    }
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+        if (document.body.classList.contains('dark')) {
+            localStorage.setItem('theme', 'dark');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i> <span>الوضع النهاري</span>';
+        } else {
+            localStorage.setItem('theme', 'light');
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i> <span>الوضع الليلي</span>';
         }
     });
-
-    // فتح وإغلاق نافذة المدير
-    const modal = document.getElementById("adminModal");
-    document.getElementById("openAdminBtn").addEventListener("click", () => {
-        isAdminMode = true;
-        modal.classList.add("active");
-        refreshAdminPanel();
-        renderApps(); // إعادة رسم الأزرار لظهور أزرار الحذف
-    });
-    document.getElementById("closeModalBtn").addEventListener("click", () => {
-        modal.classList.remove("active");
-        isAdminMode = false;
-        renderApps(); // إعادة رسم دون أزرار حذف
-    });
-    window.addEventListener("click", (e) => { if (e.target === modal) { modal.classList.remove("active"); isAdminMode = false; renderApps(); } });
-
-    // البحث
-    document.getElementById("searchInput").addEventListener("input", (e) => {
-        searchText = e.target.value;
-        renderApps();
-    });
-
-    // الأزرار الثلاثة للإجراءات
-    document.querySelectorAll('.glass-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const action = btn.getAttribute('data-action');
-            if (action === 'cert') showToast('💳 شراء شهادة: تواصل مع القناة');
-            else if (action === 'howto') showToast('🔧 استخدم Ksign أو Gbox أو بوت ipasignxbot');
-            else if (action === 'request') showToast('🎮 املأ نموذج الطلب في الأسفل');
-        });
-    });
-
-    // التهيئة الأولية
-    renderCategories();
+    
+    // تحميل أولي
     renderApps();
 </script>
 </body>
