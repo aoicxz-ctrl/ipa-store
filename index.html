@@ -1,39 +1,211 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IPA Store</title>
-<style>
-body{
-    margin:0;
-    background:#f5f5f5;
-    font-family:sans-serif;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-}
-.ipa-btn{
-    width:90px;
-    height:90px;
-    border-radius:50%;
-    border:none;
-    background:#888;
-    color:white;
-    font-size:22px;
-    font-weight:bold;
-    cursor:pointer;
-    box-shadow:0 4px 10px rgba(0,0,0,.2);
-}
-.ipa-btn:hover{
-    transform:scale(1.05);
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZSign Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0d0d1a;
+            color: #ffffff;
+            padding: 20px 0;
+        }
+
+        /* القائمة العلوية للتصنيفات */
+        .categories-container {
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 10px 20px;
+            margin-bottom: 25px;
+            scrollbar-width: none; /* إخفاء شريط التمرير في فايرفوكس */
+        }
+        .categories-container::-webkit-scrollbar {
+            display: none; /* إخفاء شريط التمرير في كروم وسفاري */
+        }
+
+        .category-btn {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 8px 18px;
+            margin-left: 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            text-decoration: none;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .category-btn.active, .category-btn:hover {
+            background-color: #007aff;
+        }
+
+        /* عنوان القسم */
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 20px 20px 15px 20px;
+            color: #ffffff;
+        }
+
+        /* صف التمرير الأفقي للتطبيقات */
+        .apps-row {
+            display: flex;
+            overflow-x: auto;
+            padding: 10px 20px;
+            gap: 20px;
+            scrollbar-width: none;
+        }
+        .apps-row::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* كارت التطبيق الواحد */
+        .app-card {
+            flex: 0 0 95px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* الأيقونات الدائرية المتدرجة الألوان نفس الفيديو */
+        .app-icon {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8a2be2, #007aff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+            margin-bottom: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* مخصص لتغيير ألوان بعض الأيقونات تلقائياً */
+        .app-card:nth-child(even) .app-icon {
+            background: linear-gradient(135deg, #ff007f, #7f00ff);
+        }
+
+        .app-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #ffffff;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 4px;
+        }
+
+        .app-rating {
+            font-size: 11px;
+            color: #a0a0a0;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            margin-bottom: 8px;
+        }
+        .app-rating i {
+            color: #ffcc00;
+        }
+
+        /* زر التنزيل الأزرق التفاعلي */
+        .download-btn {
+            background-color: #007aff;
+            color: white;
+            border: none;
+            padding: 6px 18px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 15px;
+            text-decoration: none;
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+        .download-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
 
-<button class="ipa-btn">IPA</button>
+    <div class="categories-container">
+        <span class="category-btn active">الكل</span>
+        <span class="category-btn">تواصل اجتماعي</span>
+        <span class="category-btn">أفلام ومسلسلات</span>
+        <span class="category-btn">الألعاب</span>
+        <span class="category-btn">التصميم والمونتاج</span>
+        <span class="category-btn">مطور</span>
+    </div>
+
+    <div class="section-title">تواصل اجتماعي</div>
+    <div class="apps-row">
+        
+        <div class="app-card">
+            <div class="app-icon"><i class="fab fa-whatsapp"></i></div>
+            <div class="app-name">WhatsApp</div>
+            <div class="app-rating"><i class="fas fa-star"></i> 4.4</div>
+            <a href="itms-services://?action=download-manifest&url=رابط_ملف_الـ_PLIST_هنا" class="download-btn">تنزيل</a>
+        </div>
+
+        <div class="app-card">
+            <div class="app-icon"><i class="fab fa-telegram"></i></div>
+            <div class="app-name">Beegram</div>
+            <div class="app-rating"><i class="fas fa-star"></i> 4.2</div>
+            <a href="#" class="download-btn">تنزيل</a>
+        </div>
+
+        <div class="app-card">
+            <div class="app-icon"><i class="fab fa-snapchat"></i></div>
+            <div class="app-name">Snapchat</div>
+            <div class="app-rating"><i class="fas fa-star"></i> 4.0</div>
+            <a href="#" class="download-btn">تنزيل</a>
+        </div>
+
+        <div class="app-card">
+            <div class="app-icon"><i class="fab fa-instagram"></i></div>
+            <div class="app-name">Regram</div>
+            <div class="app-rating"><i class="fas fa-star"></i> 4.9</div>
+            <a href="#" class="download-btn">تنزيل</a>
+        </div>
+
+    </div>
+
+    <div class="section-title">أفلام ومسلسلات</div>
+    <div class="apps-row">
+
+        <div class="app-card">
+            <div class="app-icon"><i class="fas fa-film"></i></div>
+            <div class="app-name">سينمانا</div>
+            <div class="app-rating"><i class="fas fa-star"></i> 4.1</div>
+            <a href="#" class="download-btn">تنزيل</a>
+        </div>
+
+        <div class="app-card">
+            <div class="app-icon"><i class="fas fa-tv"></i></div>
+            <div class="app-name">Bawa</div>
+            <div class="app-rating"><i class="fas fa-star"></i> 4.0</div>
+            <a href="#" class="download-btn">تنزيل</a>
+        </div>
+
+        <div class="app-card">
+            <div class="app-icon"><i class="fas fa-play"></i></div>
+            <div class="app-name">HiTV</div>
+            <div class="app-rating"><i class="fas fa-star"></i> 4.3</div>
+            <a href="#" class="download-btn">تنزيل</a>
+        </div>
+
+    </div>
 
 </body>
 </html>
