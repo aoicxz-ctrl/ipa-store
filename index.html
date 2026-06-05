@@ -2,8 +2,8 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>IPA - متجر التطبيقات</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>متجر تطبيقات الـ IPA | كيرا بلس</title>
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -11,481 +11,445 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            font-family: system-ui, -apple-system, 'Segoe UI', 'Tahoma', sans-serif;
         }
 
         body {
-            background: linear-gradient(145deg, #1a1f2e 0%, #0c0f1a 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 16px;
+            background: #f5f7fb;
+            color: #1a1e2b;
+            padding: 20px;
         }
 
-        /* تأثير الزجاج السائل */
-        .phone {
-            max-width: 450px;
-            width: 100%;
-            background: rgba(20, 25, 40, 0.5);
-            backdrop-filter: blur(20px);
-            border-radius: 44px;
-            overflow: hidden;
-            box-shadow: 0 25px 45px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.15);
-            position: relative;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        /* تم إزالة شريط الحالة (الساعة والبطارية) بالكامل */
-
-        .main-header {
-            padding: 20px 24px 12px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        .logo {
-            font-size: 34px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #fff, #a0c0ff, #6c9eff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: -0.5px;
-            text-shadow: 0 2px 10px rgba(108,158,255,0.3);
-        }
-        .menu-icon {
-            color: rgba(255,255,255,0.8);
-            font-size: 26px;
-        }
-
-        /* الفئات الأفقية */
-        .categories {
-            display: flex;
-            overflow-x: auto;
-            gap: 26px;
-            padding: 18px 24px;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            white-space: nowrap;
-            scrollbar-width: thin;
-            background: rgba(255,255,255,0.02);
-        }
-        .categories::-webkit-scrollbar {
-            height: 3px;
-        }
-        .cat-item {
-            font-size: 18px;
-            font-weight: 500;
-            color: rgba(255,255,255,0.7);
-            cursor: pointer;
-            transition: 0.2s;
-            padding-bottom: 8px;
-            border-bottom: 2px solid transparent;
-        }
-        .cat-item.active {
-            color: #ffffff;
-            border-bottom: 2px solid #6c9eff;
-            text-shadow: 0 0 8px rgba(108,158,255,0.5);
-        }
-
-        .content {
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 32px;
-            max-height: 520px;
-            overflow-y: auto;
-            background: rgba(0,0,0,0.2);
-        }
-
-        .section-title {
-            color: rgba(255,255,255,0.95);
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: -0.3px;
-            margin-bottom: 8px;
-        }
-
-        .app-card {
-            background: rgba(35, 40, 60, 0.6);
-            backdrop-filter: blur(8px);
+        /* تنسيق البطاقات والعناصر */
+        .card {
+            background: #ffffff;
             border-radius: 28px;
-            padding: 14px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            padding: 20px 24px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03), 0 2px 6px rgba(0,0,0,0.05);
+            margin-bottom: 28px;
             transition: 0.2s;
-            border: 1px solid rgba(255,255,255,0.08);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-            margin-bottom: 12px;
+            border: 1px solid #eef2f6;
         }
-        .app-card:active {
-            transform: scale(0.99);
-            background: rgba(50, 55, 80, 0.7);
-        }
-        .app-info {
-            display: flex;
+
+        .badge {
+            background: #eef2ff;
+            color: #2563eb;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 500;
+            display: inline-flex;
             align-items: center;
-            gap: 18px;
+            gap: 6px;
         }
-        .app-icon {
-            width: 56px;
-            height: 56px;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(4px);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            border: 0.5px solid rgba(255,255,255,0.15);
+
+        .btn {
+            background: #2563eb;
             color: white;
-        }
-        .app-details h4 {
-            color: white;
-            font-size: 20px;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 60px;
             font-weight: 600;
-            margin-bottom: 6px;
-        }
-        .rating {
-            display: flex;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.15s;
+            display: inline-flex;
             align-items: center;
             gap: 8px;
         }
-        .stars {
-            color: #ffd966;
-            font-size: 16px;
-            letter-spacing: 3px;
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #cbd5e1;
+            color: #1e293b;
         }
-        .rating-num {
-            color: rgba(255,255,255,0.8);
-            font-size: 15px;
-            font-weight: 500;
+        .btn-outline:hover {
+            background: #f1f5f9;
+            border-color: #94a3b8;
         }
-        .download-btn {
-            background: rgba(108, 158, 255, 0.85);
-            backdrop-filter: blur(4px);
-            padding: 10px 22px;
-            border-radius: 40px;
-            color: white;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.15s;
-            border: 0.5px solid rgba(255,255,255,0.2);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-        }
-        .download-btn:active {
-            background: #4a7cd9;
-            transform: scale(0.96);
-        }
-
-        /* القائمة السفلية */
-        .bottom-nav {
-            background: rgba(15, 18, 30, 0.7);
-            backdrop-filter: blur(20px);
-            display: flex;
-            justify-content: space-around;
-            padding: 14px 20px 20px 20px;
-            border-top: 0.5px solid rgba(255,255,255,0.1);
-        }
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            color: rgba(255,255,255,0.6);
+        .btn-sm {
+            padding: 6px 16px;
             font-size: 13px;
-            transition: 0.1s;
+        }
+
+        /* الإشعارات */
+        .notification-box {
+            background: #fefce8;
+            border-right: 4px solid #eab308;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .notification-title {
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .mute-icon {
+            color: #6b7280;
             cursor: pointer;
-            font-weight: 500;
-        }
-        .nav-item span:first-child {
-            font-size: 24px;
-        }
-        .nav-item.active {
-            color: #6c9eff;
-            text-shadow: 0 0 8px rgba(108,158,255,0.4);
         }
 
-        /* الرابط السفلي */
-        .footer-link {
+        /* رأس المتجر */
+        .store-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        .stats {
+            background: #eef2ff;
+            padding: 8px 20px;
+            border-radius: 80px;
+            font-weight: 700;
+        }
+
+        /* طلب تطبيق */
+        .request-section {
+            background: linear-gradient(145deg, #ffffff, #fafcff);
+        }
+        .chip-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        /* قائمة التطبيقات */
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            margin-top: 16px;
+        }
+        .app-card {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            border: 1px solid #edf2f7;
+            transition: 0.15s;
+        }
+        .app-name {
+            font-size: 20px;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .app-desc {
+            color: #334155;
+            font-size: 14px;
+            margin: 12px 0;
+            line-height: 1.45;
+            background: #f8fafc;
+            padding: 10px 12px;
+            border-radius: 20px;
+        }
+        .install-row {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 8px;
+        }
+
+        /* طرق التثبيت */
+        .method-step {
+            background: #f9fafb;
+            border-radius: 24px;
+            padding: 18px;
+            margin-top: 16px;
+        }
+
+        /* نموذج الطلب */
+        .request-form input, .request-form textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 28px;
+            border: 1px solid #e2e8f0;
+            background: white;
+            font-size: 15px;
+            margin-bottom: 14px;
+        }
+        .request-form textarea {
+            border-radius: 24px;
+            resize: vertical;
+        }
+
+        .footer {
             text-align: center;
-            padding: 16px 0 20px 0;
-            background: rgba(0,0,0,0.3);
-            backdrop-filter: blur(8px);
-            border-top: 0.5px solid rgba(255,255,255,0.05);
-        }
-        .footer-link a {
-            color: rgba(255,255,255,0.6);
-            text-decoration: none;
             font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            transition: 0.2s;
-        }
-        .footer-link a:hover {
-            color: #6c9eff;
+            color: #5b6e8c;
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 1px solid #e2edf7;
         }
 
-        .toast-msg {
-            position: fixed;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(40, 45, 60, 0.95);
-            backdrop-filter: blur(20px);
-            color: white;
-            padding: 12px 28px;
-            border-radius: 50px;
-            font-size: 14px;
-            opacity: 0;
-            transition: 0.2s;
-            pointer-events: none;
-            z-index: 200;
-            white-space: nowrap;
-            border: 0.5px solid rgba(255,255,255,0.2);
-            font-weight: 500;
+        /* بحث */
+        .search-bar {
+            background: white;
+            border-radius: 60px;
+            padding: 8px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 25px;
+        }
+        .search-bar i {
+            color: #94a3b8;
+        }
+        .search-bar input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            background: transparent;
         }
 
-        /* تحسين التمرير */
-        .content::-webkit-scrollbar {
-            width: 4px;
-        }
-        .content::-webkit-scrollbar-track {
-            background: rgba(255,255,255,0.05);
-            border-radius: 10px;
-        }
-        .content::-webkit-scrollbar-thumb {
-            background: rgba(255,255,255,0.3);
-            border-radius: 10px;
+        @media (max-width: 700px) {
+            .container { padding: 0 4px; }
+            .card { padding: 18px; }
         }
     </style>
 </head>
 <body>
-<div class="phone">
-    <!-- لا يوجد شريط حالة (الساعة والبطارية محذوفة) -->
-    <div class="main-header">
-        <div class="logo">IPA</div>
-        <div class="menu-icon"><i class="fas fa-bolt"></i></div>
+<div class="container">
+    <!-- 🔔 التحديثات والإشعارات -->
+    <div class="card notification-box">
+        <div class="notification-title">
+            <i class="fas fa-bell" style="color:#eab308;"></i> 
+            <span>🔔 التحديثات والإشعارات</span>
+        </div>
+        <div class="mute-icon" id="muteBtn">
+            <i class="fas fa-volume-off"></i> 🔕
+        </div>
+    </div>
+    <div class="card" id="noNoticeCard" style="display: flex; justify-content: space-between; align-items: center;">
+        <span>📭 لا توجد إشعارات جديدة</span>
+        <i class="fas fa-check-circle" style="color:#22c55e;"></i>
     </div>
 
-    <!-- الأقسام الأفقية -->
-    <div class="categories" id="categoriesList">
-        <div class="cat-item active" data-cat="games">الألعاب</div>
-        <div class="cat-item" data-cat="movies">أفلام ومسلسلات</div>
-        <div class="cat-item" data-cat="social">تواصل اجتماعي</div>
-        <div class="cat-item" data-cat="all">الكل</div>
-        <div class="cat-item" data-cat="design">التصميم والموتاج</div>
-        <div class="cat-item" data-cat="other">غير ذلك</div>
-        <div class="cat-item" data-cat="lifestyle">نمط الحياة</div>
-        <div class="cat-item" data-cat="dev">مطور</div>
-    </div>
-
-    <div class="content" id="appContent"></div>
-
-    <div class="bottom-nav">
-        <div class="nav-item active" data-nav="settings">
-            <span><i class="fas fa-cog"></i></span>
-            <span>الإعدادات</span>
+    <!-- رأس المتجر -->
+    <div class="card">
+        <div class="store-header">
+            <h1 style="font-size: 28px;">📱 متجر تطبيقات الـ IPA</h1>
+            <div class="stats"><i class="fas fa-database"></i> 215 تطبيق</div>
         </div>
-        <div class="nav-item" data-nav="downloads">
-            <span><i class="fas fa-download"></i></span>
-            <span>التزيلات</span>   <!-- كما في الصورة: التزيلات -->
-        </div>
-        <div class="nav-item" data-nav="sign">
-            <span><i class="fas fa-signature"></i></span>
-            <span>التوقيع</span>
-        </div>
-        <div class="nav-item" data-nav="apps">
-            <span><i class="fas fa-th"></i></span>
-            <span>التطبيقات</span>
-        </div>
-        <div class="nav-item" data-nav="home">
-            <span><i class="fas fa-home"></i></span>
-            <span>الرئيسية</span>
+        <p style="margin-top: 8px; color: #2c3e66;">حمّل ملفات IPA في جهازك وثبّتها باستخدام برنامج Ksign أو Gbox أو بوتات التثبيت باستخدام شهادتك الخاصة.</p>
+        <div class="chip-group" style="margin-top: 18px;">
+            <span class="badge"><i class="fas fa-gamepad"></i> 🎮 اطلب تطبيق</span>
+            <span class="badge"><i class="fas fa-question-circle"></i> شلون أثبت هذي التطبيقات؟</span>
+            <span class="badge"><i class="fas fa-ticket-alt"></i> شراء شهادة</span>
         </div>
     </div>
 
-    <!-- الرابط الموجود في الصورة -->
-    <div class="footer-link">
-        <a href="#" target="_blank">aoicxz-ctrl.github.io</a>
+    <!-- ريكرام + بحث -->
+    <div class="search-bar">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="⌕ ريكرام ... ابحث عن تطبيق" autocomplete="off">
+        <i class="fas fa-sliders-h" style="opacity:0.6;"></i>
+    </div>
+
+    <!-- قائمة التطبيقات بالكامل (مطابقة للمحتوى الأصلي) -->
+    <div id="appsContainer">
+        <div class="apps-grid" id="appsGrid"></div>
+    </div>
+
+    <!-- كيف تثبّت ملف الـ IPA بعد التحميل؟ -->
+    <div class="card">
+        <h3 style="margin-bottom: 12px;"><i class="fas fa-download"></i> كيف تثبّت ملف الـ IPA بعد التحميل؟</h3>
+        <p style="color: #475569;">واجهتك مشكلة؟ <a href="#" style="color:#2563eb;">تواصل معنا</a> — Website designed by Dyala Youssif</p>
+        
+        <div class="method-step">
+            <div><strong>📌 الطريقة الأولى</strong></div>
+            <ol style="margin-top: 8px; margin-right: 20px;">
+                <li>تأكد أنك تمتلك شهادة مدفوعة.</li>
+                <li>افتح الملف وقم بمشاركته لأي برنامج توقيع تطبيقات IPA مثل Ksign أو Gbox أو Esign أو غيرها.</li>
+                <li>سيفتح الملف في التطبيق، اضغط عليه واختر (توقيع وتثبيت) أو Sign & Install.</li>
+            </ol>
+        </div>
+
+        <div class="method-step">
+            <div><strong>🤖 الطريقة الثانية (بوت التليجرام)</strong></div>
+            <ol style="margin-top: 8px; margin-right: 20px;">
+                <li>اذهب لهذا البوت <strong>@ipasignxbot</strong>.</li>
+                <li>اضغط Add IPA.</li>
+                <li>اضغط Add Cert وأضف ملفات شهادتك والباسورد.</li>
+                <li>أرسل للبوت ملف الـ IPA واضغط Sign.</li>
+                <li>بعدها اضغط Install ثم Install Now.</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- نموذج طلب تطبيق أو لعبة -->
+    <div class="card request-section">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 18px;">
+            <i class="fas fa-gamepad" style="font-size: 32px;"></i>
+            <h2>🎮 اطلب تطبيق أو لعبة</h2>
+        </div>
+        <p style="margin-bottom: 12px;">سيصلك ردنا في أقرب وقت عبر القناة</p>
+        <form id="appRequestForm" class="request-form">
+            <input type="text" placeholder="اسم التطبيق أو اللعبة *" required id="appNameInput">
+            <input type="url" placeholder="رابط التطبيق (اختياري) — 💡 إضافة الرابط يساعدنا نوصلك أسرع — من App Store أو أي مصدر آخر" id="appLinkInput">
+            <button type="submit" class="btn" style="width:100%; justify-content: center;">📨 إرسال الطلب</button>
+        </form>
+        <p class="small-note" style="font-size: 13px; margin-top: 12px; color:#5b6e8c;">راح يوصل طلبك مباشرة لفريق كيرا بلس</p>
+    </div>
+
+    <div class="footer">
+        <i class="fas fa-crown"></i> كيرا بلس — متجر IPA شامل<br>
+        Website designed by Dyala Youssif
     </div>
 </div>
-<div class="toast-msg" id="toastMsg">تمت المحاكاة</div>
 
 <script>
-    // بيانات التطبيقات مع أيقونات طبيعية وتقييمات محدثة
-    const appDatabase = {
-        games: [
-            { name: "PUBG Mobile", rating: 4.7, icon: "fab fa-fort-awesome", stars: "★★★★★", color: "#dd8a3a", starCount: 5 },
-            { name: "Free Fire", rating: 4.5, icon: "fas fa-fire", stars: "★★★★½", color: "#ff6600" },
-            { name: "Call of Duty", rating: 4.6, icon: "fas fa-crosshairs", stars: "★★★★½", color: "#3a6ea5" }
-        ],
-        social: [
-            { name: "WhatsApp", rating: 4.1, icon: "fab fa-whatsapp", stars: "★★★★☆", color: "#25D366" },
-            { name: "Beegram", rating: 4.1, icon: "fab fa-telegram", stars: "★★★★☆", color: "#26A5E4" },
-            { name: "Snapchat", rating: 4.8, icon: "fab fa-snapchat-ghost", stars: "★★★★★", color: "#FFFC00" }
-        ],
-        movies: [
-            { name: "Anime Slayer ipason", rating: 4.5, icon: "fas fa-film", stars: "★★★★½", color: "#b33b2c" },
-            { name: "Bawa", rating: 4.6, icon: "fas fa-tv", stars: "★★★★½", color: "#5a3e2b" },
-            { name: "Buzz TV", rating: 4.9, icon: "fas fa-broadcast-tower", stars: "★★★★★", color: "#2c7da0" }
-        ],
-        all: [
-            { name: "PUBG Mobile", rating: 4.7, icon: "fab fa-fort-awesome", stars: "★★★★★", color: "#dd8a3a" },
-            { name: "Free Fire", rating: 4.5, icon: "fas fa-fire", stars: "★★★★½", color: "#ff6600" },
-            { name: "Call of Duty", rating: 4.6, icon: "fas fa-crosshairs", stars: "★★★★½", color: "#3a6ea5" },
-            { name: "Anime Slayer ipason", rating: 4.5, icon: "fas fa-film", stars: "★★★★½", color: "#b33b2c" },
-            { name: "Bawa", rating: 4.6, icon: "fas fa-tv", stars: "★★★★½", color: "#5a3e2b" },
-            { name: "Buzz TV", rating: 4.9, icon: "fas fa-broadcast-tower", stars: "★★★★★", color: "#2c7da0" },
-            { name: "WhatsApp", rating: 4.1, icon: "fab fa-whatsapp", stars: "★★★★☆", color: "#25D366" },
-            { name: "Beegram", rating: 4.1, icon: "fab fa-telegram", stars: "★★★★☆", color: "#26A5E4" },
-            { name: "Snapchat", rating: 4.8, icon: "fab fa-snapchat-ghost", stars: "★★★★★", color: "#FFFC00" }
-        ],
-        design: [
-            { name: "CapCut", rating: 4.8, icon: "fas fa-cut", stars: "★★★★★", color: "#4a90e2" },
-            { name: "Adobe Premiere", rating: 4.7, icon: "fas fa-video", stars: "★★★★★", color: "#ea5a9f" }
-        ],
-        other: [
-            { name: "VPN Express", rating: 4.3, icon: "fas fa-shield-alt", stars: "★★★★☆", color: "#43b3a8" },
-            { name: "Cleaner Kit", rating: 4.0, icon: "fas fa-broom", stars: "★★★★☆", color: "#b0a07c" }
-        ],
-        lifestyle: [
-            { name: "Calm", rating: 4.8, icon: "fas fa-bed", stars: "★★★★★", color: "#4c9f9c" },
-            { name: "Food App", rating: 4.2, icon: "fas fa-utensils", stars: "★★★★☆", color: "#e67e22" }
-        ],
-        dev: [
-            { name: "Terminal IDE", rating: 4.4, icon: "fas fa-terminal", stars: "★★★★☆", color: "#2ecc71" },
-            { name: "GitHub", rating: 4.9, icon: "fab fa-github", stars: "★★★★★", color: "#f5f5f5" }
-        ]
-    };
+    // بيانات التطبيقات مطابقة تماماً للمحتوى الأصلي
+    const appsList = [
+        { name: "Snapchat root", desc: "حسابك مسؤليتك .........", features: "لتفعيل مميزات النسخة : - قم بتحويل لغة النسخة من الانكليزية الى العربية او بالعكس." },
+        { name: "WhatsApp Gold", desc: "سجل بالنسخة كجهاز مصاحب فقطططط.", features: "نسخة خاصة بذهب واتساب" },
+        { name: "Telegram Dark", desc: "نسخة تدعم الاشعارات ( قم بتثبيتها مباشرة لا تكررها ولا تغير الباندل ) مدمجة مع مميزات Tgextra", features: "" },
+        { name: "instagram DL", desc: "لتفعيل مميزات النسخة : - اضغط على زر الـ Home ضغطة مطوله", features: "" },
+        { name: "بيكرام", desc: "instagram IG", features: "لتفعيل مميزات النسخة : - اضغط على زر الـبروفايل وستجيد ايقونة الريشه اضغط عليها وتفتح معك المميزات" },
+        { name: "instagram IG", desc: "لتفعيل مميزات النسخة : - اضغط على زر الـبروفايل وستجيد ايقونة الريشه اضغط عليها وتفتح معك المميزات", features: "" },
+        { name: "Watusi", desc: "سجل بالنسخة كجهاز مصاحب فقطططط.", features: "واتساب معدل" },
+        { name: "WhatsApp Business - Watusi", desc: "سجل بالنسخة كجهاز مصاحب فقطططط.", features: "" },
+        { name: "Swiftgram", desc: "لتفعيل مميزات النسخة اتبع التالي : - الاعدادات - انزل للاسفل - اضغط ضغطة مطوله على ايقونه ( اسال سوالا ) ومبروك تم فتح المميزات", features: "" }
+    ];
 
-    const contentDiv = document.getElementById('appContent');
-    const toast = document.getElementById('toastMsg');
-    let activeCategory = 'design';  // نبدأ بقسم التصميم والموتاج كما في الصورة
-
-    function showDownloadMsg(appName) {
-        toast.style.opacity = '1';
-        toast.innerText = `✅ تم تنزيل ${appName}`;
-        setTimeout(() => {
-            toast.style.opacity = '0';
-        }, 1500);
-    }
-
-    function renderCategory(categoryKey) {
-        let appsList = [];
-        if (categoryKey === 'all') {
-            appsList = appDatabase.all;
-        } else if (appDatabase[categoryKey]) {
-            appsList = appDatabase[categoryKey];
-        } else {
-            appsList = [];
-        }
-
-        if (appsList.length === 0) {
-            contentDiv.innerHTML = `<div style="text-align:center; color:rgba(255,255,255,0.6); padding: 50px; font-size: 18px;">✨ لا توجد تطبيقات في هذا القسم</div>`;
+    function renderApps(filterText = "") {
+        const grid = document.getElementById("appsGrid");
+        if (!grid) return;
+        const lowerFilter = filterText.toLowerCase();
+        const filtered = appsList.filter(app => 
+            app.name.toLowerCase().includes(lowerFilter) || 
+            app.desc.toLowerCase().includes(lowerFilter) ||
+            (app.features && app.features.toLowerCase().includes(lowerFilter))
+        );
+        
+        if(filtered.length === 0){
+            grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding: 40px;">🔍 لا توجد تطبيقات مطابقة لـ "${filterText}"</div>`;
             return;
         }
-
-        let sectionHtml = `
-            <div class="section">
-                <div class="section-title">${getCategoryTitle(categoryKey)}</div>
-                ${appsList.map(app => `
-                    <div class="app-card">
-                        <div class="app-info">
-                            <div class="app-icon" style="background: ${app.color}30; color: ${app.color};">
-                                <i class="${app.icon}"></i>
-                            </div>
-                            <div class="app-details">
-                                <h4>${app.name}</h4>
-                                <div class="rating">
-                                    <span class="stars">${app.stars}</span>
-                                    <span class="rating-num">${app.rating}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="download-btn" data-appname="${app.name}">تنزيل</div>
-                    </div>
-                `).join('')}
+        
+        grid.innerHTML = filtered.map(app => `
+            <div class="app-card">
+                <div class="app-name">
+                    <span><i class="fab fa-app-store-ios" style="margin-left: 6px; color:#2563eb;"></i> ${app.name}</span>
+                    <span class="badge" style="font-size:12px;">IPA</span>
+                </div>
+                <div class="app-desc">
+                    <i class="fas fa-info-circle" style="margin-left: 6px; opacity:0.7;"></i> 
+                    ${app.desc}
+                    ${app.features ? `<div style="margin-top: 8px; font-size:13px; background: #f1f5f9; border-radius: 16px; padding: 8px;"><i class="fas fa-magic"></i> ${app.features}</div>` : ''}
+                </div>
+                <div class="install-row">
+                    <button class="btn btn-sm install-btn" data-app="${app.name}"><i class="fas fa-download"></i> تثبيت</button>
+                </div>
             </div>
-        `;
-        contentDiv.innerHTML = sectionHtml;
-
-        document.querySelectorAll('.download-btn').forEach(btn => {
+        `).join('');
+        
+        // attach events to install buttons
+        document.querySelectorAll('.install-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const appName = btn.getAttribute('data-appname');
-                showDownloadMsg(appName);
+                const appName = btn.getAttribute('data-app');
+                showToast(`⚡ بدء محاكاة تثبيت: ${appName}\nملف IPA جاهز للتوقيع.`, "success");
             });
         });
     }
-
-    function getCategoryTitle(key) {
-        const titles = {
-            games: 'الألعاب',
-            movies: 'أفلام ومسلسلات',
-            social: 'تواصل اجتماعي',
-            all: 'الكل',
-            design: 'التصميم والموتاج',
-            other: 'غير ذلك',
-            lifestyle: 'نمط الحياة',
-            dev: 'مطور'
-        };
-        return titles[key] || 'تطبيقات';
+    
+    // رسالة منبثقة
+    function showToast(msg, type = "info") {
+        let toastDiv = document.getElementById('dynamicToast');
+        if(!toastDiv){
+            toastDiv = document.createElement('div');
+            toastDiv.id = 'dynamicToast';
+            toastDiv.style.position = 'fixed';
+            toastDiv.style.bottom = '30px';
+            toastDiv.style.left = '20px';
+            toastDiv.style.right = '20px';
+            toastDiv.style.backgroundColor = '#1e293b';
+            toastDiv.style.color = 'white';
+            toastDiv.style.padding = '14px 20px';
+            toastDiv.style.borderRadius = '60px';
+            toastDiv.style.fontWeight = '500';
+            toastDiv.style.zIndex = '999';
+            toastDiv.style.textAlign = 'center';
+            toastDiv.style.boxShadow = '0 10px 25px rgba(0,0,0,0.2)';
+            toastDiv.style.backdropFilter = 'blur(8px)';
+            toastDiv.style.background = 'rgba(0,0,0,0.8)';
+            document.body.appendChild(toastDiv);
+        }
+        toastDiv.innerHTML = `<i class="fas fa-check-circle" style="margin-left:8px;"></i> ${msg}`;
+        toastDiv.style.opacity = '1';
+        setTimeout(() => {
+            toastDiv.style.opacity = '0';
+            setTimeout(() => toastDiv.remove(), 500);
+        }, 2500);
     }
-
-    function setActiveCategory(categoryId) {
-        const items = document.querySelectorAll('.cat-item');
-        items.forEach(item => {
-            if (item.getAttribute('data-cat') === categoryId) {
-                item.classList.add('active');
-            } else {
-                item.classList.remove('active');
+    
+    // إرسال نموذج الطلب
+    const form = document.getElementById('appRequestForm');
+    if(form){
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const appNameVal = document.getElementById('appNameInput').value.trim();
+            if(!appNameVal){
+                showToast('يرجى إدخال اسم التطبيق أو اللعبة', 'error');
+                return;
             }
-        });
-        activeCategory = categoryId;
-        renderCategory(activeCategory);
-    }
-
-    function initBottomNav() {
-        const navItems = document.querySelectorAll('.nav-item');
-        navItems.forEach(nav => {
-            nav.addEventListener('click', (e) => {
-                const navValue = nav.getAttribute('data-nav');
-                navItems.forEach(n => n.classList.remove('active'));
-                nav.classList.add('active');
-                if (navValue === 'settings') showDownloadMsg('فتح الإعدادات');
-                else if (navValue === 'downloads') showDownloadMsg('قائمة التزيلات');
-                else if (navValue === 'sign') showDownloadMsg('شاشة التوقيع');
-                else if (navValue === 'apps') showDownloadMsg('جميع التطبيقات');
-                else if (navValue === 'home') {
-                    showDownloadMsg('الرئيسية');
-                    setActiveCategory(activeCategory);
-                }
-            });
+            showToast(`✅ تم استلام طلبك: ${appNameVal} — سيصلك رد في القناة قريباً.`);
+            form.reset();
         });
     }
-
-    function bindCategoryEvents() {
-        const cats = document.querySelectorAll('.cat-item');
-        cats.forEach(cat => {
-            cat.addEventListener('click', () => {
-                const catValue = cat.getAttribute('data-cat');
-                setActiveCategory(catValue);
-            });
+    
+    // زر كتم الإشعارات
+    const muteBtn = document.getElementById('muteBtn');
+    if(muteBtn){
+        muteBtn.addEventListener('click', () => {
+            showToast('🔕 تم إسكات الإشعارات (محاكاة)', 'info');
         });
     }
-
-    function init() {
-        bindCategoryEvents();
-        initBottomNav();
-        setActiveCategory('design');  // يبدأ بقسم التصميم والموتاج مثل الصورة
+    
+    // البحث الحي
+    const searchInput = document.getElementById('searchInput');
+    if(searchInput){
+        searchInput.addEventListener('input', (e) => {
+            renderApps(e.target.value);
+        });
     }
-
-    init();
+    
+    // شلون أثبت / شراء شهادة تفاعلية (إشعارات فقط)
+    document.querySelectorAll('.badge').forEach(badge => {
+        badge.addEventListener('click', (e) => {
+            const text = badge.innerText;
+            if(text.includes('شلون أثبت')) showToast('🔧 الطريقتان مذكورتان في الأسفل (طرق التثبيت)');
+            else if(text.includes('شراء شهادة')) showToast('💳 شهادات مدفوعة: يمكنك الحصول عليها من خدمات مثل ksign أو من القناة');
+            else if(text.includes('اطلب تطبيق')) showToast('🎮 استخدم النموذج في الأسفل لطلب تطبيق أو لعبة');
+            else showToast(`ℹ️ ${text}`);
+        });
+    });
+    
+    // بدء العرض
+    renderApps();
+    
+    // إضافة تواصل معنا تفاعلي
+    const contactLink = document.querySelector('a[href="#"]');
+    if(contactLink && contactLink.innerText.includes('تواصل معنا')){
+        contactLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showToast('📧 للتواصل: عبر قناة كيرا بلس أو البوت @ipasignxbot');
+        });
+    }
+    
+    // زر تثبيت محاكي للتطبيقات الظاهرة - سيتم عبر الـ dynamic
 </script>
 </body>
 </html>
